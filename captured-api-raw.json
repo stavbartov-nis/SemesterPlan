@@ -1,0 +1,277 @@
+[
+  {
+    "url": "https://shnaton.huji.ac.il/api/reference-data/active-years",
+    "data": [
+      {
+        "id": 7,
+        "year": 2026,
+        "hebrewYear": "תשפ\"ו",
+        "current": true
+      },
+      {
+        "id": 6,
+        "year": 2025,
+        "hebrewYear": "תשפ\"ה",
+        "current": null
+      },
+      {
+        "id": 5,
+        "year": 2024,
+        "hebrewYear": "תשפ\"ד",
+        "current": null
+      },
+      {
+        "id": 4,
+        "year": 2023,
+        "hebrewYear": "תשפ\"ג",
+        "current": null
+      },
+      {
+        "id": 3,
+        "year": 2022,
+        "hebrewYear": "תשפ\"ב",
+        "current": null
+      },
+      {
+        "id": 2,
+        "year": 2021,
+        "hebrewYear": "תשפ\"א",
+        "current": null
+      },
+      {
+        "id": 1,
+        "year": 2020,
+        "hebrewYear": "תש\"ף",
+        "current": null
+      }
+    ]
+  },
+  {
+    "url": "https://shnaton.huji.ac.il/api/reference-data/threshold-years",
+    "data": [
+      {
+        "id": 7,
+        "year": 2026,
+        "hebrewYear": "תשפ\"ו",
+        "current": true
+      },
+      {
+        "id": 6,
+        "year": 2025,
+        "hebrewYear": "תשפ\"ה",
+        "current": null
+      },
+      {
+        "id": 5,
+        "year": 2024,
+        "hebrewYear": "תשפ\"ד",
+        "current": null
+      },
+      {
+        "id": 4,
+        "year": 2023,
+        "hebrewYear": "תשפ\"ג",
+        "current": null
+      },
+      {
+        "id": 3,
+        "year": 2022,
+        "hebrewYear": "תשפ\"ב",
+        "current": null
+      },
+      {
+        "id": 2,
+        "year": 2021,
+        "hebrewYear": "תשפ\"א",
+        "current": null
+      },
+      {
+        "id": 1,
+        "year": 2020,
+        "hebrewYear": "תש\"ף",
+        "current": null
+      }
+    ]
+  },
+  {
+    "url": "https://shnaton.huji.ac.il/api/faculties",
+    "data": [
+      {
+        "id": 14,
+        "code": "015",
+        "name": {
+          "he": "ביה\"ס לאחיות",
+          "en": "Nursing school"
+        }
+      },
+      {
+        "id": 21,
+        "code": "023",
+        "name": {
+          "he": "ביה\"ס לבריאות הציבור",
+          "en": "School of Public Health and Community Medicine"
+        }
+      },
+      {
+        "id": 11,
+        "code": "012",
+        "name": {
+          "he": "ביה\"ס להנדסה ולמדעי המחשב",
+          "en": "The School of Computer Science & Engineering"
+        }
+      },
+      {
+        "id": 19,
+        "code": "021",
+        "name": {
+          "he": "ביה\"ס לחינוך ע\"ש שלמה (סימור) פוקס",
+          "en": "The Seymour Fox School of Education"
+        }
+      },
+      {
+        "id": 16,
+        "code": "018",
+        "name": {
+          "he": "ביה\"ס למדעי הרפואה",
+          "en": "School of Medical Sciences"
+        }
+      },
+      {
+        "id": 6,
+        "code": "006",
+        "name": {
+          "he": "ביה\"ס למנהל עסקים",
+          "en": "Business School"
+        }
+      },
+      {
+        "id": 9,
+        "code": "009",
+        "name": {
+          "he": "ביה\"ס לעבודה סוציאלית ולרווחה חברתית",
+          "en": "School of Social Work and Social Welfare"
+        }
+      },
+      {
+        "id": 12,
+        "code": "013",
+        "name": {
+          "he": "ביה\"ס לרוקחות",
+          "en": "School of Pharmacy"
+        }
+      },
+      {
+        "id": 13,
+        "code": "014",
+        "name": {
+          "he": "ביה\"ס לריפוי בעיסוק",
+          "en": "School of Occupational Therapy"
+        }
+      },
+      {
+        "id": 20,
+        "code": "022",
+        "name": {
+          "he": "ביה\"ס לרפואה וטרינרית",
+          "en": "Koret School of Veterinary Medicine"
+        }
+      },
+      {
+        "id": 17,
+        "code": "020",
+        "name": {
+          "he": "ביה\"ס לתלמידי חו\"ל",
+          "en": "School of overseas studies"
+        }
+      },
+      {
+        "id": 15,
+        "code": "016",
+        "name": {
+          "he": "מכינה",
+          "en": "MECHINA"
+        }
+      },
+      {
+        "id": 10,
+        "code": "011",
+        "name": {
+          "he": "מרכז למדעי המח",
+          "en": "Center for Brain Sciences"
+        }
+      },
+      {
+        "id": 8,
+        "code": "008",
+        "name": {
+          "he": "פקולטה לחקלאות, מזון וסביבה ע\"ש רוברט ה. סמית",
+          "en": "The Robert H. Smith Faculty of Agriculture, Food and Environment"
+        }
+      },
+      {
+        "id": 7,
+        "code": "007",
+        "name": {
+          "he": "פקולטה למדעי החברה",
+          "en": "Faculty of Social Sciences"
+        }
+      },
+      {
+        "id": 1,
+        "code": "001",
+        "name": {
+          "he": "פקולטה למדעי הרוח",
+          "en": "Faculty of Humanities"
+        }
+      },
+      {
+        "id": 3,
+        "code": "003",
+        "name": {
+          "he": "פקולטה למשפטים",
+          "en": "The Faculty of Law"
+        }
+      },
+      {
+        "id": 2,
+        "code": "002",
+        "name": {
+          "he": "פקולטה למתמטיקה ולמדעי הטבע",
+          "en": "Faculty of Sciences"
+        }
+      },
+      {
+        "id": 4,
+        "code": "004",
+        "name": {
+          "he": "פקולטה לרפואה",
+          "en": "The Faculty of Medicine"
+        }
+      },
+      {
+        "id": 5,
+        "code": "005",
+        "name": {
+          "he": "פקולטה לרפואת שיניים ",
+          "en": "Faculty of Dental Medicine"
+        }
+      },
+      {
+        "id": 18,
+        "code": "030",
+        "name": {
+          "he": "תכניות מיוחדות",
+          "en": "specials programs"
+        }
+      },
+      {
+        "id": 22,
+        "code": "024",
+        "name": {
+          "he": "תלמידי תיכון",
+          "en": "High School Students"
+        }
+      }
+    ]
+  }
+]
