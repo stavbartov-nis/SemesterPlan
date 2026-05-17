@@ -45,3 +45,5 @@ Generate valid academic plans that satisfy degree credits while respecting user 
 
 ---
 *Developed as part of the HUJI Schedule Planner project.*
+
+*Verified by Gemini CLI.*
