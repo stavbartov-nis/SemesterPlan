@@ -9,10 +9,22 @@ export const BundleSuggestions: React.FC = () => {
     selectedTrack, 
     preferences, 
     historyCourseIds,
-    setPlannedCourses 
+    setPlannedCourses,
+    setPreferences
   } = usePlannerStore();
 
   const [bundles, setBundles] = useState<SuggestedBundle[]>([]);
+
+  const handleTargetChange = (type: 'Mandatory' | 'Core' | 'Elective', value: string) => {
+    const numValue = parseInt(value) || 0;
+    setPreferences({
+      ...preferences,
+      targetCreditsByType: {
+        ...preferences.targetCreditsByType,
+        [type]: numValue
+      }
+    });
+  };
 
   const handleGenerate = () => {
     if (!selectedTrack) return;
@@ -40,6 +52,20 @@ export const BundleSuggestions: React.FC = () => {
     <div className="bundle-suggestions">
       <div className="suggestion-header">
         <h3>Smart Suggestions</h3>
+        <div className="target-inputs">
+          {(['Mandatory', 'Core', 'Elective'] as const).map(type => (
+            <label key={type}>
+              {type}:
+              <input 
+                type="number" 
+                value={preferences?.targetCreditsByType?.[type] || 0} 
+                onChange={(e) => handleTargetChange(type, e.target.value)}
+                min="0"
+                max="30"
+              />
+            </label>
+          ))}
+        </div>
         <button className="generate-btn" onClick={handleGenerate}>
           ✨ Generate Plans
         </button>

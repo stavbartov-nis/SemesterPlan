@@ -222,3 +222,95 @@ body {
     .credit-match-grid { grid-template-columns: 1fr; }
 }
 
+/* Bundle Suggestions Custom Inputs */
+.target-inputs {
+    display: flex;
+    gap: 12px;
+    margin-right: 15px;
+}
+
+.target-inputs label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.target-inputs input {
+    width: 60px;
+    padding: 6px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.generate-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.generate-btn:hover {
+    background: var(--primary-dark);
+}
+
+.bundles-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1rem;
+}
+
+.bundle-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 20px;
+}
+
+.bundle-card h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+.bundle-card .rationale {
+    margin: 4px 0 0;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.35;
+}
+
+.apply-btn {
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.apply-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+

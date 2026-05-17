@@ -37,6 +37,11 @@ const DEFAULT_PREFERENCES: UserPreferences = {
     allowOverlap: false,
     maxOverlapMinutes: 0,
   },
+  targetCreditsByType: {
+    Mandatory: 12,
+    Core: 8,
+    Elective: 4,
+  },
 };
 
 export const usePlannerStore = create<PlannerState>()(
@@ -90,6 +95,20 @@ export const usePlannerStore = create<PlannerState>()(
     }),
     {
       name: 'huji-planner-storage',
+      version: 1,
+      migrate: (persistedState: any, version: number) => {
+        if (version === 0) {
+          // If the old state exists but lacks the new field, inject it
+          return {
+            ...persistedState,
+            preferences: {
+              ...persistedState.preferences,
+              targetCreditsByType: DEFAULT_PREFERENCES.targetCreditsByType
+            }
+          };
+        }
+        return persistedState;
+      }
     }
   )
 );

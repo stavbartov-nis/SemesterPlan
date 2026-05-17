@@ -89,7 +89,19 @@ function generateBundle(
   const candidates = getCandidates(catalog, track, historyIds, bundleCourses);
   candidates.sort(sortFn);
 
+  // Track current credits by type
+  const currentCredits = { Mandatory: 0, Core: 0, Elective: 0 };
+  bundleCourses.forEach(pc => {
+    const course = catalog.find(c => c.id === pc.courseId);
+    if (!course) return;
+    const type = getCourseType(course.id, track);
+    if (type) currentCredits[type] += course.credits;
+  });
+
   for (const candidate of candidates) {
+    // Check if we've already met the target for this type
+    if (currentCredits[candidate.type] >= prefs.targetCreditsByType[candidate.type]) continue;
+
     const offering = offerings.find(o => o.courseId === candidate.course.id);
     if (!offering) continue;
 
@@ -100,10 +112,11 @@ function generateBundle(
         isAnchor: false,
         selectedGroupIds: [validGroup.id]
       });
+      currentCredits[candidate.type] += candidate.course.credits;
     }
 
-    // Limit bundle size for readability
-    if (bundleCourses.length >= 6) break;
+    // Limit bundle size for readability (cap at 8 instead of 6 to allow more credits)
+    if (bundleCourses.length >= 8) break;
   }
 
   return {
@@ -126,6 +139,15 @@ function generateCompactBundle(
   let bundleCourses = [...anchors];
   const candidates = getCandidates(catalog, track, historyIds, bundleCourses);
   
+  // Track current credits by type
+  const currentCredits = { Mandatory: 0, Core: 0, Elective: 0 };
+  bundleCourses.forEach(pc => {
+    const course = catalog.find(c => c.id === pc.courseId);
+    if (!course) return;
+    const type = getCourseType(course.id, track);
+    if (type) currentCredits[type] += course.credits;
+  });
+
   // Sort by priority first
   candidates.sort((a, b) => {
     const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
@@ -133,6 +155,9 @@ function generateCompactBundle(
   });
 
   for (const candidate of candidates) {
+    // Check if we've already met the target for this type
+    if (currentCredits[candidate.type] >= prefs.targetCreditsByType[candidate.type]) continue;
+
     const offering = offerings.find(o => o.courseId === candidate.course.id);
     if (!offering) continue;
 
@@ -161,9 +186,10 @@ function generateCompactBundle(
         isAnchor: false,
         selectedGroupIds: [groups[0].id]
       });
+      currentCredits[candidate.type] += candidate.course.credits;
     }
 
-    if (bundleCourses.length >= 6) break;
+    if (bundleCourses.length >= 8) break;
   }
 
   return {
@@ -173,6 +199,15 @@ function generateCompactBundle(
     rationale: 'Tries to group courses on the fewest possible days to maximize free time.',
     totalCredits: calculateTotalCredits(bundleCourses, catalog)
   };
+}
+
+function getCourseType(courseId: string, track: DegreeTrack): 'Mandatory' | 'Core' | 'Elective' | undefined {
+  for (const comp of track.components) {
+    for (const basket of comp.baskets) {
+      if (basket.courseIds.includes(courseId)) return basket.type;
+    }
+  }
+  return undefined;
 }
 
 function getCandidates(

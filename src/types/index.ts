@@ -74,6 +74,11 @@ export interface UserPreferences {
     end: string;   // "HH:MM"
   };
   overlapPolicy: OverlapPolicy;
+  targetCreditsByType: {
+    Mandatory: number;
+    Core: number;
+    Elective: number;
+  };
 }
 
 export type OverlapPolicy = {

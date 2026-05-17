@@ -8,7 +8,8 @@ describe('suggestBundles', () => {
   const prefs: UserPreferences = {
     allowedDays: [0, 1, 2, 3, 4],
     timeWindow: { start: '08:00', end: '20:00' },
-    overlapPolicy: { allowOverlap: false, maxOverlapMinutes: 0 }
+    overlapPolicy: { allowOverlap: false, maxOverlapMinutes: 0 },
+    targetCreditsByType: { Mandatory: 12, Core: 8, Elective: 4 }
   };
 
   it('should suggest bundles starting from empty state', () => {
