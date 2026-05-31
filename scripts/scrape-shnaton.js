@@ -108,9 +108,12 @@ function toCampus(campusName) {
 function toMeetingType(typeName) {
   if (!typeName) return 'Lecture';
   const n = (typeName.he || typeName.en || '').toLowerCase();
-  if (n.includes('תרגיל') || n.includes('exercise') || n.includes('trgil')) return 'Exercise';
+  // Order matters: combined / specific patterns must come before single-word ones,
+  // because Hebrew "שעור ותרגיל" (Lesson and Exercise) contains "תרגיל".
+  if (n.includes('שעור ותרגיל') || n.includes('lesson and exercise')) return 'Lecture';
   if (n.includes('מעבדה') || n.includes('lab')) return 'Lab';
   if (n.includes('סמינר') || n.includes('seminar')) return 'Seminar';
+  if (n.includes('תרגיל') || n.includes('exercise') || n.includes('trgil')) return 'Exercise';
   return 'Lecture';
 }
 

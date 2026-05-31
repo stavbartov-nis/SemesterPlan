@@ -1,7 +1,7 @@
 {
   "meta": {
     "year": 2026,
-    "generated": "2026-05-31T08:06:06.021Z",
+    "generated": "2026-05-31T08:46:04.246Z",
     "departments": [
       "Economics",
       "Business Administration",
@@ -2544,7 +2544,7 @@
       "groups": [
         {
           "id": "869",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -2644,7 +2644,7 @@
       "groups": [
         {
           "id": "61",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -2660,7 +2660,7 @@
         },
         {
           "id": "2056",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -2687,7 +2687,7 @@
         },
         {
           "id": "5778",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -2832,7 +2832,7 @@
         },
         {
           "id": "2061",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -2848,7 +2848,7 @@
         },
         {
           "id": "3463",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -2864,7 +2864,7 @@
         },
         {
           "id": "4440",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -2902,7 +2902,7 @@
         },
         {
           "id": "10969",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -3248,7 +3248,7 @@
         },
         {
           "id": "3193",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -3264,7 +3264,7 @@
         },
         {
           "id": "7443",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -3280,7 +3280,7 @@
         },
         {
           "id": "8837",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -3907,7 +3907,7 @@
         },
         {
           "id": "6697",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -3923,7 +3923,7 @@
         },
         {
           "id": "7444",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -3939,7 +3939,7 @@
         },
         {
           "id": "9602",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -4242,7 +4242,7 @@
       "groups": [
         {
           "id": "366",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -4280,7 +4280,7 @@
         },
         {
           "id": "7440",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -4296,7 +4296,7 @@
         },
         {
           "id": "9922",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -4319,7 +4319,7 @@
       "groups": [
         {
           "id": "2652",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -4355,7 +4355,7 @@
       "groups": [
         {
           "id": "2193",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -4373,7 +4373,7 @@
       "groups": [
         {
           "id": "7544",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -4391,7 +4391,7 @@
       "groups": [
         {
           "id": "9538",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -4463,7 +4463,7 @@
       "groups": [
         {
           "id": "1677",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -4589,7 +4589,7 @@
       "groups": [
         {
           "id": "7648",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -4607,7 +4607,7 @@
       "groups": [
         {
           "id": "9042",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -4625,7 +4625,7 @@
       "groups": [
         {
           "id": "6318",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -4697,7 +4697,7 @@
       "groups": [
         {
           "id": "3144",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -4715,7 +4715,7 @@
       "groups": [
         {
           "id": "3072",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -4726,7 +4726,7 @@
         },
         {
           "id": "3123",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -4737,7 +4737,7 @@
         },
         {
           "id": "8152",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -4784,7 +4784,7 @@
       "groups": [
         {
           "id": "3602",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -4795,7 +4795,7 @@
         },
         {
           "id": "6067",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -4806,7 +4806,7 @@
         },
         {
           "id": "9083",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -4842,7 +4842,7 @@
       "groups": [
         {
           "id": "8198",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -4860,7 +4860,7 @@
       "groups": [
         {
           "id": "2663",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -4878,7 +4878,7 @@
       "groups": [
         {
           "id": "10809",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -4896,7 +4896,7 @@
       "groups": [
         {
           "id": "3603",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -4914,7 +4914,7 @@
       "groups": [
         {
           "id": "518",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -4925,7 +4925,7 @@
         },
         {
           "id": "690",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -4936,7 +4936,7 @@
         },
         {
           "id": "2942",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -4954,7 +4954,7 @@
       "groups": [
         {
           "id": "3060",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5008,7 +5008,7 @@
       "groups": [
         {
           "id": "8715",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -5080,7 +5080,7 @@
       "groups": [
         {
           "id": "10943",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -5116,7 +5116,7 @@
       "groups": [
         {
           "id": "10773",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -5152,7 +5152,7 @@
       "groups": [
         {
           "id": "8269",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5242,7 +5242,7 @@
       "groups": [
         {
           "id": "11365",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 5,
@@ -5278,7 +5278,7 @@
       "groups": [
         {
           "id": "2781",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -5314,7 +5314,7 @@
       "groups": [
         {
           "id": "7230",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -5386,7 +5386,7 @@
       "groups": [
         {
           "id": "3975",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -5404,7 +5404,7 @@
       "groups": [
         {
           "id": "701",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -5415,7 +5415,7 @@
         },
         {
           "id": "3820",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -5433,7 +5433,7 @@
       "groups": [
         {
           "id": "5384",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5444,7 +5444,7 @@
         },
         {
           "id": "7477",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5455,7 +5455,7 @@
         },
         {
           "id": "9411",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 5,
@@ -5502,7 +5502,7 @@
       "groups": [
         {
           "id": "3801",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -5513,7 +5513,7 @@
         },
         {
           "id": "3886",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5524,7 +5524,7 @@
         },
         {
           "id": "5077",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -5535,7 +5535,7 @@
         },
         {
           "id": "5405",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -5553,7 +5553,7 @@
       "groups": [
         {
           "id": "6349",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 5,
@@ -5564,7 +5564,7 @@
         },
         {
           "id": "6546",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5575,7 +5575,7 @@
         },
         {
           "id": "9368",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5593,7 +5593,7 @@
       "groups": [
         {
           "id": "4221",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -5604,7 +5604,7 @@
         },
         {
           "id": "4698",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -5615,7 +5615,7 @@
         },
         {
           "id": "8389",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -5626,7 +5626,7 @@
         },
         {
           "id": "11020",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -5739,7 +5739,7 @@
       "groups": [
         {
           "id": "828",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -5750,7 +5750,7 @@
         },
         {
           "id": "1297",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -5761,7 +5761,7 @@
         },
         {
           "id": "7233",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -5772,7 +5772,7 @@
         },
         {
           "id": "7529",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -5790,7 +5790,7 @@
       "groups": [
         {
           "id": "1326",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -5801,7 +5801,7 @@
         },
         {
           "id": "5914",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -5812,7 +5812,7 @@
         },
         {
           "id": "7240",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5823,7 +5823,7 @@
         },
         {
           "id": "9822",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5841,7 +5841,7 @@
       "groups": [
         {
           "id": "783",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5852,7 +5852,7 @@
         },
         {
           "id": "3881",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 5,
@@ -5863,7 +5863,7 @@
         },
         {
           "id": "7568",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5881,7 +5881,7 @@
       "groups": [
         {
           "id": "1329",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5892,7 +5892,7 @@
         },
         {
           "id": "8777",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 5,
@@ -5903,7 +5903,7 @@
         },
         {
           "id": "10649",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -5994,7 +5994,7 @@
       "groups": [
         {
           "id": "8307",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6005,7 +6005,7 @@
         },
         {
           "id": "8657",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6016,7 +6016,7 @@
         },
         {
           "id": "9952",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 5,
@@ -6034,7 +6034,7 @@
       "groups": [
         {
           "id": "4569",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6045,7 +6045,7 @@
         },
         {
           "id": "9646",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -6056,7 +6056,7 @@
         },
         {
           "id": "9863",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6074,7 +6074,7 @@
       "groups": [
         {
           "id": "160",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -6085,7 +6085,7 @@
         },
         {
           "id": "349",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -6096,7 +6096,7 @@
         },
         {
           "id": "2270",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -6107,7 +6107,7 @@
         },
         {
           "id": "9916",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -6125,7 +6125,7 @@
       "groups": [
         {
           "id": "1878",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 5,
@@ -6136,7 +6136,7 @@
         },
         {
           "id": "3851",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6147,7 +6147,7 @@
         },
         {
           "id": "11192",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6165,7 +6165,7 @@
       "groups": [
         {
           "id": "874",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -6176,7 +6176,7 @@
         },
         {
           "id": "7218",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6187,7 +6187,7 @@
         },
         {
           "id": "10081",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -6205,7 +6205,7 @@
       "groups": [
         {
           "id": "2145",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -6216,7 +6216,7 @@
         },
         {
           "id": "10640",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -6234,7 +6234,7 @@
       "groups": [
         {
           "id": "1841",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6245,7 +6245,7 @@
         },
         {
           "id": "1842",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6256,7 +6256,7 @@
         },
         {
           "id": "4565",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 5,
@@ -6274,7 +6274,7 @@
       "groups": [
         {
           "id": "3825",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6285,7 +6285,7 @@
         },
         {
           "id": "5064",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6296,7 +6296,7 @@
         },
         {
           "id": "5382",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -6307,7 +6307,7 @@
         },
         {
           "id": "9636",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -6376,7 +6376,7 @@
       "groups": [
         {
           "id": "10407",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -6466,7 +6466,7 @@
       "groups": [
         {
           "id": "1414",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -6484,7 +6484,7 @@
       "groups": [
         {
           "id": "6203",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -6502,7 +6502,7 @@
       "groups": [
         {
           "id": "10457",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -6538,7 +6538,7 @@
       "groups": [
         {
           "id": "2803",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -6574,7 +6574,7 @@
       "groups": [
         {
           "id": "6488",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -6610,7 +6610,7 @@
       "groups": [
         {
           "id": "10607",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -6628,7 +6628,7 @@
       "groups": [
         {
           "id": "1925",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -6718,7 +6718,7 @@
       "groups": [
         {
           "id": "3776",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -6754,7 +6754,7 @@
       "groups": [
         {
           "id": "4202",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6765,7 +6765,7 @@
         },
         {
           "id": "5454",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -6776,7 +6776,7 @@
         },
         {
           "id": "6441",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -6787,7 +6787,7 @@
         },
         {
           "id": "8279",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -6823,7 +6823,7 @@
       "groups": [
         {
           "id": "1161",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6834,7 +6834,7 @@
         },
         {
           "id": "9177",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -6845,7 +6845,7 @@
         },
         {
           "id": "10914",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -6971,7 +6971,7 @@
       "groups": [
         {
           "id": "70780",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -6989,7 +6989,7 @@
       "groups": [
         {
           "id": "7522",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -7007,7 +7007,7 @@
       "groups": [
         {
           "id": "8106",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -7025,7 +7025,7 @@
       "groups": [
         {
           "id": "7354",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 1,
@@ -7036,7 +7036,7 @@
         },
         {
           "id": "10480",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -7047,7 +7047,7 @@
         },
         {
           "id": "11196",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -7065,7 +7065,7 @@
       "groups": [
         {
           "id": "9570",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 3,
@@ -7083,7 +7083,7 @@
       "groups": [
         {
           "id": "10278",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -7119,7 +7119,7 @@
       "groups": [
         {
           "id": "4893",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -7130,7 +7130,7 @@
         },
         {
           "id": "10427",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 5,
@@ -7166,7 +7166,7 @@
       "groups": [
         {
           "id": "9170",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 0,
@@ -7184,7 +7184,7 @@
       "groups": [
         {
           "id": "448",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -7495,7 +7495,7 @@
       "groups": [
         {
           "id": "7138",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -7513,7 +7513,7 @@
       "groups": [
         {
           "id": "765",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 4,
@@ -7567,7 +7567,7 @@
       "groups": [
         {
           "id": "11100",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,
@@ -7621,7 +7621,7 @@
       "groups": [
         {
           "id": "495",
-          "type": "Exercise",
+          "type": "Lecture",
           "slots": [
             {
               "day": 2,

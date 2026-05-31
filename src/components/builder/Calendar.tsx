@@ -16,7 +16,10 @@ const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 const HOURS = Array.from({ length: 13 }, (_, i) => i + 8); // 8:00 to 20:00
 
 export const Calendar: React.FC = () => {
-  const { plannedCourses } = usePlannerStore();
+  const { plannedCourses, preferences } = usePlannerStore();
+  const visibleDays = DAYS
+    .map((name, idx) => ({ name, idx }))
+    .filter(d => preferences.allowedDays.includes(d.idx));
 
   // Extract all scheduled events from the current plan
   const events: CalendarEvent[] = [];
@@ -66,7 +69,7 @@ export const Calendar: React.FC = () => {
         ))}
       </div>
       
-      {DAYS.map((dayName, dayIndex) => (
+      {visibleDays.map(({ name: dayName, idx: dayIndex }) => (
         <div key={dayIndex} className="day-column">
           <div className="header-cell">{dayName}</div>
           <div className="day-grid" style={{ position: 'relative', height: `${HOURS.length * 60}px` }}>
@@ -74,7 +77,7 @@ export const Calendar: React.FC = () => {
             {HOURS.map(hour => (
               <div key={hour} className="grid-line" style={{ top: `${(hour - 8) * 60}px` }} />
             ))}
-            
+
             {/* Events */}
             {events.filter(e => e.slot.day === dayIndex).map((event, i) => (
               <div 
