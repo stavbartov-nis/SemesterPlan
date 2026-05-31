@@ -1,87 +1,127 @@
 {
   "meta": {
     "year": 2026,
-    "generated": "2026-05-31T08:46:04.246Z",
+    "generated": "2026-05-31T09:18:22.795Z",
+    "filter": {
+      "degree": "Bachelor's only (sugToar=001)"
+    },
     "departments": [
       "Economics",
-      "Business Administration",
-      "Economics & Business (joint)"
+      "Business Administration"
     ],
-    "courseCount": 236,
-    "offeringCount": 207
+    "courseCount": 92,
+    "offeringCount": 86,
+    "noScheduleCount": 6,
+    "droppedByDept": {
+      "Economics": 19,
+      "Business Administration": 125
+    },
+    "missingSchedule": [
+      {
+        "code": "57104",
+        "name": "The Economics of Disasters and Climate Change"
+      },
+      {
+        "code": "57132",
+        "name": "Firm Financial decisions"
+      },
+      {
+        "code": "57003",
+        "name": "Economic Data Analysis using Python – An Introduction"
+      },
+      {
+        "code": "55117",
+        "name": "Participation in Experiments"
+      },
+      {
+        "code": "55531",
+        "name": "Negotiations - Theory and Practice."
+      },
+      {
+        "code": "55861",
+        "name": "A Multicultural course in Entrepreneurship (Israel-Canada)-summer course"
+      }
+    ]
   },
   "courses": [
     {
       "id": "57893",
-      "name": "הגורמים וההשלכות של אי-שוויון בהכנסה",
+      "name": "The causes and consequences of  income inequality",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57307"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57126",
-      "name": "השקעות בינלאומיות ושערי חליפין",
+      "name": "International investments and exchange rates",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57305"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57552",
-      "name": "חיזוי במאקרו כלכלה ובשוק ההון",
+      "name": "Forecasting in Macroeconomics and Financial markets",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57468",
         "57322",
         "57108"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57121",
-      "name": "חשבון דיפרנציאלי ואינטגרלי לכלכלנים א'",
+      "name": "Math for Economists A1",
       "credits": 4,
       "department": "Economics",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "57467",
-      "name": "כלכלה התנהגותית ויישומיים אימפירים",
+      "name": "Behavioral Economics and Empirical Applications",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57468"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57807",
-      "name": "כלכלה פוליטית",
+      "name": "POLITICAL ECONOMY",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57308",
         "57307"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57104",
-      "name": "כלכלה של אסונות ושינויי אקלים",
+      "name": "The Economics of Disasters and Climate Change",
       "credits": 1,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57468"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57010",
-      "name": "כלכלת ישראל",
+      "name": "The Israeli Economy",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
@@ -90,45 +130,36 @@
         "57468",
         "57307",
         "57308"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57638",
-      "name": "כלכלת עבודה אמפירית",
+      "name": "Empirical Labor Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57322",
         "57308"
-      ]
-    },
-    {
-      "id": "57735",
-      "name": "כלכלת עבודה מבנית",
-      "credits": 2,
-      "department": "Economics",
-      "prerequisites": [
-        "57308",
-        "57322",
-        "57307",
-        "57305"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57123",
-      "name": "כלכלת תקשורת ",
+      "name": "Media Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57468",
         "57307"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57305",
-      "name": "מאקרו כלכלה",
+      "name": "Intermediate Macroeconomics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -140,11 +171,12 @@
         "57340",
         "54111",
         "57341"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57506",
-      "name": "מאקרו כלכלה מתקדמת",
+      "name": "Advanced macroeconomics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -153,11 +185,12 @@
         "57122",
         "57305",
         "57307"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57322",
-      "name": "מבוא לאקונומטריקה",
+      "name": "Introduction to Econometrics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -169,47 +202,41 @@
         "57341",
         "57107",
         "57108"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57107",
-      "name": "מבוא לכלכלה א (מיקרו)",
+      "name": "Introduction to Economics 1 (Micro)",
       "credits": 4,
       "department": "Economics",
-      "prerequisites": []
-    },
-    {
-      "id": "57866",
-      "name": "מבנה שווקים למוסמך (א') : תאוריה מדיניות ויישומים אמפיריים",
-      "credits": 3,
-      "department": "Economics",
-      "prerequisites": [
-        "57824",
-        "57988"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "57654",
-      "name": "מסחר בינלאומי",
+      "name": "International trade",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57322"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57253",
-      "name": "משברים פיננסיים וכלכליים והחשיבה במאקרו-כלכלה",
+      "name": "Financial and Economic Crises and Macroeconomic Analysis",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57305"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57556",
-      "name": "מתמטיקה מתקדמת לכלכלנים",
+      "name": "Advanced Mathematics for Economists",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -223,30 +250,22 @@
         "57122",
         "52113",
         "80157"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57469",
-      "name": "נושאים בחקר המיסוי אמפירי",
+      "name": "Topics in Empirical Tax Research",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57322"
-      ]
-    },
-    {
-      "id": "57855",
-      "name": "ניתוח אקונומטרי של סדרות עיתיות",
-      "credits": 4,
-      "department": "Economics",
-      "prerequisites": [
-        "57824",
-        "57988"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57496",
-      "name": "סוגיות בכלכלת הפירמה",
+      "name": "Topics on Economics of the Firm",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -256,18 +275,12 @@
         "57341",
         "57121",
         "57122"
-      ]
-    },
-    {
-      "id": "57874",
-      "name": "סוגיות במדיניות מיסוי",
-      "credits": 2,
-      "department": "Economics",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57128",
-      "name": "סוגיות נבחרות בכלכלה התנהגותית",
+      "name": "Selected Topics in Behavioral Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -275,32 +288,20 @@
         "57308",
         "57322",
         "57305"
-      ]
-    },
-    {
-      "id": "57400",
-      "name": "סוגיות נבחרות בכלכלת ישראל",
-      "credits": 4,
-      "department": "Economics",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57340",
-      "name": "סטטיסטיקה לכלכלנים א'",
+      "name": "Statistics  for Economists A",
       "credits": 4,
       "department": "Economics",
-      "prerequisites": []
-    },
-    {
-      "id": "57753",
-      "name": "סמינריון למוסמך  - חלק א' ",
-      "credits": 1,
-      "department": "Economics",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "57307",
-      "name": "תורת המחירים א",
+      "name": "Price Theory 1",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -323,131 +324,93 @@
         "54111",
         "57341",
         "52221"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57554",
-      "name": "תורת המשחקים לכלכלנים",
+      "name": "Game Theory for Economists",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57308"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57493",
-      "name": "נושאים בביג דאטה בכלכלה",
+      "name": "Big Data in Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57468"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57132",
-      "name": "החלטות פיננסיות של הפירמה",
+      "name": "Firm Financial decisions",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57102"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57533",
-      "name": "מחקר כלכלי על אפליה והטיה",
+      "name": "Economic Research on Discrimination and Bias",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57468"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57130",
-      "name": "מתמטיקה לתלמידי מכפיל",
+      "name": "Math for Machpil students",
       "credits": 5,
       "department": "Economics",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "57736",
-      "name": "נושאים בכלכלה פוליטית",
+      "name": "Topics in Political Economy",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57322"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57117",
-      "name": "נושאים מתקדמים בכלכלת עבודה ",
+      "name": "Advanced topics in labor economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57322",
         "57468"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57013",
-      "name": "ניתוח מדיניות ",
+      "name": "Policy Analysis",
       "credits": 4,
       "department": "Economics",
-      "prerequisites": []
-    },
-    {
-      "id": "57836",
-      "name": "סדנה בכלכלה התנהגותית",
-      "credits": 1,
-      "department": "Economics",
-      "prerequisites": [
-        "57307",
-        "57308",
-        "57468",
-        "57322"
-      ]
-    },
-    {
-      "id": "57958",
-      "name": "סדנה בכלכלה יישומית",
-      "credits": 2,
-      "department": "Economics",
-      "prerequisites": []
-    },
-    {
-      "id": "57997",
-      "name": "סדנה בתאוריה כלכלית",
-      "credits": 2,
-      "department": "Economics",
-      "prerequisites": []
-    },
-    {
-      "id": "57999",
-      "name": "סמינר מורים בכלכלה",
-      "credits": 2,
-      "department": "Economics",
-      "prerequisites": []
-    },
-    {
-      "id": "57986",
-      "name": "סמינריון מחקר לדוקטורנטים",
-      "credits": 2,
-      "department": "Economics",
-      "prerequisites": []
-    },
-    {
-      "id": "57890",
-      "name": "עבודה סמינריונית בלימודי מ\"א",
-      "credits": 4,
-      "department": "Economics",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": null
     },
     {
       "id": "57509",
-      "name": "אלגברה לינארית לכלכלנים",
+      "name": "Linear Algebra for Economists",
       "credits": 3,
       "department": "Economics",
       "prerequisites": [
@@ -460,93 +423,76 @@
         "57121",
         "54110",
         "80132"
-      ]
-    },
-    {
-      "id": "57937",
-      "name": "אקונומטריקה למוסמך ב",
-      "credits": 4,
-      "department": "Economics",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57011",
-      "name": "היבטים יישומיים של חוק התחרות הכלכלית",
+      "name": "Applied Issues in Competition Law",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57308"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57127",
-      "name": "הסטוריה של המחשבה הכלכלית ",
+      "name": "History of Economic Thought",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57308",
         "57307"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57122",
-      "name": "חשבון דיפרנציאלי ואינטגרלי לכלכלנים ב'",
+      "name": "Math for Economists A2",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57121"
-      ]
-    },
-    {
-      "id": "57777",
-      "name": "כלכלה התנהגותית וניסויית למוסמך",
-      "credits": 4,
-      "department": "Economics",
-      "prerequisites": [
-        "57307",
-        "57308"
-      ]
-    },
-    {
-      "id": "57861",
-      "name": "כלכלה עירונית למוסמך",
-      "credits": 3,
-      "department": "Economics",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57133",
-      "name": "כלכלה ציבורית",
+      "name": "Public Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57667",
-      "name": "כלכלת אינפורמציה",
+      "name": "INFORMATION ECONOMICS",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57308"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57012",
-      "name": "כלכלת בריאות ",
+      "name": "Health Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57322"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57020",
-      "name": "כלכלת מזרח תיכון ",
+      "name": "Middle East Economics",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
@@ -555,116 +501,104 @@
         "57307",
         "57305",
         "57322"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57495",
-      "name": "כלכלת עבודה",
+      "name": "Labour Economics",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57322",
         "57468"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57510",
-      "name": "כשלי שוק ",
+      "name": "Market Failures",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57118",
         "57308",
         "57307"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57108",
-      "name": "מבוא לכלכלה ב (מקרו)",
+      "name": "INTRODUCTION TO ECONOMICS II (MACRO)",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57107"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57003",
-      "name": "מבוא לניתוח נתונים בכלכלה בעזרת Pyton",
+      "name": "Economic Data Analysis using Python – An Introduction",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57322"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57124",
-      "name": "מדיניות מוניטרית: מהתיאוריה לאתגרים של היום",
+      "name": "Monetary Policy: From Theory to Today’s Challenges",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57107",
         "57108",
         "57305"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57002",
-      "name": "מימון בינלאומי ",
+      "name": "International Finance",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57108",
         "57305"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57102",
-      "name": "מימון לכלכלנים",
+      "name": "Finance for Economists",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57468",
         "57322"
-      ]
-    },
-    {
-      "id": "57588",
-      "name": "מימון למוסמך",
-      "credits": 3,
-      "department": "Economics",
-      "prerequisites": [
-        "57107",
-        "57307",
-        "57509"
-      ]
-    },
-    {
-      "id": "57125",
-      "name": "נושאים בחקר מקרו כלכלה אמפירית",
-      "credits": 4,
-      "department": "Economics",
-      "prerequisites": [
-        "57322",
-        "57305"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57705",
-      "name": "נושאים במדיניות פיסקלית",
+      "name": "Topics in Fiscal Policy",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57468",
         "57305"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57311",
-      "name": "נושאים במקרו כלכלה של אי-ודאות ושווקים פיננסים",
+      "name": "Topics in Macroeconomics of Uncertainty and Financial Markets",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -672,276 +606,85 @@
         "57322",
         "57307",
         "57305"
-      ]
-    },
-    {
-      "id": "57853",
-      "name": "ניתוח אקונומטרי של נתוני מרחב ורשתות",
-      "credits": 3,
-      "department": "Economics",
-      "prerequisites": [
-        "57509",
-        "52322"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57341",
-      "name": "סטטיסטיקה לכלכלנים ב'",
+      "name": "Statistics for Economics B",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57340"
-      ]
-    },
-    {
-      "id": "57754",
-      "name": "סמינריון למוסמך - חלק ב' ",
-      "credits": 1,
-      "department": "Economics",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "57466",
-      "name": "שווקים ותחרות בישראל",
+      "name": "Markets and Competition in Israel",
       "credits": 3,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57468",
         "57307"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57497",
-      "name": "שיטות בלמידת מכונה לכלכלנים ",
+      "name": "Machine Learning Methods for economists",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57322",
         "57468"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "57308",
-      "name": "תורת המחירים ב",
+      "name": "Price Theory 2",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
         "57107",
         "57108"
-      ]
-    },
-    {
-      "id": "55604",
-      "name": "Career X: צעדים ראשונים בקריירה שלך",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55678",
-      "name": "HUBS Aid – בנייה ויישום של תכנית שיקום לעסקים קטנים ובינוניים בישראל",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55007",
-      "name": "HUBS Aid – בנייה ויישום של תכנית שיקום לעסקים קטנים ובינוניים בישראל",
+      "name": "HUBS Aid - Design and Implementation of a Rehabilitation Program for Small and Medium Businesses in Israel",
       "credits": 4,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55728",
-      "name": "אג\"חים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55846"
-      ]
-    },
-    {
-      "id": "55543",
-      "name": "אינטראקציות אדם-בינה מלאכותית למנהלים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55991",
-      "name": "אנליטיקה של ניהול קשרי לקוחות",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55804",
-        "55905"
-      ]
-    },
-    {
-      "id": "55971",
-      "name": "אסטרטגיה בינלאומית",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55905",
-        "55804"
-      ]
-    },
-    {
-      "id": "55899",
-      "name": "אסטרטגיות השקעה חדשניות והשלכות על הדיווח החשבונאי",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55813",
-      "name": "אקונומטריקה למימון",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55797",
-        "55125",
-        "55746",
-        "55796",
-        "55321",
-        "55745"
-      ]
-    },
-    {
-      "id": "55425",
-      "name": "אקונומטריקה לתלמידי כלכלה פיננסית",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55544",
-      "name": "ארגונים וגלובליזציה: ניהול, תרבות ועבודה בעידן משתנה",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55983",
-      "name": "בינה מלאכותית אחראית",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55606",
-      "name": "בינה מלאכותית אחראית-סמינר",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55982",
-      "name": "בינה מלאכותית לטובת הכלל",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55793",
-        "67577"
-      ]
-    },
-    {
-      "id": "55783",
-      "name": "בריאות דיגיטלית",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55610",
-      "name": "היכרות מקרוב עם מרכז הכספים של גרמניה",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55696",
-      "name": "השקעות אימפקט",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55821",
-        "55510"
-      ]
-    },
-    {
-      "id": "55978",
-      "name": "התנהגות הצרכן",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55905",
-        "55804"
-      ]
-    },
-    {
-      "id": "55721",
-      "name": "חידושים פיננסים לפיתוח כלכלי",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55803"
-      ]
-    },
-    {
-      "id": "55939",
-      "name": "חקר ביצועים 2: מודלים  סטוכסטיים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55815",
-        "55945"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": 2
     },
     {
       "id": "55008",
-      "name": "חקר התנהגות אנושית בעזרת נתוני עתק",
+      "name": "Researching Human Behavior Causality Using Big Data",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "6177",
         "55518",
         "6180"
-      ]
-    },
-    {
-      "id": "55871",
-      "name": "יזמות ביו רפואית",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55821"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "55009",
-      "name": "יסודות מדעי ההתנהגות באנגלית",
+      "name": "Foundations of Behavioural Sciences (English)",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55708",
-      "name": "כלים לפיתוח חדשנות ויזמות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55821",
-        "55510"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "55337",
-      "name": "כתיבת תוכנית עסקית למיזם חברתי",
+      "name": "Business plans for social entrepreneurship ventures",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
@@ -961,185 +704,55 @@
         "55108",
         "55803",
         "55312"
-      ]
-    },
-    {
-      "id": "55807",
-      "name": "למידת מכונה ובינה מלאכותית",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55866"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55650",
-      "name": "מבוא לחדשנות פיננסית ופינטק",
+      "name": "Introduction to Financial Innovation and Fintech",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 2
     },
     {
       "id": "55701",
-      "name": "מבוא לכלכלה א' (מיקרו)",
+      "name": "Basic Principles of Economics (Micro)",
       "credits": 4,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55793",
-      "name": "מבוא למדע המידע",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "55120",
-      "name": "מבוא לסטטיסטיקה א׳",
+      "name": "Introduction to Statistics I",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55878",
-      "name": "מבוא לפיתוח תרופות ומכשור רפואי א",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55671",
-      "name": "מבט נרטיבי על ארגונים ותהליכי התארגנות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55921",
-      "name": "מדיניות מוצרים חדשים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55905",
-        "55804"
-      ]
-    },
-    {
-      "id": "55809",
-      "name": "מכרזים ומכירות פומביות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55795",
-        "55797",
-        "55746"
-      ]
-    },
-    {
-      "id": "55306",
-      "name": "משקיעים מוסדיים ושוק ההון",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "55321",
-      "name": "מתמטיקה א'",
+      "name": "Mathematics A",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55796",
-      "name": "מתמטיקה למינהל עסקים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55993",
-      "name": "נוירומרקטינג וחקר המוח הצרכני",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55407",
-      "name": "נושאים מתקדמים במיקרו כלכלה",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55844",
-      "name": "ניהול התפעול למוסמך",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55815",
-        "55945",
-        "55797",
-        "55746",
-        "55745",
-        "55796"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "55826",
-      "name": "ניהול התקשורת והפרסום בעידן הדיגיטלי",
+      "name": "Advertising and Communication Management in the Digital era",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55905",
         "55804"
-      ]
-    },
-    {
-      "id": "55856",
-      "name": "ניהול סיכונים ושוק ההון",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55894",
-      "name": "ניהול קריירה בשיווק",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55989",
-      "name": "ניהול קרן השקעות א",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55846"
-      ]
-    },
-    {
-      "id": "55880",
-      "name": "ניתוח דוחות כספיים",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55902",
-        "55802"
-      ]
-    },
-    {
-      "id": "55817",
-      "name": "ניתוח חברות והערכת שווי",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55902"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "55507",
-      "name": "סדנה יישומית במינהל עסקים",
+      "name": "Practical  Workshop in Management",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
@@ -1159,40 +772,12 @@
         "55518",
         "55945",
         "55815"
-      ]
-    },
-    {
-      "id": "55753",
-      "name": "סוגיות עכשוויות בחשבונאות בשוק ההון הישראלי",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55902",
-        "55802"
-      ]
-    },
-    {
-      "id": "55810",
-      "name": "סטטיסטיקה יישומית",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55796",
-        "55745",
-        "55797",
-        "55746"
-      ]
-    },
-    {
-      "id": "55797",
-      "name": "סטטיסטיקה למינהל עסקים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55404",
-      "name": "סמינר  ביזמות טכנולוגית א",
+      "name": "Startup Science Innovation A",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
@@ -1205,11 +790,12 @@
         "55108",
         "55804",
         "55945"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "55529",
-      "name": "סמינר - חדשנות בניהול מותגים ואסטרטגיה שיווקית ",
+      "name": "Brand and Marketing Strategy seminar",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
@@ -1225,91 +811,20 @@
         "55905",
         "55312",
         "55945"
-      ]
-    },
-    {
-      "id": "55850",
-      "name": "סמינר ביישום אסטרטגיה",
-      "credits": 4,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55821",
-        "55708",
-        "55824",
-        "55822",
-        "55696",
-        "55971",
-        "55812"
-      ]
-    },
-    {
-      "id": "55681",
-      "name": "סמינר בשיתוף עם מנהלי שיווק",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55905",
-        "55994",
-        "55838"
-      ]
-    },
-    {
-      "id": "55874",
-      "name": "עקרונות במחקר ביו רפואי",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55941",
-      "name": "פרויקט גמר ביזמות ביו-רפואית BioInnovation - א'",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55876"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55432",
-      "name": "קבלת החלטות: אינטואיציה, אסטרטגיה, ומה שביניהן",
+      "name": "Decision Making: Intuition, Strategy, and In Between",
       "credits": 2,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55963",
-      "name": "קריאה מודרכת א' לתלמידים מתקדמים במימון ו/או בכלכלה פיננסית",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55998",
-      "name": "תאוריות ארגוניות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55739",
-      "name": "תורת ההחלטות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55895",
-      "name": "תזמון הייצור",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55945",
-        "55815"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": 2
     },
     {
       "id": "55301",
-      "name": "תחרות, תמחור ודוחות כספיים א'",
+      "name": "Competition, valuation and financial reports A",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
@@ -1322,75 +837,32 @@
         "55804",
         "55945",
         "55802"
-      ]
-    },
-    {
-      "id": "55988",
-      "name": "תנו לנתונים לדבר: יצירת אסטרטגיה עסקית מבוססת נתונים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55994",
-      "name": "אסטרטגיה וניהול שיווק מתקדם",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55905",
-        "55804"
-      ]
-    },
-    {
-      "id": "55821",
-      "name": "אסטרטגיה עסקית",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55797",
-        "55746",
-        "55796",
-        "55745"
-      ]
-    },
-    {
-      "id": "55846",
-      "name": "השקעות וניירות ערך",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55803"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "55687",
-      "name": "התנהגות ארגונית",
+      "name": "Organizational Behaviour",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55102",
         "55117",
         "55119"
-      ]
-    },
-    {
-      "id": "55922",
-      "name": "התנהגות ארגונית ומינהל משאבי אנוש",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55802",
-      "name": "יסודות החשבונאות",
+      "name": "Fundamentals of Accounting",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "55803",
-      "name": "יסודות המימון",
+      "name": "Fundamentals of Finance",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
@@ -1406,11 +878,12 @@
         "57340",
         "55120",
         "80430"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55804",
-      "name": "יסודות השיווק",
+      "name": "Fundamentals of Marketing Managment",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
@@ -1434,63 +907,28 @@
         "55746",
         "52117",
         "55125"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55102",
-      "name": "יסודות מדעי ההתנהגות",
+      "name": "Foundations of  Behavioural Sciences",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55795",
-      "name": "כלכלת עסקים א' (מיקרו)",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55902",
-      "name": "מבוא לחשבונאות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55904",
-      "name": "מבוא למימון",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55797",
-        "55746",
-        "55745",
-        "55796"
-      ]
-    },
-    {
-      "id": "55815",
-      "name": "מודלים כמותיים בניהול",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55797",
-        "55746",
-        "55796",
-        "55745"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "55124",
-      "name": "מודלים עסקיים באקסל",
+      "name": "Business Modelling with Excel",
       "credits": 2,
       "department": "Business Administration",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 2
     },
     {
       "id": "55510",
-      "name": "ניהול אסטרטגי",
+      "name": "Strategic Management",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
@@ -1506,25 +944,12 @@
         "57341",
         "55797",
         "55312"
-      ]
-    },
-    {
-      "id": "55905",
-      "name": "ניהול השיווק",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55803",
-        "55796",
-        "55745",
-        "55746",
-        "55797"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55506",
-      "name": "ניהול התפעול",
+      "name": "Operations Management",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
@@ -1543,11 +968,12 @@
         "55803",
         "55108",
         "55702"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55312",
-      "name": "נתונים וטכנולוגיה בעסקים",
+      "name": "Business Data and Technology",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
@@ -1562,23 +988,12 @@
         "55120",
         "51102",
         "52116"
-      ]
-    },
-    {
-      "id": "55889",
-      "name": "נתונים וטכנולוגיה בעסקים - MBA",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55796",
-        "55745",
-        "55797",
-        "55746"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55945",
-      "name": "שיטות כמותיות בניהול",
+      "name": "Quantitative Methods in Management",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
@@ -1601,11 +1016,12 @@
         "52117",
         "55125",
         "52221"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55518",
-      "name": "שיטות מחקר במינהל עסקים",
+      "name": "Research Methods in  Business Administration",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
@@ -1622,207 +1038,36 @@
         "55321",
         "57122",
         "55322"
-      ]
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55117",
-      "name": "השתתפות בניסויים",
+      "name": "Participation in Experiments",
       "credits": 0,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55914",
-      "name": "חקר ארגונים",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55922"
-      ]
-    },
-    {
-      "id": "55806",
-      "name": "לנתח, לפרש, לכתוב: סמינר מתקדם במתודולגיות איכותניות לדוקטורנטים",
-      "credits": 4,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55876",
-      "name": "מבוא למדעי החיים והרפואה",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55827",
-      "name": "סמינר -אישיות ומצב בניבוי התנהגות",
-      "credits": 4,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55908",
-        "55998",
-        "55947",
-        "55954"
-      ]
-    },
-    {
-      "id": "55857",
-      "name": "סמינר מחלקתי - דוקטורנטים",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55605",
-      "name": "  Career X: מתקדמים בקריירה שלך",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55709",
-      "name": "אופציות ונכסים מותנים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55846"
-      ]
-    },
-    {
-      "id": "55609",
-      "name": "אסטרטגיות השקעה של קרנות גידור",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55822",
-      "name": "אסטרטגיות צמיחה",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55821"
-      ]
-    },
-    {
-      "id": "55607",
-      "name": "אקטיביזם של בעלי מניות וממשל תאגידי",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55803",
-        "55832"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "55527",
-      "name": "אתיקה בעסקים",
+      "name": "Business Ethics",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55847",
-      "name": "בחירת תיקי השקעות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55803",
-        "55832",
-        "55846"
-      ]
-    },
-    {
-      "id": "55996",
-      "name": "בינה מלאכותית ועסקים",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55793"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": 2
     },
     {
       "id": "55324",
-      "name": "בנה את הרעיון שלך: מפנטזיה למציאות ב-Vibe Coding",
+      "name": "Built it Now:Vibe Coding-Tech Creation without the Code Barrier",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55714",
-      "name": "דרכי פעולה של יזמות וחדשנות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55795",
-        "55812",
-        "55813"
-      ]
-    },
-    {
-      "id": "55870",
-      "name": "הבטחת איכות, רגולציה ומו\"פ קליני",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55979",
-      "name": "הפנקס פתוח: על בלוקצ'יין ומטבעות קריפטוגרפיים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55795",
-        "55793"
-      ]
-    },
-    {
-      "id": "55741",
-      "name": "הקשבה בארגונים: מיומנויות בניהול",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55922"
-      ]
-    },
-    {
-      "id": "55841",
-      "name": "חקר ביצועים 1: מודלים ליניאריים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55815",
-        "55945"
-      ]
-    },
-    {
-      "id": "55608",
-      "name": "יישומים מתקדמים ומחקר בדיווח כספי ",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55902",
-        "55802",
-        "55813",
-        "55797"
-      ]
-    },
-    {
-      "id": "55403",
-      "name": "כלכלה, שווקים ועסקים במזרח אסיה",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55803"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": null
     },
     {
       "id": "55022",
-      "name": "כשבינה מלאכותית פוגשת אנשים וחברה",
+      "name": "When AI meets Humans and Society",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
@@ -1835,247 +1080,63 @@
         "55108",
         "55804",
         "55945"
-      ]
-    },
-    {
-      "id": "55611",
-      "name": "כשהעסקי פוגש חברתי: יצירת ערך כלכלי-חברתי",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55308",
-      "name": "מבוא לבסיסי נתונים ובינה עסקית",
+      "name": "Introduction to Database and Business Intelligence",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55312"
-      ]
-    },
-    {
-      "id": "55891",
-      "name": "מבוא לחשיבת העתיד בעולם העסקים - מגמות על וכוחות מניעים",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "55702",
-      "name": "מבוא לכלכלה ב' (מאקרו)",
+      "name": "Management  Economics (Macro)",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
         "55795",
         "55701"
-      ]
-    },
-    {
-      "id": "55402",
-      "name": "מבוא למחקר במנהל עסקים",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55125",
-      "name": "מבוא לסטטיסטיקה ב׳",
+      "name": "Introduction to Statistics II",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55120",
         "52116",
         "57340"
-      ]
-    },
-    {
-      "id": "55824",
-      "name": "מבוא לעולם ההון סיכון",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55510",
-        "55821"
-      ]
-    },
-    {
-      "id": "55879",
-      "name": "מבוא לפיתוח תרופות ומכשור רפואי ב'",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55878"
-      ]
-    },
-    {
-      "id": "55866",
-      "name": "מדע המידע",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55793",
-        "55300"
-      ]
-    },
-    {
-      "id": "55733",
-      "name": "מודלים ואלגוריתמים בתורת המשחקים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55811",
-      "name": "מודלים למערכות מורכבות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55793"
-      ]
-    },
-    {
-      "id": "55969",
-      "name": "מימון והשקעות בנדל\"ן",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904"
-      ]
-    },
-    {
-      "id": "55011",
-      "name": "מכינה במתמטיקה- סמסטר ב",
-      "credits": 0,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55896",
-      "name": "מנהלים מדברים על AI",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55223",
-      "name": "מסוגלות גלובלית בזירות רב תרבותיות",
+      "name": "Global Competence: Thriving in Multicultural Landscapes",
       "credits": 2,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55779",
-      "name": "מסע בוול סטריט: היכרות מקרוב עם שוקי ההון של ארה\"ב",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55977",
-      "name": "מערכות פיננסיות מסביב לעולם",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55803"
-      ]
+      "prerequisites": [],
+      "statusCourseCode": 2
     },
     {
       "id": "55322",
-      "name": "מתמטיקה ב'",
+      "name": "Mathematics B",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55321"
-      ]
-    },
-    {
-      "id": "55710",
-      "name": "נושאים בכלכלה פיננסית ב'",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55999",
-      "name": "נושאים מתקדמים במימון וכלכלה התנהגותית ",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55720",
-      "name": "ניהול השקעות כמותי",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55781",
-      "name": "ניהול ידע וקניין רוחני",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55832",
-      "name": "ניהול פיננסי",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55803"
-      ]
-    },
-    {
-      "id": "55990",
-      "name": "ניהול קרן השקעות ב",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55846",
-        "55989"
-      ]
-    },
-    {
-      "id": "55812",
-      "name": "ניתוח נתונים לקבלת החלטות",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55321",
-        "55745",
-        "55796",
-        "55797",
-        "52117",
-        "55125",
-        "55746"
-      ]
-    },
-    {
-      "id": "55780",
-      "name": "סוגיות במימון מיזם ביו רפואי",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55660",
-      "name": "סודות בחברה? ניהול תחת פערי מידע",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55952",
-      "name": "סמינר בחשבונאות ומידע פיננסי",
-      "credits": 4,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 1
     },
     {
       "id": "55408",
-      "name": "סמינר ביזמות טכנולוגית ב",
+      "name": "tartup Science Innovation B",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
@@ -2089,26 +1150,12 @@
         "55803",
         "55804",
         "55945"
-      ]
-    },
-    {
-      "id": "55317",
-      "name": "סמינר בפיתוח תוכניות עסקיות",
-      "credits": 4,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55821",
-        "55708",
-        "55824",
-        "55822",
-        "55696",
-        "55971",
-        "55812"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "55415",
-      "name": "סמינר בשוק ההון",
+      "name": "Seminar in Capital Market",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
@@ -2126,183 +1173,22 @@
         "55322",
         "55702",
         "55701"
-      ]
-    },
-    {
-      "id": "55935",
-      "name": "סמינר מחקרי ברשתות דיגיטליות",
-      "credits": 4,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55994",
-        "55838"
-      ]
-    },
-    {
-      "id": "55865",
-      "name": "סמינריון באנליטיקה",
-      "credits": 4,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55841",
-        "55810"
-      ]
-    },
-    {
-      "id": "55890",
-      "name": "סמינריון במדע המידע",
-      "credits": 4,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55866",
-        "55807"
-      ]
-    },
-    {
-      "id": "55913",
-      "name": "סמנריון במדע המידע - המשך למודלים של מערכות מורכבות",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55811"
-      ]
-    },
-    {
-      "id": "55309",
-      "name": "עקרונות ניהול משא ומתן",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55735",
-      "name": "פינטק",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55944",
-      "name": "פרוייקט גמר ביזמות ביו-רפואית BioInnovation - ב'",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55941",
-        "55876"
-      ]
-    },
-    {
-      "id": "55910",
-      "name": "פרוייקט סיום בביג דאטא",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55807",
-        "55841"
-      ]
-    },
-    {
-      "id": "55724",
-      "name": "פרקטיקום במדע המידע",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55793",
-        "55807"
-      ]
-    },
-    {
-      "id": "55965",
-      "name": "קריאה מודרכת ב' לתלמידים מתקדמים במימון ו/או בכלכלה פיננסית",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55963"
-      ]
-    },
-    {
-      "id": "55755",
-      "name": "שיווק ביו רפואי",
-      "credits": 2,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55968",
-      "name": "שיווק ובינה מלאכותית",
-      "credits": 1,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55804",
-        "55905"
-      ]
-    },
-    {
-      "id": "55698",
-      "name": "שיווק חברתי",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55838",
-      "name": "שיטות במחקר שווקים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55812",
-        "55805",
-        "55810",
-        "55905",
-        "55804"
-      ]
-    },
-    {
-      "id": "55954",
-      "name": "שיטות מחקר כמותיות בהתנהגות ארגונית",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55922"
-      ]
-    },
-    {
-      "id": "55772",
-      "name": "שימוש במודלים של מדעי הטבע להבנת תופעות חברתיות ",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "55717",
-      "name": "תחרות -חדשנות בניהול מותגים - המשך",
+      "name": "Competition - Innovation in brand management - Continue",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
         "55529"
-      ]
-    },
-    {
-      "id": "55916",
-      "name": "תחרות ומבנה שווקים",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": [
-        "55904",
-        "55803",
-        "55795"
-      ]
-    },
-    {
-      "id": "55976",
-      "name": "תחרות ורגולציה בכלכלה הישראלית",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "55305",
-      "name": "תחרות, תמחור ודוחות כספיים ב'",
+      "name": "Competition, valuation and financial reports B",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
@@ -2317,63 +1203,32 @@
         "55108",
         "55804",
         "55301"
-      ]
+      ],
+      "statusCourseCode": 2
     },
     {
       "id": "55531",
-      "name": "תיאוריה ומעשה במשא ומתן",
+      "name": "Negotiations - Theory and Practice.",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55662",
-      "name": "CATALYST – תכנית קיץ מרוכזת בחדשנות וטכנולוגיה יישומית",
-      "credits": 6,
-      "department": "Business Administration",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 2
     },
     {
       "id": "55005",
-      "name": "מכינה במתמטיקה",
+      "name": "Preparatory Course in Mathematics",
       "credits": 0,
       "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55602",
-      "name": "מתמטיקה ל-IMBA קורס קיץ",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55745",
-      "name": "מתמטיקה למינהל עסקים-קורס קיץ",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55603",
-      "name": "סטטיסטיקה ל-IMBA -קורס קיץ",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
-    },
-    {
-      "id": "55746",
-      "name": "סטטיסטיקה למנהל עסקים-קורס קיץ",
-      "credits": 3,
-      "department": "Business Administration",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 1
     },
     {
       "id": "55861",
-      "name": "קורס רב תרבותי ביזמות - קורס קיץ",
+      "name": "A Multicultural course in Entrepreneurship (Israel-Canada)-summer course",
       "credits": 3,
       "department": "Business Administration",
-      "prerequisites": []
+      "prerequisites": [],
+      "statusCourseCode": 2
     }
   ],
   "offerings": [
@@ -2463,14 +1318,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 0,
-              "start": "12:30",
-              "end": "14:00"
-            },
-            {
               "day": 3,
               "start": "10:30",
               "end": "12:00"
+            },
+            {
+              "day": 0,
+              "start": "12:30",
+              "end": "14:00"
             }
           ]
         },
@@ -2479,14 +1334,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 4,
-              "start": "14:30",
-              "end": "16:00"
-            },
-            {
               "day": 2,
               "start": "16:30",
               "end": "18:00"
+            },
+            {
+              "day": 4,
+              "start": "14:30",
+              "end": "16:00"
             }
           ]
         },
@@ -2495,12 +1350,12 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 3,
+              "day": 2,
               "start": "14:30",
               "end": "16:00"
             },
             {
-              "day": 2,
+              "day": 3,
               "start": "14:30",
               "end": "16:00"
             }
@@ -2602,24 +1457,6 @@
       ]
     },
     {
-      "courseId": "57735",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "8534",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "10:30",
-              "end": "12:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "57123",
       "semester": "A",
       "campus": "MtScopus",
@@ -2647,14 +1484,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 0,
-              "start": "18:30",
-              "end": "20:00"
-            },
-            {
               "day": 4,
               "start": "16:30",
               "end": "18:00"
+            },
+            {
+              "day": 0,
+              "start": "18:30",
+              "end": "20:00"
             }
           ]
         },
@@ -2663,14 +1500,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 0,
-              "start": "14:30",
-              "end": "16:00"
-            },
-            {
               "day": 3,
               "start": "16:30",
               "end": "18:00"
+            },
+            {
+              "day": 0,
+              "start": "14:30",
+              "end": "16:00"
             }
           ]
         },
@@ -2724,14 +1561,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 4,
-              "start": "10:30",
-              "end": "12:00"
-            },
-            {
               "day": 2,
               "start": "16:30",
               "end": "18:00"
+            },
+            {
+              "day": 4,
+              "start": "10:30",
+              "end": "12:00"
             }
           ]
         }
@@ -2758,14 +1595,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 3,
-              "start": "18:30",
-              "end": "20:00"
-            },
-            {
               "day": 1,
               "start": "10:30",
               "end": "12:00"
+            },
+            {
+              "day": 3,
+              "start": "18:30",
+              "end": "20:00"
             }
           ]
         },
@@ -2851,14 +1688,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 2,
-              "start": "14:00",
-              "end": "15:45"
-            },
-            {
               "day": 0,
               "start": "18:00",
               "end": "19:45"
+            },
+            {
+              "day": 2,
+              "start": "14:00",
+              "end": "15:45"
             }
           ]
         },
@@ -2867,14 +1704,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 0,
-              "start": "10:30",
-              "end": "12:00"
-            },
-            {
               "day": 3,
               "start": "12:30",
               "end": "14:00"
+            },
+            {
+              "day": 0,
+              "start": "10:30",
+              "end": "12:00"
             }
           ]
         },
@@ -2905,32 +1742,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 3,
-              "start": "16:30",
-              "end": "18:00"
-            },
-            {
               "day": 1,
               "start": "08:30",
               "end": "10:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57866",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9750",
-          "type": "Lecture",
-          "slots": [
+            },
             {
-              "day": 2,
+              "day": 3,
               "start": "16:30",
-              "end": "19:00"
+              "end": "18:00"
             }
           ]
         }
@@ -3025,24 +1844,6 @@
       ]
     },
     {
-      "courseId": "57855",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "2179",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "12:30",
-              "end": "15:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "57496",
       "semester": "A",
       "campus": "MtScopus",
@@ -3052,32 +1853,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 3,
-              "start": "14:30",
-              "end": "16:00"
-            },
-            {
               "day": 1,
               "start": "15:00",
               "end": "16:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57874",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7216",
-          "type": "Lecture",
-          "slots": [
+            },
             {
-              "day": 0,
-              "start": "18:30",
-              "end": "20:00"
+              "day": 3,
+              "start": "14:30",
+              "end": "16:00"
             }
           ]
         }
@@ -3107,24 +1890,6 @@
       ]
     },
     {
-      "courseId": "57400",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5203",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "14:00",
-              "end": "17:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "57340",
       "semester": "A",
       "campus": "MtScopus",
@@ -3134,14 +1899,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 3,
-              "start": "18:30",
-              "end": "20:00"
-            },
-            {
               "day": 1,
               "start": "19:00",
               "end": "20:30"
+            },
+            {
+              "day": 3,
+              "start": "18:30",
+              "end": "20:00"
             }
           ]
         },
@@ -3161,14 +1926,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 0,
-              "start": "16:30",
-              "end": "18:00"
-            },
-            {
               "day": 2,
               "start": "10:30",
               "end": "12:00"
+            },
+            {
+              "day": 0,
+              "start": "16:30",
+              "end": "18:00"
             }
           ]
         },
@@ -3177,14 +1942,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 4,
-              "start": "12:30",
-              "end": "14:00"
-            },
-            {
               "day": 1,
               "start": "10:30",
               "end": "12:00"
+            },
+            {
+              "day": 4,
+              "start": "12:30",
+              "end": "14:00"
             }
           ]
         },
@@ -3196,24 +1961,6 @@
               "day": 2,
               "start": "18:30",
               "end": "20:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57753",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "4482",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 3,
-              "start": "16:30",
-              "end": "18:00"
             }
           ]
         }
@@ -3283,14 +2030,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 1,
-              "start": "17:00",
-              "end": "18:30"
-            },
-            {
               "day": 4,
               "start": "12:30",
               "end": "14:00"
+            },
+            {
+              "day": 1,
+              "start": "17:00",
+              "end": "18:30"
             }
           ]
         },
@@ -3317,14 +2064,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 1,
-              "start": "13:00",
-              "end": "14:30"
-            },
-            {
               "day": 3,
               "start": "12:30",
               "end": "14:00"
+            },
+            {
+              "day": 1,
+              "start": "13:00",
+              "end": "14:30"
             }
           ]
         }
@@ -3398,14 +2145,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 3,
-              "start": "12:30",
-              "end": "14:00"
-            },
-            {
               "day": 4,
               "start": "09:30",
               "end": "12:00"
+            },
+            {
+              "day": 3,
+              "start": "12:30",
+              "end": "14:00"
             }
           ]
         },
@@ -3476,96 +2223,6 @@
               "day": 1,
               "start": "10:30",
               "end": "12:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57836",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7735",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "14:30",
-              "end": "16:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57958",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "8768",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "12:30",
-              "end": "14:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57997",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "6680",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "14:30",
-              "end": "16:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57999",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "4862",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 3,
-              "start": "10:30",
-              "end": "12:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57986",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5861",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "08:00",
-              "end": "10:00"
             }
           ]
         }
@@ -3689,14 +2346,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 0,
-              "start": "12:30",
-              "end": "14:00"
-            },
-            {
               "day": 3,
               "start": "10:30",
               "end": "12:00"
+            },
+            {
+              "day": 0,
+              "start": "12:30",
+              "end": "14:00"
             }
           ]
         },
@@ -3719,42 +2376,6 @@
               "day": 1,
               "start": "17:00",
               "end": "18:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57777",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "1468",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "14:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57861",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "1575",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "17:00",
-              "end": "19:30"
             }
           ]
         }
@@ -3811,14 +2432,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 0,
-              "start": "12:30",
-              "end": "14:00"
-            },
-            {
               "day": 2,
               "start": "10:30",
               "end": "12:00"
+            },
+            {
+              "day": 0,
+              "start": "12:30",
+              "end": "14:00"
             }
           ]
         }
@@ -3910,14 +2531,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 4,
-              "start": "18:30",
-              "end": "20:00"
-            },
-            {
               "day": 1,
               "start": "17:00",
               "end": "18:30"
+            },
+            {
+              "day": 4,
+              "start": "18:30",
+              "end": "20:00"
             }
           ]
         },
@@ -3942,14 +2563,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 1,
-              "start": "15:00",
-              "end": "16:30"
-            },
-            {
               "day": 3,
               "start": "14:30",
               "end": "16:00"
+            },
+            {
+              "day": 1,
+              "start": "15:00",
+              "end": "16:30"
             }
           ]
         }
@@ -4010,42 +2631,6 @@
       ]
     },
     {
-      "courseId": "57588",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9598",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "16:30",
-              "end": "19:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57125",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5713",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "16:30",
-              "end": "20:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "57705",
       "semester": "B",
       "campus": "MtScopus",
@@ -4073,32 +2658,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 2,
-              "start": "16:30",
-              "end": "18:00"
-            },
-            {
               "day": 4,
               "start": "12:30",
               "end": "14:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "57853",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "585",
-          "type": "Lecture",
-          "slots": [
+            },
             {
-              "day": 4,
-              "start": "13:30",
-              "end": "16:00"
+              "day": 2,
+              "start": "16:30",
+              "end": "18:00"
             }
           ]
         }
@@ -4182,24 +2749,6 @@
       ]
     },
     {
-      "courseId": "57754",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7608",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 3,
-              "start": "08:30",
-              "end": "10:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "57466",
       "semester": "B",
       "campus": "MtScopus",
@@ -4245,14 +2794,14 @@
           "type": "Lecture",
           "slots": [
             {
-              "day": 4,
-              "start": "14:30",
-              "end": "16:00"
-            },
-            {
               "day": 1,
               "start": "13:00",
               "end": "14:30"
+            },
+            {
+              "day": 4,
+              "start": "14:30",
+              "end": "16:00"
             }
           ]
         },
@@ -4313,24 +2862,6 @@
       ]
     },
     {
-      "courseId": "55678",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "2652",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55007",
       "semester": "A",
       "campus": "MtScopus",
@@ -4343,240 +2874,6 @@
               "day": 0,
               "start": "12:30",
               "end": "16:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55728",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "2193",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55543",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7544",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55971",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9538",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55899",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5501",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:30",
-              "end": "20:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55813",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "8978",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55425",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7526",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "12:30",
-              "end": "15:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55544",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "1677",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55983",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "3443",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55982",
-      "semester": "A",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "6078",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "12:00",
-              "end": "14:45"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55783",
-      "semester": "A",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "9209",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "16:00",
-              "end": "17:45"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55696",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "10463",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55721",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5320",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:00",
-              "end": "19:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55939",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9185",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:30",
-              "end": "21:00"
             }
           ]
         }
@@ -4601,24 +2898,6 @@
       ]
     },
     {
-      "courseId": "55871",
-      "semester": "A",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "9042",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:00",
-              "end": "19:45"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55009",
       "semester": "A",
       "campus": "MtScopus",
@@ -4637,24 +2916,6 @@
       ]
     },
     {
-      "courseId": "55708",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "4724",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55337",
       "semester": "A",
       "campus": "MtScopus",
@@ -4667,24 +2928,6 @@
               "day": 0,
               "start": "11:30",
               "end": "15:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55807",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "6780",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:30",
-              "end": "21:00"
             }
           ]
         }
@@ -4749,35 +2992,6 @@
       ]
     },
     {
-      "courseId": "55793",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7805",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        },
-        {
-          "id": "8057",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55120",
       "semester": "A",
       "campus": "MtScopus",
@@ -4812,96 +3026,6 @@
               "day": 3,
               "start": "12:30",
               "end": "15:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55878",
-      "semester": "A",
-      "campus": "EinKerem",
-      "groups": [
-        {
-          "id": "8882",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "09:15",
-              "end": "11:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55671",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "8198",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55921",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "2663",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55809",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "10809",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55306",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "3603",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:30",
-              "end": "21:00"
             }
           ]
         }
@@ -4948,60 +3072,6 @@
       ]
     },
     {
-      "courseId": "55796",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "3060",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "12:30",
-              "end": "15:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55407",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "6901",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55844",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9746",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55826",
       "semester": "A",
       "campus": "MtScopus",
@@ -5020,78 +3090,6 @@
       ]
     },
     {
-      "courseId": "55856",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "368",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "09:30",
-              "end": "11:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55989",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "2815",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55880",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5807",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "08:30",
-              "end": "11:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55817",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "10943",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55507",
       "semester": "A",
       "campus": "MtScopus",
@@ -5104,60 +3102,6 @@
               "day": 2,
               "start": "12:30",
               "end": "14:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55753",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "10773",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55810",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "8652",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55797",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "8269",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
             }
           ]
         }
@@ -5200,78 +3144,6 @@
       ]
     },
     {
-      "courseId": "55850",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "2736",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 0,
-              "start": "14:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55681",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7193",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 2,
-              "start": "21:00",
-              "end": "22:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55874",
-      "semester": "A",
-      "campus": "EinKerem",
-      "groups": [
-        {
-          "id": "11365",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "11:15",
-              "end": "14:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55941",
-      "semester": "A",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "1167",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "20:00",
-              "end": "21:45"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55432",
       "semester": "A",
       "campus": "MtScopus",
@@ -5290,78 +3162,6 @@
       ]
     },
     {
-      "courseId": "55963",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5325",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "17:00",
-              "end": "18:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55998",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7230",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55739",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "1228",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55895",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "10481",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55301",
       "semester": "A",
       "campus": "MtScopus",
@@ -5374,122 +3174,6 @@
               "day": 3,
               "start": "18:30",
               "end": "20:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55988",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "3975",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55994",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "701",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        },
-        {
-          "id": "3820",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55821",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5384",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        },
-        {
-          "id": "7477",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        },
-        {
-          "id": "9411",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "08:00",
-              "end": "10:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55846",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "4282",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        },
-        {
-          "id": "11088",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "15:30",
-              "end": "18:00"
             }
           ]
         }
@@ -5541,46 +3225,6 @@
               "day": 0,
               "start": "16:30",
               "end": "19:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55922",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "6349",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "08:30",
-              "end": "11:00"
-            }
-          ]
-        },
-        {
-          "id": "6546",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        },
-        {
-          "id": "9368",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
             }
           ]
         }
@@ -5835,199 +3479,6 @@
       ]
     },
     {
-      "courseId": "55795",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "783",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        },
-        {
-          "id": "3881",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "08:00",
-              "end": "10:30"
-            }
-          ]
-        },
-        {
-          "id": "7568",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55902",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "1329",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        },
-        {
-          "id": "8777",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "08:30",
-              "end": "11:00"
-            }
-          ]
-        },
-        {
-          "id": "10649",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55904",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "968",
-          "type": "Exercise",
-          "slots": [
-            {
-              "day": 3,
-              "start": "21:00",
-              "end": "22:00"
-            }
-          ]
-        },
-        {
-          "id": "1749",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "11:00",
-              "end": "13:30"
-            }
-          ]
-        },
-        {
-          "id": "2456",
-          "type": "Exercise",
-          "slots": [
-            {
-              "day": 3,
-              "start": "14:20",
-              "end": "15:20"
-            }
-          ]
-        },
-        {
-          "id": "4327",
-          "type": "Exercise",
-          "slots": [
-            {
-              "day": 3,
-              "start": "21:00",
-              "end": "22:00"
-            }
-          ]
-        },
-        {
-          "id": "4423",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        },
-        {
-          "id": "7777",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "08:30",
-              "end": "11:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55815",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "8307",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        },
-        {
-          "id": "8657",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        },
-        {
-          "id": "9952",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "11:30",
-              "end": "14:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55124",
       "semester": "Annual",
       "campus": "MtScopus",
@@ -6119,46 +3570,6 @@
       ]
     },
     {
-      "courseId": "55905",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "1878",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "11:00",
-              "end": "13:30"
-            }
-          ]
-        },
-        {
-          "id": "3851",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        },
-        {
-          "id": "11192",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55506",
       "semester": "Annual",
       "campus": "MtScopus",
@@ -6222,46 +3633,6 @@
               "day": 0,
               "start": "09:30",
               "end": "12:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55889",
-      "semester": "Annual",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "1841",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        },
-        {
-          "id": "1842",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        },
-        {
-          "id": "4565",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "11:30",
-              "end": "14:00"
             }
           ]
         }
@@ -6370,132 +3741,6 @@
       ]
     },
     {
-      "courseId": "55914",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "10407",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "16:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55806",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "669",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 2,
-              "start": "13:30",
-              "end": "16:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55827",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "3970",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 2,
-              "start": "18:30",
-              "end": "20:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55857",
-      "semester": "A",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9662",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 3,
-              "start": "12:30",
-              "end": "14:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55605",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7649",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "12:30",
-              "end": "15:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55709",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "1414",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55822",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "6203",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55527",
       "semester": "B",
       "campus": "MtScopus",
@@ -6508,24 +3753,6 @@
               "day": 2,
               "start": "09:30",
               "end": "12:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55847",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "3821",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:30",
-              "end": "21:00"
             }
           ]
         }
@@ -6550,132 +3777,6 @@
       ]
     },
     {
-      "courseId": "55714",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7635",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55870",
-      "semester": "B",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "6488",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "17:00",
-              "end": "20:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55979",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9330",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55741",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "10607",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55841",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "1925",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55608",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9655",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "20:00",
-              "end": "21:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55403",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7827",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55022",
       "semester": "B",
       "campus": "MtScopus",
@@ -6694,24 +3795,6 @@
       ]
     },
     {
-      "courseId": "55611",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9183",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "15:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55308",
       "semester": "B",
       "campus": "MtScopus",
@@ -6724,24 +3807,6 @@
               "day": 4,
               "start": "09:30",
               "end": "12:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55891",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9161",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "16:30",
-              "end": "18:00"
             }
           ]
         }
@@ -6799,24 +3864,6 @@
       ]
     },
     {
-      "courseId": "55402",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "723",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "16:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55125",
       "semester": "B",
       "campus": "MtScopus",
@@ -6857,132 +3904,6 @@
       ]
     },
     {
-      "courseId": "55824",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7399",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55879",
-      "semester": "B",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "11066",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "15:30",
-              "end": "17:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55866",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "3855",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55733",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7305",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55811",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "10056",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:30",
-              "end": "21:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55969",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "11296",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55011",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "70780",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "09:00",
-              "end": "11:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55223",
       "semester": "B",
       "campus": "MtScopus",
@@ -6995,24 +3916,6 @@
               "day": 2,
               "start": "14:30",
               "end": "16:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55977",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "8106",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "12:30",
-              "end": "15:00"
             }
           ]
         }
@@ -7059,179 +3962,6 @@
       ]
     },
     {
-      "courseId": "55999",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9570",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "14:30",
-              "end": "17:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55720",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "10278",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55781",
-      "semester": "B",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "2364",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "20:00",
-              "end": "21:45"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55832",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "4893",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        },
-        {
-          "id": "10427",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "11:30",
-              "end": "14:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55990",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7632",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55812",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9170",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55780",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "448",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "20:00",
-              "end": "21:45"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55660",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "11044",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 5,
-              "start": "08:30",
-              "end": "12:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55952",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "182",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:30",
-              "end": "22:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55408",
       "semester": "B",
       "campus": "MtScopus",
@@ -7244,24 +3974,6 @@
               "day": 0,
               "start": "12:30",
               "end": "14:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55317",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "2440",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 0,
-              "start": "18:30",
-              "end": "22:15"
             }
           ]
         }
@@ -7286,263 +3998,6 @@
       ]
     },
     {
-      "courseId": "55935",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "3078",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 2,
-              "start": "21:30",
-              "end": "22:00"
-            },
-            {
-              "day": 2,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55865",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "3563",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:30",
-              "end": "22:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55890",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9145",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:30",
-              "end": "22:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55913",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5021",
-          "type": "Seminar",
-          "slots": [
-            {
-              "day": 1,
-              "start": "21:30",
-              "end": "22:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55735",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5190",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55944",
-      "semester": "B",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "2221",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "18:00",
-              "end": "19:45"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55910",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "4147",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55724",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "9360",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55965",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "6902",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "17:00",
-              "end": "18:30"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55755",
-      "semester": "B",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "2928",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "16:00",
-              "end": "17:45"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55698",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "6580",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55838",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "7138",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55954",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "765",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 4,
-              "start": "15:30",
-              "end": "18:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55772",
-      "semester": "B",
-      "campus": "Safra",
-      "groups": [
-        {
-          "id": "7530",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 3,
-              "start": "15:00",
-              "end": "17:45"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "courseId": "55717",
       "semester": "B",
       "campus": "MtScopus",
@@ -7555,42 +4010,6 @@
               "day": 2,
               "start": "12:30",
               "end": "14:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55916",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "11100",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "18:30",
-              "end": "21:00"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "courseId": "55976",
-      "semester": "B",
-      "campus": "MtScopus",
-      "groups": [
-        {
-          "id": "5172",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "18:30",
-              "end": "21:00"
             }
           ]
         }
@@ -7616,7 +4035,7 @@
     },
     {
       "courseId": "55005",
-      "semester": "A",
+      "semester": "Summer",
       "campus": "MtScopus",
       "groups": [
         {

@@ -1,9 +1,17 @@
 /**
- * HUJI Shnaton Scraper
+ * HUJI Shnaton Scraper — Bachelor's Catalog Builder
  *
- * Fetches real course data for Economics + Business departments from the
- * Shnaton API (shnaton.huji.ac.il) and writes it to src/data/huji-catalog-2026.json
- * in the schema expected by the app (Course[], CourseOffering[]).
+ * Fetches real Bachelor's course data for Economics + Business Administration
+ * from the Shnaton API (shnaton.huji.ac.il) and writes it to
+ * src/data/huji-catalog-2026.json in the schema expected by the app.
+ *
+ * Filters:
+ *   - sugToar === '001' (Bachelor's only — drops Master's and PhD courses)
+ *   - isLearning === 1 (active courses only)
+ *
+ * Output is English-first: course names, department names, and meeting
+ * types come from the API's English fields, with Hebrew kept only as a
+ * fallback when an English string is missing.
  *
  * Usage: node scripts/scrape-shnaton.js
  * Requires Node 18+ (native fetch).
@@ -19,15 +27,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const YEAR = 2026;
 const BASE_API = 'https://shnaton.huji.ac.il/api';
-const BATCH_SIZE = 20; // courses per groups-with-sessions request (API rejects large batches)
-const DELAY_MS = 800;  // polite delay between requests
+const BATCH_SIZE = 20;
+const DELAY_MS = 800;
 
-// Departments to scrape (department code → human label used in logs)
+// Departments to scrape. We only target Bachelor's-bearing departments;
+// the sugToar filter below removes any Master's/PhD courses that slip in.
 const DEPARTMENTS = [
-  { code: '321', label: 'Economics' },
-  { code: '322', label: 'Business Administration' },
-  { code: '343', label: 'Economics & Business (joint)' },
+  { code: '321', label: 'Economics' },                  // Faculty of Social Sciences
+  { code: '322', label: 'Business Administration' },    // Business School
 ];
+
+const BACHELOR_SUG_TOAR = '001';
 
 const OUTPUT_FILE = path.join(__dirname, '..', 'src', 'data', 'huji-catalog-2026.json');
 
@@ -35,22 +45,19 @@ const OUTPUT_FILE = path.join(__dirname, '..', 'src', 'data', 'huji-catalog-2026
 
 const SESSION_ID = crypto.randomUUID();
 
-async function apiFetch(path, opts = {}) {
-  const url = `${BASE_API}${path}`;
+async function apiFetch(p, opts = {}) {
+  const url = `${BASE_API}${p}`;
   const headers = {
     'Content-Type': 'application/json',
     'X-Session-Id': SESSION_ID,
     ...opts.headers,
   };
-
   const res = await fetch(url, { ...opts, headers });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} — ${url}`);
   return res.json();
 }
 
-async function sleep(ms) {
-  return new Promise(r => setTimeout(r, ms));
-}
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // ─── API wrappers ───────────────────────────────────────────────────────────
 
@@ -62,13 +69,14 @@ async function searchByDepartment(departmentCode) {
 }
 
 async function getGroupsWithSessions(courseIds) {
-  const idList = courseIds.join(',');
-  return apiFetch(`/courses/groups-with-sessions?year=${YEAR}&courseIds=${idList}`);
+  return apiFetch(
+    `/courses/groups-with-sessions?year=${YEAR}&courseIds=${courseIds.join(',')}`
+  );
 }
 
 async function getPrerequisites(courseCode) {
   try {
-    return apiFetch(`/courses/code/${courseCode}/requirements?year=${YEAR}`);
+    return await apiFetch(`/courses/code/${courseCode}/requirements?year=${YEAR}`);
   } catch {
     return null;
   }
@@ -76,9 +84,17 @@ async function getPrerequisites(courseCode) {
 
 // ─── Transform helpers ──────────────────────────────────────────────────────
 
+/** Prefer English; fall back to Hebrew if English is missing/empty. */
+function pickEnglish(localized) {
+  if (!localized) return '';
+  const en = (localized.en || '').trim();
+  if (en) return en;
+  return (localized.he || '').trim();
+}
+
 /** milliseconds-from-midnight → "HH:MM" */
 function msToTime(ms) {
-  if (!ms && ms !== 0) return null;
+  if (ms == null) return null;
   const totalMinutes = Math.round(ms / 60000);
   const h = Math.floor(totalMinutes / 60);
   const m = totalMinutes % 60;
@@ -90,38 +106,46 @@ function toSemester(period) {
   if (period === 1) return 'A';
   if (period === 2) return 'B';
   if (period === 3) return 'Annual';
-  return 'A'; // fallback
+  if (period === 4) return 'Summer';
+  return 'A';
 }
 
 /** API campus name → our Campus type */
 function toCampus(campusName) {
   if (!campusName) return 'MtScopus';
-  const n = campusName.toLowerCase();
-  if (n.includes('scopus') || n.includes('הצופים')) return 'MtScopus';
-  if (n.includes('safra') || n.includes('ספרא')) return 'Safra';
-  if (n.includes('kerem') || n.includes('כרם')) return 'EinKerem';
-  if (n.includes('rehovot') || n.includes('רחובות')) return 'Rehovot';
+  const n = pickEnglish(campusName).toLowerCase();
+  if (n.includes('scopus')) return 'MtScopus';
+  if (n.includes('safra')) return 'Safra';
+  if (n.includes('kerem')) return 'EinKerem';
+  if (n.includes('rehovot')) return 'Rehovot';
   return 'MtScopus';
 }
 
-/** API studySessionTypeName → our MeetingType */
+/**
+ * API studySessionTypeName → our MeetingType.
+ * The English names from the API are stable and unambiguous; match on them
+ * first, then fall back to Hebrew if the English field is empty.
+ */
 function toMeetingType(typeName) {
   if (!typeName) return 'Lecture';
-  const n = (typeName.he || typeName.en || '').toLowerCase();
-  // Order matters: combined / specific patterns must come before single-word ones,
-  // because Hebrew "שעור ותרגיל" (Lesson and Exercise) contains "תרגיל".
-  if (n.includes('שעור ותרגיל') || n.includes('lesson and exercise')) return 'Lecture';
-  if (n.includes('מעבדה') || n.includes('lab')) return 'Lab';
-  if (n.includes('סמינר') || n.includes('seminar')) return 'Seminar';
-  if (n.includes('תרגיל') || n.includes('exercise') || n.includes('trgil')) return 'Exercise';
+  const en = (typeName.en || '').toLowerCase();
+  if (en === 'lesson and exercise') return 'Lecture';
+  if (en === 'lesson') return 'Lecture';
+  if (en === 'exercise') return 'Exercise';
+  if (en === 'laboratory' || en === 'lab') return 'Lab';
+  if (en === 'seminar') return 'Seminar';
+  const he = typeName.he || '';
+  if (he.includes('שעור ותרגיל')) return 'Lecture';
+  if (he.includes('מעבדה')) return 'Lab';
+  if (he.includes('סמינר')) return 'Seminar';
+  if (he.includes('תרגיל')) return 'Exercise';
   return 'Lecture';
 }
 
 /**
  * Flatten a requirements tree (OR/AND/COURSE nodes) into a flat list of
- * prerequisite course codes (strings). We take the simplest path through
- * OR nodes — just collect all leaf COURSE codes as a flat list, which is
- * conservative (may list more than strictly needed).
+ * prerequisite course codes. Conservative — collects every leaf code,
+ * which may overstate requirements that are actually OR-branches.
  */
 function flattenPrereqs(node) {
   if (!node) return [];
@@ -135,17 +159,27 @@ function flattenPrereqs(node) {
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log(`\nHUJI Shnaton Scraper — Year ${YEAR}`);
-  console.log('═'.repeat(50));
+  console.log(`\nHUJI Shnaton Scraper — Year ${YEAR}, Bachelor's only`);
+  console.log('═'.repeat(60));
 
-  // 1. Fetch course lists for all departments
-  const rawCourseMap = new Map(); // courseId → raw API course object
+  // 1. Course lists per department, filtered to Bachelor's
+  const rawCourseMap = new Map();
+  const droppedByDept = {};
+
   for (const dept of DEPARTMENTS) {
     console.log(`\n▶ Fetching ${dept.label} (code: ${dept.code})...`);
     try {
       const results = await searchByDepartment(dept.code);
-      console.log(`  ✓ ${results.length} courses`);
-      for (const c of results) rawCourseMap.set(c.id, c);
+      let kept = 0;
+      let dropped = 0;
+      for (const c of results) {
+        if (c.sugToar !== BACHELOR_SUG_TOAR) { dropped++; continue; }
+        if (c.isLearning !== 1) { dropped++; continue; }
+        rawCourseMap.set(c.id, c);
+        kept++;
+      }
+      droppedByDept[dept.label] = dropped;
+      console.log(`  ✓ ${kept} Bachelor's courses kept, ${dropped} dropped (Master's/PhD/inactive)`);
     } catch (err) {
       console.error(`  ✗ Failed: ${err.message}`);
     }
@@ -153,15 +187,17 @@ async function main() {
   }
 
   const allRaw = Array.from(rawCourseMap.values());
-  console.log(`\n▶ Total unique courses: ${allRaw.length}`);
+  console.log(`\n▶ Total unique Bachelor's courses: ${allRaw.length}`);
 
-  // 2. Fetch schedule data in batches
+  // 2. Schedule data
   console.log('\n▶ Fetching schedule data (groups + sessions)...');
   const sessionsByCourseId = {};
-  const ids = allRaw.map(c => c.id);
+  const ids = allRaw.map((c) => c.id);
   for (let i = 0; i < ids.length; i += BATCH_SIZE) {
     const batch = ids.slice(i, i + BATCH_SIZE);
-    process.stdout.write(`  Batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(ids.length / BATCH_SIZE)}...`);
+    process.stdout.write(
+      `  Batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(ids.length / BATCH_SIZE)}...`
+    );
     try {
       const data = await getGroupsWithSessions(batch);
       Object.assign(sessionsByCourseId, data);
@@ -172,10 +208,10 @@ async function main() {
     await sleep(DELAY_MS);
   }
 
-  // 3. Fetch prerequisites for all unique course codes
+  // 3. Prerequisites
   console.log('\n▶ Fetching prerequisites...');
-  const prereqMap = {}; // courseCode (string) → string[]
-  const codes = [...new Set(allRaw.map(c => c.code))];
+  const prereqMap = {};
+  const codes = [...new Set(allRaw.map((c) => c.code))];
   for (let i = 0; i < codes.length; i++) {
     const code = codes[i];
     if (i % 10 === 0) process.stdout.write(`  ${i}/${codes.length}\r`);
@@ -189,7 +225,7 @@ async function main() {
         if (prereqs.length) prereqMap[code] = prereqs;
       }
     } catch {
-      // silent — not critical
+      /* silent */
     }
     await sleep(200);
   }
@@ -199,50 +235,49 @@ async function main() {
   console.log('\n▶ Transforming to app schema...');
   const courses = [];
   const offerings = [];
+  let noScheduleCount = 0;
+  const missingSchedule = [];
 
   for (const raw of allRaw) {
-    const code = raw.code; // 5-digit Shnaton code
+    const code = raw.code;
 
-    // Course object
     courses.push({
       id: code,
-      name: raw.name?.he || raw.name?.en || '',
+      name: pickEnglish(raw.name),
       credits: raw.academicPoints ?? 0,
-      department: raw.departmentName?.en || raw.departmentName?.he || '',
+      department: pickEnglish(raw.departmentName),
       prerequisites: prereqMap[code] ?? [],
+      // statusCourseCode = 1 looks like a core / required-track tag,
+      // 2 looks like an elective. We surface it so downstream code
+      // (tracks, UI) can use it to bucket courses.
+      statusCourseCode: raw.statusCourseCode ?? null,
     });
 
-    // CourseOffering — build from groups-with-sessions data
-    const groups = sessionsByCourseId[raw.id] || raw.groups || [];
-    if (!groups.length) continue;
+    const groups = sessionsByCourseId[raw.id] || [];
+    if (!groups.length) {
+      noScheduleCount++;
+      missingSchedule.push({ code, name: pickEnglish(raw.name) });
+      continue;
+    }
 
-    // Determine campus from first session's room
     let campus = 'MtScopus';
     for (const g of groups) {
-      const sess = g.studySessions?.[0];
-      if (sess?.room?.building?.campus?.name?.en) {
-        campus = toCampus(sess.room.building.campus.name.en);
-        break;
-      }
+      const sess = (g.studySessions || [])[0];
+      const campusName = sess?.room?.building?.campus?.name;
+      if (campusName) { campus = toCampus(campusName); break; }
     }
 
     const meetingGroups = [];
     for (const g of groups) {
       const sessions = g.studySessions || [];
-      if (!sessions.length) continue;
-
-      // Each studySession is one recurring weekly slot.
-      // dayOfWeek: 0=Sunday, 1=Monday, … (confirmed from dates)
       const slots = sessions
-        .filter(s => s.startTime != null && s.endTime != null)
-        .map(s => ({
+        .filter((s) => s.startTime != null && s.endTime != null)
+        .map((s) => ({
           day: s.dayOfWeek,
           start: msToTime(s.startTime),
           end: msToTime(s.endTime),
         }));
-
       if (!slots.length) continue;
-
       meetingGroups.push({
         id: String(g.id),
         type: toMeetingType(g.studySessionTypeName),
@@ -250,7 +285,11 @@ async function main() {
       });
     }
 
-    if (!meetingGroups.length) continue;
+    if (!meetingGroups.length) {
+      noScheduleCount++;
+      missingSchedule.push({ code, name: pickEnglish(raw.name) });
+      continue;
+    }
 
     offerings.push({
       courseId: code,
@@ -260,14 +299,18 @@ async function main() {
     });
   }
 
-  // 5. Save output
+  // 5. Save
   const output = {
     meta: {
       year: YEAR,
       generated: new Date().toISOString(),
-      departments: DEPARTMENTS.map(d => d.label),
+      filter: { degree: "Bachelor's only (sugToar=001)" },
+      departments: DEPARTMENTS.map((d) => d.label),
       courseCount: courses.length,
       offeringCount: offerings.length,
+      noScheduleCount,
+      droppedByDept,
+      missingSchedule,
     },
     courses,
     offerings,
@@ -275,14 +318,16 @@ async function main() {
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2), 'utf8');
 
-  console.log('\n' + '═'.repeat(50));
-  console.log(`✅ Done!`);
-  console.log(`   Courses:   ${courses.length}`);
-  console.log(`   Offerings: ${offerings.length} (with schedule data)`);
-  console.log(`   Output:    ${OUTPUT_FILE}`);
+  console.log('\n' + '═'.repeat(60));
+  console.log('✅ Done!');
+  console.log(`   Bachelor courses: ${courses.length}`);
+  console.log(`   With schedules:   ${offerings.length}`);
+  console.log(`   No schedule:      ${noScheduleCount}`);
+  console.log(`   Dropped (non-BSc): ${JSON.stringify(droppedByDept)}`);
+  console.log(`   Output: ${OUTPUT_FILE}`);
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error('\n💥 Fatal error:', err);
   process.exit(1);
 });
