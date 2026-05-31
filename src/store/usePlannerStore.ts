@@ -21,6 +21,7 @@ interface PlannerState {
   addPlannedCourse: (courseId: string) => void;
   removePlannedCourse: (courseId: string) => void;
   toggleAnchor: (courseId: string) => void;
+  addAnchor: (courseId: string) => void;
   updateSelectedGroups: (courseId: string, groupIds: string[]) => void;
   setPreferences: (prefs: UserPreferences) => void;
   addToHistory: (courseId: string) => void;
@@ -71,10 +72,27 @@ export const usePlannerStore = create<PlannerState>()(
       })),
 
       toggleAnchor: (courseId) => set((state) => ({
-        plannedCourses: state.plannedCourses.map(c => 
+        plannedCourses: state.plannedCourses.map(c =>
           c.courseId === courseId ? { ...c, isAnchor: !c.isAnchor } : c
         )
       })),
+
+      addAnchor: (courseId) => set((state) => {
+        const existing = state.plannedCourses.find(c => c.courseId === courseId);
+        if (existing) {
+          return {
+            plannedCourses: state.plannedCourses.map(c =>
+              c.courseId === courseId ? { ...c, isAnchor: true } : c
+            )
+          };
+        }
+        return {
+          plannedCourses: [
+            ...state.plannedCourses,
+            { courseId, isAnchor: true, selectedGroupIds: [] }
+          ]
+        };
+      }),
 
       updateSelectedGroups: (courseId, groupIds) => set((state) => ({
         plannedCourses: state.plannedCourses.map(c => 
