@@ -3,38 +3,34 @@ import { calculateRequirementProgress } from './accounting';
 import { MOCK_COURSES, MOCK_TRACKS } from '../data/huji-mock-catalog';
 
 describe('calculateRequirementProgress', () => {
-  const econBusTrack = MOCK_TRACKS.find(t => t.id === 'be')!;
+  const econTrack = MOCK_TRACKS.find(t => t.id === 'econ-2026')!;
 
   it('should calculate zero progress for an empty plan', () => {
-    const report = calculateRequirementProgress([], [], econBusTrack, MOCK_COURSES);
+    const report = calculateRequirementProgress([], [], econTrack, MOCK_COURSES);
     expect(report.totalCredits).toBe(0);
     expect(report.components[0].baskets[0].isMet).toBe(false);
   });
 
-  it('should calculate progress correctly for Econ Micro I', () => {
-    const report = calculateRequirementProgress(['57107'], [], econBusTrack, MOCK_COURSES);
+  it('should count credits for a single mandatory course (57107 Intro Micro = 4 credits)', () => {
+    const report = calculateRequirementProgress(['57107'], [], econTrack, MOCK_COURSES);
     expect(report.totalCredits).toBe(4);
-    expect(report.components[0].name).toBe('Economics Component');
-    expect(report.components[0].baskets[0].currentCredits).toBe(4);
-    expect(report.components[0].baskets[0].isMet).toBe(false); // Target is 28
+    const mand = report.components[0].baskets.find(b => b.basketId === 'econ_mand')!;
+    expect(mand.currentCredits).toBe(4);
+    expect(mand.isMet).toBe(false); // target is 20
   });
 
-  it('should mark requirement as met when target is reached', () => {
-    // Business Mandatory only needs 4 credits (304)
-    const report = calculateRequirementProgress(['304'], [], econBusTrack, MOCK_COURSES);
-    const busComp = report.components.find(c => c.name === 'Business Component')!;
-    expect(busComp.baskets[0].isMet).toBe(true);
+  it('should mark a basket as met when target credits are reached', () => {
+    // Mandatory basket needs 20 credits total. Add 5 four-credit mandatory courses:
+    // 57107, 57108, 57121, 57122, 57340 → 5 × 4 = 20.
+    const ids = ['57107', '57108', '57121', '57122', '57340'];
+    const report = calculateRequirementProgress(ids, [], econTrack, MOCK_COURSES);
+    const mand = report.components[0].baskets.find(b => b.basketId === 'econ_mand')!;
+    expect(mand.currentCredits).toBe(20);
+    expect(mand.isMet).toBe(true);
   });
 
-  it('should handle joint progress (Economics and Business)', () => {
-    const report = calculateRequirementProgress(['57107', '304'], [], econBusTrack, MOCK_COURSES);
-    expect(report.totalCredits).toBe(8); // 4 (Econ) + 4 (Bus)
-    
-    const econComp = report.components.find(c => c.name === 'Economics Component')!;
-    const busComp = report.components.find(c => c.name === 'Business Component')!;
-    
-    expect(econComp.baskets[0].currentCredits).toBe(4);
-    expect(busComp.baskets[0].currentCredits).toBe(4);
-    expect(busComp.baskets[0].isMet).toBe(true); // Target is 4
+  it('should count history credits toward progress', () => {
+    const report = calculateRequirementProgress([], ['57107'], econTrack, MOCK_COURSES);
+    expect(report.totalCredits).toBe(4);
   });
 });

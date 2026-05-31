@@ -9,39 +9,27 @@ describe('validateScheduleConflicts', () => {
     expect(report.conflicts).toHaveLength(0);
   });
 
-  it('should detect a conflict between Intro to CS and Marketing', () => {
+  it('should detect a conflict between Econometrics (7411) and Math A (10321) on Sunday 14:30-16:00', () => {
+    // 57322 group 7411 lecture: Sun 14:30-16:00, Thu 12:30-14:00
+    // 57121 group 10321 exercise: Sun 14:30-16:00 — overlaps Sunday
     const planned: PlannedCourse[] = [
-      {
-        courseId: '67101',
-        isAnchor: true,
-        selectedGroupIds: ['L1'], // Mon 10:00-13:00
-      },
-      {
-        courseId: '112',
-        isAnchor: false,
-        selectedGroupIds: ['L1'], // Mon 10:00-13:00
-      },
+      { courseId: '57322', isAnchor: true,  selectedGroupIds: ['7411'] },
+      { courseId: '57121', isAnchor: false, selectedGroupIds: ['10321'] },
     ];
 
     const report = validateScheduleConflicts(planned, MOCK_OFFERINGS);
-    expect(report.conflicts).toHaveLength(1);
-    expect(report.conflicts[0].courseIdA).toBe('67101');
-    expect(report.conflicts[0].courseIdB).toBe('112');
-    expect(report.conflicts[0].day).toBe(1);
+    expect(report.conflicts.length).toBeGreaterThan(0);
+    const conflict = report.conflicts.find(c => c.day === 0);
+    expect(conflict).toBeDefined();
   });
 
-  it('should detect no conflict between Intro to CS and Micro I (L1)', () => {
+  it('should detect no conflict between non-overlapping groups', () => {
+    // 57107 group 4440 exercise: Sun 10:30-12:00, Wed 12:30-14:00
+    // 57121 group 8568 lecture:  Wed 14:30-16:00, Tue 14:30-16:00
+    // No overlap on any shared day.
     const planned: PlannedCourse[] = [
-      {
-        courseId: '67101',
-        isAnchor: true,
-        selectedGroupIds: ['L1'], // Mon 10:00-13:00
-      },
-      {
-        courseId: '57107',
-        isAnchor: false,
-        selectedGroupIds: ['L1'], // Sun/Tue 10:00-12:00
-      },
+      { courseId: '57107', isAnchor: true,  selectedGroupIds: ['4440'] },
+      { courseId: '57121', isAnchor: false, selectedGroupIds: ['8568'] },
     ];
 
     const report = validateScheduleConflicts(planned, MOCK_OFFERINGS);

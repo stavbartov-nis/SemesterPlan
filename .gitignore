@@ -29,7 +29,12 @@ yarn-error.log*
 .vscode/
 .idea/
 .cursor/
+.claude/
 
 # OS
 Thumbs.db
 desktop.ini
+
+# Local dev server logs
+.dev-server.log
+.dev-server.err
