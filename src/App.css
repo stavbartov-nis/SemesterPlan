@@ -25,6 +25,40 @@
   gap: 1rem;
 }
 
+/* ── Header centre: NKZ progress stat (#9) ─────────────────── */
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nkz-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.nkz-done  { color: #68d391; font-weight: 700; font-size: 1rem; }
+.nkz-sep   { color: #4a5568; }
+.nkz-total { color: #a0aec0; }
+
+.nkz-bar {
+  width: 80px;
+  height: 5px;
+  background: #2d3748;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-left: 0.4rem;
+}
+
+.nkz-bar-fill {
+  height: 100%;
+  background: #68d391;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
 .app-title {
   font-size: 1.1rem;
   font-weight: 700;
@@ -68,13 +102,34 @@
   overflow: hidden;
 }
 
-/* ── Step nav ──────────────────────────────────────────────── */
+/* ── Step nav (#2) ─────────────────────────────────────────── */
 .wizard-nav {
   display: flex;
   gap: 2px;
   background: #e2e8f0;
   padding: 0;
   flex-shrink: 0;
+  position: relative;
+}
+
+/* Connecting track line */
+.wizard-track {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: #cbd5e0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wizard-track-fill {
+  height: 100%;
+  background: #3182ce;
+  transition: width 0.35s ease;
+  border-radius: 2px;
 }
 
 .wizard-step-btn {
@@ -88,6 +143,8 @@
   cursor: pointer;
   transition: background 0.15s;
   text-align: left;
+  position: relative;
+  z-index: 1;
 }
 
 .wizard-step-btn:hover {
@@ -97,10 +154,15 @@
 .wizard-step-btn.active {
   background: #fff;
   border-bottom: 3px solid #3182ce;
+  box-shadow: 0 2px 0 0 #3182ce;
 }
 
 .wizard-step-btn.done {
   background: #f0fff4;
+}
+
+.wizard-step-btn.done .step-text strong {
+  color: #276749;
 }
 
 .step-num {
@@ -485,27 +547,6 @@
   background: #3182ce;
   color: #fff;
   border-color: #3182ce;
-}
-
-.time-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.time-row label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: #4a5568;
-}
-
-.time-row input[type="time"] {
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 0.35rem 0.6rem;
-  font-size: 0.875rem;
 }
 
 .time-sep {
@@ -908,3 +949,313 @@
   padding-top: 0.5rem;
   border-top: 1px solid #edf2f7;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   NEW STYLES — improvements 1-9
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── #2 Step nav: progress bar thick variant ───────────────── */
+.progress-bar.thick {
+  height: 10px;
+  border-radius: 6px;
+}
+
+/* ── #6 Prereq warning ─────────────────────────────────────── */
+.prereq-warning {
+  font-size: 0.72rem;
+  color: #c05621;
+  background: #fffaf0;
+  border: 1px solid #fbd38d;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-top: 3px;
+  display: inline-block;
+}
+
+.prereq-warning.small {
+  font-size: 0.68rem;
+}
+
+.course-row.has-warning {
+  border-color: #fbd38d;
+  background: #fffaf0;
+}
+
+.anchor-card.warn {
+  border-color: #fbd38d;
+  background: #fffaf0;
+}
+
+/* ── #7 Completed step: progress bars ──────────────────────── */
+.overall-progress {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.overall-progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.overall-progress-header strong {
+  color: #2d3748;
+}
+
+.component-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.comp-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+}
+
+.comp-bar-label {
+  width: 140px;
+  color: #4a5568;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+
+.comp-bar-track {
+  flex: 1;
+  height: 6px;
+  background: #edf2f7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.comp-bar-fill {
+  height: 100%;
+  background: #48bb78;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.comp-bar-value {
+  width: 48px;
+  text-align: right;
+  color: #718096;
+  flex-shrink: 0;
+}
+
+/* ── #8 Constraints: availability card ─────────────────────── */
+.availability-card {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.avail-days {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.time-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.time-bar-label {
+  font-size: 0.78rem;
+  color: #718096;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.time-bar-track {
+  display: flex;
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #e2e8f0;
+  gap: 1px;
+}
+
+.time-bar-seg {
+  flex: 1;
+  height: 100%;
+  background: #e2e8f0;
+  transition: background 0.15s;
+}
+
+.time-bar-seg.in-window {
+  background: #3182ce;
+}
+
+.time-bar-ends {
+  font-size: 0.78rem;
+  color: #4a5568;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.time-inputs-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.time-inputs-row label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: #4a5568;
+}
+
+.time-inputs-row input[type="time"] {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.82rem;
+  background: #fff;
+}
+
+/* ── #3 Bundle mini day-grid ────────────────────────────────── */
+.bundle-day-grid {
+  display: flex;
+  gap: 4px;
+  padding: 0.5rem 0;
+}
+
+.bdg-day {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  color: #a0aec0;
+  font-weight: 600;
+}
+
+.bdg-day.active {
+  color: #3182ce;
+}
+
+.bdg-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  transition: background 0.15s;
+}
+
+.bdg-day.active .bdg-dot {
+  background: #3182ce;
+}
+
+/* ── #5 Ready summary (empty state in Generate) ─────────────── */
+.ready-summary {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.ready-summary h3 {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #2d3748;
+  font-weight: 700;
+}
+
+.ready-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ready-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: #4a5568;
+}
+
+.ready-icon {
+  font-size: 1rem;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ── #4 Collapsible sidebar ─────────────────────────────────── */
+.generate-sidebar {
+  position: relative;
+  flex-shrink: 0;
+  overflow-y: auto;
+  border-left: 1px solid #e2e8f0;
+  background: #f7fafc;
+  transition: width 0.25s ease;
+}
+
+.generate-sidebar.open {
+  width: 300px;
+  padding: 1.5rem 1.25rem 1.5rem 1.5rem;
+}
+
+.generate-sidebar.closed {
+  width: 28px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 48px;
+  background: #edf2f7;
+  border: 1px solid #e2e8f0;
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #718096;
+  z-index: 10;
+  transition: background 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+
+.generate-sidebar.open .sidebar-toggle {
+  left: auto;
+  right: calc(100% - 0px);
+  border-radius: 6px 0 0 6px;
+  border: 1px solid #e2e8f0;
+  border-right: none;
+}
+
+.sidebar-toggle:hover {
+  background: #e2e8f0;
+  color: #2d3748;
+}
+

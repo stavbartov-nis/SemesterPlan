@@ -10,15 +10,19 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
 
   if (!selectedTrack) return null;
 
-  const allTrackCourses = MOCK_COURSES.filter(c =>
-    selectedTrack.components.some(comp =>
-      comp.baskets.some(b => b.courseIds.includes(c.id))
-    )
-  );
+  // Per-component progress
+  const componentStats = selectedTrack.components.map(comp => {
+    const courseIds = comp.baskets.flatMap(b => b.courseIds);
+    const courses   = MOCK_COURSES.filter(c => courseIds.includes(c.id));
+    const total     = courses.reduce((s, c) => s + c.credits, 0);
+    const done      = courses
+      .filter(c => historyCourseIds.includes(c.id))
+      .reduce((s, c) => s + c.credits, 0);
+    return { name: comp.name, done, total };
+  });
 
-  const completedCredits = allTrackCourses
-    .filter(c => historyCourseIds.includes(c.id))
-    .reduce((sum, c) => sum + c.credits, 0);
+  const totalDone  = componentStats.reduce((s, c) => s + c.done,  0);
+  const totalAll   = componentStats.reduce((s, c) => s + c.total, 0);
 
   return (
     <div className="step-layout single-col">
@@ -30,17 +34,40 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
         </p>
       </div>
 
-      {historyCourseIds.length > 0 && (
-        <div className="completed-summary">
-          {historyCourseIds.length} course{historyCourseIds.length !== 1 ? 's' : ''} &nbsp;·&nbsp;
-          {completedCredits} NKZ completed
+      {/* ── Overall progress bar ── */}
+      <div className="overall-progress">
+        <div className="overall-progress-header">
+          <span>Degree progress</span>
+          <strong>{totalDone} / {totalAll} NKZ</strong>
         </div>
-      )}
+        <div className="progress-bar thick">
+          <div
+            className="progress-fill"
+            style={{ width: `${totalAll > 0 ? (totalDone / totalAll) * 100 : 0}%` }}
+          />
+        </div>
+      </div>
+
+      {/* ── Per-component bars ── */}
+      <div className="component-bars">
+        {componentStats.map(cs => (
+          <div key={cs.name} className="comp-bar-row">
+            <span className="comp-bar-label">{cs.name}</span>
+            <div className="comp-bar-track">
+              <div
+                className="comp-bar-fill"
+                style={{ width: `${cs.total > 0 ? (cs.done / cs.total) * 100 : 0}%` }}
+              />
+            </div>
+            <span className="comp-bar-value">{cs.done}/{cs.total}</span>
+          </div>
+        ))}
+      </div>
 
       <input
         className="search-input"
         type="text"
-        placeholder="Search by name or code..."
+        placeholder="Search by name or code…"
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
@@ -54,6 +81,7 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
               c.id.includes(search))
           );
           if (rows.length === 0) return null;
+
           return (
             <div key={comp.name}>
               <div className="group-label">{comp.name}</div>
@@ -65,9 +93,7 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
                       type="checkbox"
                       checked={done}
                       onChange={e =>
-                        e.target.checked
-                          ? addToHistory(course.id)
-                          : removeFromHistory(course.id)
+                        e.target.checked ? addToHistory(course.id) : removeFromHistory(course.id)
                       }
                     />
                     <div className="course-row-info">
