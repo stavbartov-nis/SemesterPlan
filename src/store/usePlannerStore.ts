@@ -113,10 +113,9 @@ export const usePlannerStore = create<PlannerState>()(
     }),
     {
       name: 'huji-planner-storage',
-      version: 1,
+      version: 2,
       migrate: (persistedState: any, version: number) => {
         if (version === 0) {
-          // If the old state exists but lacks the new field, inject it
           return {
             ...persistedState,
             preferences: {
@@ -124,6 +123,10 @@ export const usePlannerStore = create<PlannerState>()(
               targetCreditsByType: DEFAULT_PREFERENCES.targetCreditsByType
             }
           };
+        }
+        if (version === 1) {
+          // Reset selectedTrack so the new combined track is picked up
+          return { ...persistedState, selectedTrack: null };
         }
         return persistedState;
       }
