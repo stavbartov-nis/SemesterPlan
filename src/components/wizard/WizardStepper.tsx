@@ -5,10 +5,10 @@ import { StepConstraints } from './StepConstraints';
 import { StepGenerate } from './StepGenerate';
 
 const STEPS = [
-  { label: 'Anchors',     desc: "Lock in courses you want" },
-  { label: 'Completed',   desc: "Mark what you've done" },
-  { label: 'Constraints', desc: 'Days, times & credit targets' },
-  { label: 'Generate',    desc: 'Build & choose your plan' },
+  { label: 'קורסים קבועים', desc: 'נעל קורסים שאתה בטוח לגביהם' },
+  { label: 'קורסים שהושלמו', desc: 'סמן מה כבר למדת' },
+  { label: 'אילוצים',        desc: 'ימים, שעות ויעדי נקודות' },
+  { label: 'צור תוכנית',    desc: 'בנה ובחר את התוכנית שלך' },
 ];
 
 export const WizardStepper: React.FC = () => {

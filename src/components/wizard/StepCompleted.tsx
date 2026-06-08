@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
 import { MOCK_COURSES } from '../../data/huji-mock-catalog';
+import { getCourseNameHe } from '../../data/course-names-he';
 
 interface Props { onNext: () => void; }
 
@@ -10,7 +11,6 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
 
   if (!selectedTrack) return null;
 
-  // Per-component progress
   const componentStats = selectedTrack.components.map(comp => {
     const courseIds = comp.baskets.flatMap(b => b.courseIds);
     const courses   = MOCK_COURSES.filter(c => courseIds.includes(c.id));
@@ -27,18 +27,17 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
   return (
     <div className="step-layout single-col">
       <div className="step-header">
-        <h2>Completed Courses</h2>
+        <h2>קורסים שהושלמו</h2>
         <p className="step-desc">
-          Mark courses you've already passed. They'll be excluded from generated plans
-          and count toward your degree progress.
+          סמן קורסים שכבר עברת. הם לא יופיעו בתוכניות שייווצרו ויחשבו להתקדמות התואר.
         </p>
       </div>
 
-      {/* ── Overall progress bar ── */}
+      {/* ── סרגל התקדמות כולל ── */}
       <div className="overall-progress">
         <div className="overall-progress-header">
-          <span>Degree progress</span>
-          <strong>{totalDone} / {totalAll} NKZ</strong>
+          <span>התקדמות בתואר</span>
+          <strong>{totalDone} / {totalAll} נ"ז</strong>
         </div>
         <div className="progress-bar thick">
           <div
@@ -48,7 +47,7 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
         </div>
       </div>
 
-      {/* ── Per-component bars ── */}
+      {/* ── סרגלים לפי רכיב ── */}
       <div className="component-bars">
         {componentStats.map(cs => (
           <div key={cs.name} className="comp-bar-row">
@@ -67,7 +66,7 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
       <input
         className="search-input"
         type="text"
-        placeholder="Search by name or code…"
+        placeholder="חפש לפי שם או קוד…"
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
@@ -97,8 +96,8 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
                       }
                     />
                     <div className="course-row-info">
-                      <span className="course-row-name">{course.name}</span>
-                      <span className="course-row-meta">{course.credits} NKZ</span>
+                      <span className="course-row-name">{getCourseNameHe(course.id, course.name)}</span>
+                      <span className="course-row-meta">{course.credits} נ"ז</span>
                     </div>
                     {done && <span className="done-check">✓</span>}
                   </label>
@@ -110,7 +109,7 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
       </div>
 
       <button className="next-btn" onClick={onNext}>
-        Next: Time Constraints →
+        ← הבא: אילוצי זמן
       </button>
     </div>
   );

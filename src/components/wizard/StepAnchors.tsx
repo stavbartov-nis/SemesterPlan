@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
 import { MOCK_COURSES } from '../../data/huji-mock-catalog';
+import { getCourseNameHe } from '../../data/course-names-he';
+
+const TYPE_HE: Record<string, string> = {
+  Mandatory: 'חובה',
+  Core: 'ליבה',
+  Elective: 'בחירה',
+};
 
 interface Props { onNext: () => void; }
 
@@ -14,7 +21,6 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
 
   const anchored = plannedCourses.filter(pc => pc.isAnchor);
 
-  // Prereq check: all prereqs must be in history (or already anchored)
   const anchoredIds = new Set(anchored.map(pc => pc.courseId));
   const satisfiedIds = new Set([...historyCourseIds, ...anchoredIds]);
 
@@ -29,22 +35,25 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
     if (!course) return [];
     return course.prerequisites
       .filter(p => !satisfiedIds.has(p))
-      .map(p => MOCK_COURSES.find(c => c.id === p)?.name ?? p);
+      .map(p => {
+        const c = MOCK_COURSES.find(x => x.id === p);
+        return c ? getCourseNameHe(c.id, c.name) : p;
+      });
   };
 
   return (
     <div className="step-layout two-col">
-      {/* ── Left: catalog ── */}
+      {/* ── שמאל: קטלוג ── */}
       <div className="step-left">
         <div className="step-header">
-          <h2>Anchor Courses</h2>
-          <p className="step-desc">Lock in courses you're definitely taking. The planner will always keep these.</p>
+          <h2>קורסים קבועים</h2>
+          <p className="step-desc">נעל קורסים שאתה בטוח שתלמד. המתכנן תמיד ישמור אותם.</p>
         </div>
 
         <input
           className="search-input"
           type="text"
-          placeholder="Search by name or code…"
+          placeholder="חפש לפי שם או קוד…"
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
@@ -78,14 +87,14 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
                       className={`course-row ${isAnchored ? 'is-anchored' : ''} ${hasWarning ? 'has-warning' : ''}`}
                     >
                       <div className="course-row-info">
-                        <span className="course-row-name">{course.name}</span>
+                        <span className="course-row-name">{getCourseNameHe(course.id, course.name)}</span>
                         <span className="course-row-meta">
-                          {course.credits} NKZ &nbsp;·&nbsp;
-                          <span className={`type-badge type-${type.toLowerCase()}`}>{type}</span>
+                          {course.credits} נ"ז &nbsp;·&nbsp;
+                          <span className={`type-badge type-${type.toLowerCase()}`}>{TYPE_HE[type] ?? type}</span>
                         </span>
                         {hasWarning && (
                           <span className="prereq-warning">
-                            ⚠ Prereqs missing: {missing.join(', ')}
+                            ⚠ דרישות קדם חסרות: {missing.join(', ')}
                           </span>
                         )}
                       </div>
@@ -95,7 +104,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
                           isAnchored ? removePlannedCourse(course.id) : addAnchor(course.id)
                         }
                       >
-                        {isAnchored ? '📌 Anchored' : '+ Anchor'}
+                        {isAnchored ? '📌 נעול' : '+ נעל'}
                       </button>
                     </div>
                   );
@@ -106,19 +115,19 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
         </div>
       </div>
 
-      {/* ── Right: anchored list ── */}
+      {/* ── ימין: רשימת קבועים ── */}
       <div className="step-right">
         <div className="step-header">
           <h2>
-            Your Anchors
+            הקורסים הקבועים שלך
             {anchored.length > 0 && <span className="count-badge">{anchored.length}</span>}
           </h2>
-          <p className="step-desc">These will be locked in every generated plan.</p>
+          <p className="step-desc">אלה ינעלו בכל תוכנית שתיווצר.</p>
         </div>
 
         {anchored.length === 0 ? (
           <div className="empty-state">
-            No anchors yet — click&nbsp;<strong>+ Anchor</strong>&nbsp;on any course.
+            אין קורסים קבועים עדיין — לחץ על&nbsp;<strong>+ נעל</strong>&nbsp;על כל קורס.
           </div>
         ) : (
           <div className="anchor-list">
@@ -128,10 +137,10 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
               return (
                 <div key={pc.courseId} className={`anchor-card ${warning ? 'warn' : ''}`}>
                   <div className="anchor-card-info">
-                    <strong>{course?.name}</strong>
-                    <small>{course?.credits} NKZ</small>
+                    <strong>{course ? getCourseNameHe(course.id, course.name) : ''}</strong>
+                    <small>{course?.credits} נ"ז</small>
                     {warning && (
-                      <span className="prereq-warning small">⚠ Prereqs missing</span>
+                      <span className="prereq-warning small">⚠ דרישות קדם חסרות</span>
                     )}
                   </div>
                   <button className="remove-btn" onClick={() => removePlannedCourse(pc.courseId)}>✕</button>
@@ -142,7 +151,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
         )}
 
         <button className="next-btn" onClick={onNext}>
-          Next: Completed Courses →
+          ← הבא: קורסים שהושלמו
         </button>
       </div>
     </div>

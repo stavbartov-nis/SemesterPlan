@@ -29,14 +29,14 @@ function App() {
   return (
     <div className="app-shell">
       <header className="app-top-bar">
-        <h1 className="app-title">HUJI Planner</h1>
+        <h1 className="app-title">מתכנן לימודים</h1>
 
         <div className="header-center">
           {totalCredits > 0 && (
             <div className="nkz-stat">
               <span className="nkz-done">{completedCredits}</span>
               <span className="nkz-sep">/</span>
-              <span className="nkz-total">{totalCredits} NKZ</span>
+              <span className="nkz-total">{totalCredits} נ"ז</span>
               <div className="nkz-bar">
                 <div
                   className="nkz-bar-fill"
@@ -60,7 +60,7 @@ function App() {
             className="reset-btn"
             onClick={() => { localStorage.clear(); window.location.reload(); }}
           >
-            Reset
+            איפוס
           </button>
         </div>
       </header>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
 import { MOCK_COURSES, MOCK_OFFERINGS } from '../../data/huji-mock-catalog';
+import { getCourseNameHe } from '../../data/course-names-he';
 import { ScheduleSlot } from '../../types';
 import './Calendar.css';
 
@@ -12,7 +13,7 @@ interface CalendarEvent {
   slot: ScheduleSlot;
 }
 
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+const DAYS = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי'];
 const HOURS = Array.from({ length: 13 }, (_, i) => i + 8); // 8:00–20:00
 
 const TYPE_COLORS: Record<string, string> = {
@@ -22,10 +23,16 @@ const TYPE_COLORS: Record<string, string> = {
   Seminar:  '#38a169',
 };
 
+const TYPE_HE: Record<string, string> = {
+  Lecture:  'הרצאה',
+  Exercise: 'תרגיל',
+  Lab:      'מעבדה',
+  Seminar:  'סמינר',
+};
+
 export const Calendar: React.FC = () => {
   const { plannedCourses, preferences } = usePlannerStore();
 
-  // Only show columns for allowed days
   const visibleDays = DAYS
     .map((name, idx) => ({ name, idx }))
     .filter(d => preferences.allowedDays.includes(d.idx));
@@ -44,7 +51,7 @@ export const Calendar: React.FC = () => {
       group.slots.forEach(slot => {
         events.push({
           courseId:   pc.courseId,
-          courseName: course?.name ?? pc.courseId,
+          courseName: course ? getCourseNameHe(course.id, course.name) : pc.courseId,
           groupId:    group.id,
           type:       group.type,
           slot,
@@ -72,7 +79,7 @@ export const Calendar: React.FC = () => {
   return (
     <div className="weekly-calendar">
       <div className="time-column">
-        <div className="header-cell timezone">Time</div>
+        <div className="header-cell timezone">שעה</div>
         {HOURS.map(hour => (
           <div key={hour} className="time-label" style={{ height: '60px' }}>
             {hour}:00
@@ -95,7 +102,7 @@ export const Calendar: React.FC = () => {
                 style={getEventStyle(event.slot, event.type)}
               >
                 <div className="event-title">{event.courseName}</div>
-                <div className="event-type">{event.type}</div>
+                <div className="event-type">{TYPE_HE[event.type] ?? event.type}</div>
                 <div className="event-time">{event.slot.start}–{event.slot.end}</div>
               </div>
             ))}

@@ -65,12 +65,13 @@ function deptCoursesByStatus(department: string, status: number): string[] {
 function buildTrack(
   id: string,
   name: string,
-  department: string,
+  displayName: string,
+  deptKey: string,
   coreMinFraction = 0.5,
   electiveMinFraction = 0.3
 ): DegreeTrack {
-  const coreIds = deptCoursesByStatus(department, 1);
-  const electiveIds = deptCoursesByStatus(department, 2);
+  const coreIds = deptCoursesByStatus(deptKey, 1);
+  const electiveIds = deptCoursesByStatus(deptKey, 2);
 
   const coreTotal = totalCredits(coreIds);
   const electiveTotal = totalCredits(electiveIds);
@@ -78,14 +79,14 @@ function buildTrack(
   const baskets: RequirementBasket[] = [
     {
       id: `${id}_core`,
-      name: 'Core Courses',
+      name: 'קורסי ליבה',
       type: 'Core',
       minCredits: Math.round(coreTotal * coreMinFraction),
       courseIds: coreIds,
     },
     {
       id: `${id}_elec`,
-      name: 'Electives',
+      name: 'קורסי בחירה',
       type: 'Elective',
       minCredits: Math.round(electiveTotal * electiveMinFraction),
       courseIds: electiveIds,
@@ -95,15 +96,11 @@ function buildTrack(
   return {
     id,
     name,
-    components: [{ name: department, baskets }],
+    components: [{ name: displayName, baskets }],
   };
 }
 
 export const MOCK_TRACKS: DegreeTrack[] = [
-  buildTrack('econ-2026', 'Economics (B.A. 2026)', 'Economics'),
-  buildTrack(
-    'biz-2026',
-    'Business Administration (B.A. 2026)',
-    'Business Administration'
-  ),
+  buildTrack('econ-2026', 'כלכלה (תואר ראשון 2026)', 'כלכלה', 'Economics'),
+  buildTrack('biz-2026', 'מינהל עסקים (תואר ראשון 2026)', 'מינהל עסקים', 'Business Administration'),
 ];

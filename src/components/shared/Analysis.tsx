@@ -20,17 +20,17 @@ export const Analysis: React.FC = () => {
 
   return (
     <div className="analysis-sidebar">
-      <h2>Analysis</h2>
-      
+      <h2>ניתוח</h2>
+
       <section className="conflicts-section">
-        <h3>Conflicts ({conflictReport.conflicts.length})</h3>
+        <h3>התנגשויות ({conflictReport.conflicts.length})</h3>
         {conflictReport.conflicts.length === 0 ? (
-          <p className="no-conflicts">✅ No schedule overlaps</p>
+          <p className="no-conflicts">✅ אין חפיפות בלוח הזמנים</p>
         ) : (
           <div className="conflict-list">
             {conflictReport.conflicts.map((c, i) => (
               <div key={i} className="conflict-alert">
-                Overlap: {c.courseIdA} & {c.courseIdB}
+                חפיפה: {c.courseIdA} & {c.courseIdB}
               </div>
             ))}
           </div>
@@ -38,7 +38,7 @@ export const Analysis: React.FC = () => {
       </section>
 
       <section className="progress-section">
-        <h3>Degree Progress</h3>
+        <h3>התקדמות בתואר</h3>
         {progressReport.components.map((comp, i) => (
           <div key={i} className="component-progress">
             <h4>{comp.name}</h4>
@@ -49,8 +49,8 @@ export const Analysis: React.FC = () => {
                   <span>{basket.currentCredits}/{basket.targetCredits}</span>
                 </div>
                 <div className="progress-bar">
-                  <div 
-                    className="progress-fill" 
+                  <div
+                    className="progress-fill"
                     style={{ width: `${Math.min(100, (basket.currentCredits / basket.targetCredits) * 100)}%` }}
                   />
                 </div>
@@ -59,7 +59,7 @@ export const Analysis: React.FC = () => {
           </div>
         ))}
         <div className="total-summary">
-          <strong>Total NKZ: {progressReport.totalCredits}</strong>
+          <strong>סה"כ נ"ז: {progressReport.totalCredits}</strong>
         </div>
       </section>
     </div>

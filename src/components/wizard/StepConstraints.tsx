@@ -1,8 +1,14 @@
 import React from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
 
-const DAYS      = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+const DAYS     = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳'];
 const ALL_HOURS = Array.from({ length: 13 }, (_, i) => i + 8); // 8–20
+
+const TYPE_HE: Record<string, string> = {
+  Mandatory: 'חובה',
+  Core: 'ליבה',
+  Elective: 'בחירה',
+};
 
 interface Props { onNext: () => void; }
 
@@ -28,15 +34,14 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
   return (
     <div className="step-layout single-col">
       <div className="step-header">
-        <h2>Time Constraints</h2>
-        <p className="step-desc">Tell the planner when you're available and what you're aiming for this semester.</p>
+        <h2>אילוצי זמן</h2>
+        <p className="step-desc">ספר למתכנן מתי אתה פנוי ומה המטרות שלך לסמסטר זה.</p>
       </div>
 
-      {/* ── Combined availability card ── */}
+      {/* ── כרטיס זמינות ── */}
       <section className="constraints-section">
-        <h3>When am I available?</h3>
+        <h3>מתי אני פנוי?</h3>
 
-        {/* Day row + inline time picker */}
         <div className="availability-card">
           <div className="avail-days">
             {DAYS.map((day, i) => (
@@ -50,9 +55,9 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
             ))}
           </div>
 
-          {/* Visual time-window bar */}
+          {/* סרגל חלון זמן ויזואלי */}
           <div className="time-bar-row">
-            <span className="time-bar-label">Time window</span>
+            <span className="time-bar-label">חלון זמן</span>
             <div className="time-bar-track">
               {ALL_HOURS.map(h => {
                 const inWindow = h >= startH && h < endH;
@@ -70,7 +75,7 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
 
           <div className="time-inputs-row">
             <label>
-              From
+              מ-
               <input
                 type="time"
                 value={preferences.timeWindow.start}
@@ -79,9 +84,9 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
                 }
               />
             </label>
-            <span className="time-sep">→</span>
+            <span className="time-sep">←</span>
             <label>
-              Until
+              עד
               <input
                 type="time"
                 value={preferences.timeWindow.end}
@@ -94,14 +99,14 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
         </div>
       </section>
 
-      {/* ── Credit targets ── */}
+      {/* ── יעדי נקודות ── */}
       <section className="constraints-section">
-        <h3>Credit Targets this Semester</h3>
-        <p className="step-hint">How many NKZ to aim for per requirement type.</p>
+        <h3>יעדי נקודות לסמסטר</h3>
+        <p className="step-hint">כמה נ"ז לכוון לפי סוג דרישה.</p>
         <div className="credit-targets">
           {(['Mandatory', 'Core', 'Elective'] as const).map(type => (
             <div key={type} className="credit-target-row">
-              <span className={`type-badge type-${type.toLowerCase()}`}>{type}</span>
+              <span className={`type-badge type-${type.toLowerCase()}`}>{TYPE_HE[type]}</span>
               <input
                 type="number"
                 value={preferences.targetCreditsByType[type]}
@@ -109,15 +114,15 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
                 min="0"
                 max="30"
               />
-              <span className="nkz-label">NKZ</span>
+              <span className="nkz-label">נ"ז</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── Overlap ── */}
+      {/* ── חפיפה ── */}
       <section className="constraints-section">
-        <h3>Overlap</h3>
+        <h3>חפיפה</h3>
         <label className="toggle-label">
           <input
             type="checkbox"
@@ -129,12 +134,12 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
               })
             }
           />
-          Allow minor schedule overlaps
+          אפשר חפיפות קטנות בלוח הזמנים
         </label>
       </section>
 
       <button className="next-btn" onClick={onNext}>
-        Generate Plans →
+        ← צור תוכניות
       </button>
     </div>
   );
