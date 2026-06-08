@@ -58,22 +58,18 @@ function deptCoursesByStatus(department: string, status: number): string[] {
     .map((c) => c.id);
 }
 
-/**
- * Build a single-component degree track for one department, split into
- * two baskets by statusCourseCode (1 = Core, 2 = Elective).
- */
-function buildTrack(
+/** Build one component (department) with core + elective baskets. */
+function buildComponent(
   id: string,
-  name: string,
   displayName: string,
   deptKey: string,
   coreMinFraction = 0.5,
   electiveMinFraction = 0.3
-): DegreeTrack {
-  const coreIds = deptCoursesByStatus(deptKey, 1);
+) {
+  const coreIds     = deptCoursesByStatus(deptKey, 1);
   const electiveIds = deptCoursesByStatus(deptKey, 2);
 
-  const coreTotal = totalCredits(coreIds);
+  const coreTotal     = totalCredits(coreIds);
   const electiveTotal = totalCredits(electiveIds);
 
   const baskets: RequirementBasket[] = [
@@ -93,14 +89,16 @@ function buildTrack(
     },
   ];
 
-  return {
-    id,
-    name,
-    components: [{ name: displayName, baskets }],
-  };
+  return { name: displayName, baskets };
 }
 
 export const MOCK_TRACKS: DegreeTrack[] = [
-  buildTrack('econ-2026', 'כלכלה (תואר ראשון 2026)', 'כלכלה', 'Economics'),
-  buildTrack('biz-2026', 'מינהל עסקים (תואר ראשון 2026)', 'מינהל עסקים', 'Business Administration'),
+  {
+    id: 'huji-ba-2026',
+    name: 'כלכלה ומינהל עסקים (תואר ראשון 2026)',
+    components: [
+      buildComponent('econ', 'כלכלה', 'Economics'),
+      buildComponent('biz', 'מינהל עסקים', 'Business Administration'),
+    ],
+  },
 ];

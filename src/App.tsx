@@ -8,7 +8,7 @@ function App() {
   const { selectedTrack, setTrack, historyCourseIds } = usePlannerStore();
 
   useEffect(() => {
-    if (!selectedTrack) setTrack(MOCK_TRACKS[1]);
+    if (!selectedTrack) setTrack(MOCK_TRACKS[0]);
   }, [selectedTrack, setTrack]);
 
   // NKZ stat for header (#9)
@@ -48,14 +48,7 @@ function App() {
         </div>
 
         <div className="track-picker">
-          <select
-            value={selectedTrack?.id || ''}
-            onChange={e => setTrack(MOCK_TRACKS.find(t => t.id === e.target.value)!)}
-          >
-            {MOCK_TRACKS.map(t => (
-              <option key={t.id} value={t.id}>{t.name}</option>
-            ))}
-          </select>
+          <span className="track-name">{selectedTrack?.name}</span>
           <button
             className="reset-btn"
             onClick={() => { localStorage.clear(); window.location.reload(); }}
