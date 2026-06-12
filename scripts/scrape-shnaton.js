@@ -255,9 +255,16 @@ async function main() {
   const missingSchedule = [];
 
   // Prereq codes that point outside the scraped catalog (e.g. math/stats
-  // service courses) can never be satisfied in-app — the engine would mark
-  // the course permanently unsuggestable. Keep only in-catalog prereqs.
-  const knownCodes = new Set(allRaw.map((c) => c.code));
+  // service courses) or to courses with no schedule can never be satisfied
+  // in-app — the engine would mark the course permanently unsuggestable.
+  // Keep only prereqs the user can actually take or mark as completed.
+  const offeredCodes = new Set();
+  for (const raw of allRaw) {
+    const groups = sessionsByCourseId[raw.id] || [];
+    if (groups.some((g) => (g.studySessions || []).some((s) => s.startTime != null))) {
+      offeredCodes.add(raw.code);
+    }
+  }
 
   for (const raw of allRaw) {
     const code = raw.code;
@@ -269,7 +276,7 @@ async function main() {
       nameEn: pickEnglish(raw.name),
       credits: raw.academicPoints ?? 0,
       department: pickEnglish(raw.departmentName),
-      prerequisites: (prereqMap[code] ?? []).filter((p) => knownCodes.has(p)),
+      prerequisites: (prereqMap[code] ?? []).filter((p) => offeredCodes.has(p)),
       // statusCourseCode = 1 looks like a core / required-track tag,
       // 2 looks like an elective. We surface it so downstream code
       // (tracks, UI) can use it to bucket courses.

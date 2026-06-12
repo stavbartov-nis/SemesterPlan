@@ -847,8 +847,7 @@
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
-        "55102",
-        "55117"
+        "55102"
       ],
       "statusCourseCode": 1
     },
