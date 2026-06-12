@@ -77,9 +77,44 @@ interface Candidate {
 }
 
 /**
- * Anchors arrive from the store with empty selectedGroupIds; without a group
+ * Registering for a course means taking one group of EACH meeting type it
+ * offers (lecture + exercise/lab where they exist) — a lecture without its
+ * tirgul is not a valid registration. Picks one mutually-compatible group
+ * per type, or null if the set cannot be completed.
+ *
+ * `rank` optionally orders the candidates within each type (used by the
+ * compact bundle to prefer already-occupied days).
+ */
+function findBestGroupSet(
+  groups: MeetingGroup[],
+  currentBundle: PlannedCourse[],
+  offerings: CourseOffering[],
+  prefs: UserPreferences,
+  rank?: (a: MeetingGroup, b: MeetingGroup) => number
+): MeetingGroup[] | null {
+  // Lecture chosen first — it usually has the most alternatives and anchors
+  // the rest of the set.
+  const types = [...new Set(groups.map(g => g.type))]
+    .sort((a, b) => (a === 'Lecture' ? -1 : b === 'Lecture' ? 1 : 0));
+
+  const chosen: MeetingGroup[] = [];
+  for (const type of types) {
+    const candidates = groups.filter(g => g.type === type);
+    if (rank) candidates.sort(rank);
+    const valid = candidates.find(g =>
+      isGroupValid(g, currentBundle, offerings, prefs) &&
+      !chosen.some(c => groupsOverlap(g, c))
+    );
+    if (!valid) return null;
+    chosen.push(valid);
+  }
+  return chosen.length ? chosen : null;
+}
+
+/**
+ * Anchors arrive from the store with empty selectedGroupIds; without groups
  * they render no calendar events and are invisible to conflict checks.
- * Assign each group-less anchor its first valid group up front.
+ * Assign each group-less anchor a full valid group set up front.
  */
 function scheduleAnchors(
   anchors: PlannedCourse[],
@@ -93,9 +128,9 @@ function scheduleAnchors(
       continue;
     }
     const offering = offerings.find(o => o.courseId === anchor.courseId);
-    const group = offering && findBestGroup(offering.groups, scheduled, offerings, prefs);
-    scheduled.push(group
-      ? { ...anchor, selectedGroupIds: [group.id] }
+    const set = offering && findBestGroupSet(offering.groups, scheduled, offerings, prefs);
+    scheduled.push(set
+      ? { ...anchor, selectedGroupIds: set.map(g => g.id) }
       : { ...anchor });
   }
   return scheduled;
@@ -133,12 +168,12 @@ function generateBundle(
     const offering = offerings.find(o => o.courseId === candidate.course.id);
     if (!offering) continue;
 
-    const validGroup = findBestGroup(offering.groups, bundleCourses, offerings, prefs);
-    if (validGroup) {
+    const groupSet = findBestGroupSet(offering.groups, bundleCourses, offerings, prefs);
+    if (groupSet) {
       bundleCourses.push({
         courseId: candidate.course.id,
         isAnchor: false,
-        selectedGroupIds: [validGroup.id]
+        selectedGroupIds: groupSet.map(g => g.id)
       });
       currentCredits[candidate.type] += candidate.course.credits;
     }
@@ -199,20 +234,19 @@ function generateCompactBundle(
       });
     });
 
-    const groups = offering.groups.filter(g => isGroupValid(g, bundleCourses, offerings, prefs));
-    
-    // Sort groups by how many NEW days they add (prefer 0)
-    groups.sort((a, b) => {
+    // Prefer groups whose slots land on already-occupied days
+    const byNewDays = (a: MeetingGroup, b: MeetingGroup) => {
       const daysA = a.slots.filter(s => !occupiedDays.has(s.day)).length;
       const daysB = b.slots.filter(s => !occupiedDays.has(s.day)).length;
       return daysA - daysB;
-    });
+    };
 
-    if (groups.length > 0) {
+    const groupSet = findBestGroupSet(offering.groups, bundleCourses, offerings, prefs, byNewDays);
+    if (groupSet) {
       bundleCourses.push({
         courseId: candidate.course.id,
         isAnchor: false,
-        selectedGroupIds: [groups[0].id]
+        selectedGroupIds: groupSet.map(g => g.id)
       });
       currentCredits[candidate.type] += candidate.course.credits;
     }
@@ -267,15 +301,6 @@ function getCandidates(
   });
 
   return candidates;
-}
-
-function findBestGroup(
-  groups: MeetingGroup[],
-  currentBundle: PlannedCourse[],
-  offerings: CourseOffering[],
-  prefs: UserPreferences
-): MeetingGroup | undefined {
-  return groups.find(g => isGroupValid(g, currentBundle, offerings, prefs));
 }
 
 function isGroupValid(

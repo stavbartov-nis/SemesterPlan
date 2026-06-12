@@ -81,3 +81,35 @@ describe('anchor scheduling', () => {
     }
   });
 });
+
+describe('full group sets (lecture + tirgul)', () => {
+  const track = MOCK_TRACKS[0];
+  const offerings = getOfferingsForSemester('A');
+  const prefs: UserPreferences = {
+    allowedDays: [0, 1, 2, 3, 4],
+    timeWindow: { start: '08:00', end: '20:30' },
+    overlapPolicy: { allowOverlap: false, maxOverlapMinutes: 0 },
+    targetCreditsByType: { Mandatory: 12, Core: 8, Elective: 4 }
+  };
+
+  it('selects one group of every meeting type the course offers', () => {
+    // 57322 (econometrics) has Lecture + Exercise groups; 57305 (macro) has
+    // Lecture + Lab. A lecture without its tirgul is not a valid registration.
+    const anchors = [
+      { courseId: '57322', isAnchor: true, selectedGroupIds: [] },
+      { courseId: '57305', isAnchor: true, selectedGroupIds: [] },
+    ];
+    const bundles = suggestBundles(anchors, MOCK_COURSES, offerings, track, prefs, []);
+    for (const bundle of bundles) {
+      for (const pc of bundle.courses) {
+        const offering = offerings.find(o => o.courseId === pc.courseId);
+        if (!offering || pc.selectedGroupIds.length === 0) continue;
+        const offeredTypes = new Set(offering.groups.map(g => g.type));
+        const chosenTypes = new Set(
+          pc.selectedGroupIds.map(gid => offering.groups.find(g => g.id === gid)?.type)
+        );
+        expect([...chosenTypes].sort()).toEqual([...offeredTypes].sort());
+      }
+    }
+  });
+});
