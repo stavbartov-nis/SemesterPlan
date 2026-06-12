@@ -31,8 +31,9 @@ export function suggestBundles(
 
   // 1. Fastest Path: Prioritize Mandatory/Core and high credits
   bundles.push(generateBundle(
-    "Fastest Path",
-    "Prioritizes credits and mandatory/core courses to accelerate degree completion.",
+    "fastest-path",
+    "המסלול המהיר",
+    "נותן עדיפות לנקודות זכות ולקורסי חובה וליבה כדי להאיץ את סיום התואר.",
     anchors, catalog, offerings, track, prefs, historyIds,
     (a, b) => {
       const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
@@ -57,8 +58,9 @@ export function suggestBundles(
     }
   };
   bundles.push(generateBundle(
-    "No Early Mornings",
-    "Avoids any classes starting before 10:00 for a better morning routine.",
+    "no-early-mornings",
+    "בלי בקרים מוקדמים",
+    "נמנע משיעורים שמתחילים לפני 10:00 כדי שתוכלי לפתוח את הבוקר ברוגע.",
     anchors, catalog, offerings, track, noEarlyPrefs, historyIds,
     (a, b) => {
       const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
@@ -74,7 +76,33 @@ interface Candidate {
   type: 'Mandatory' | 'Core' | 'Elective';
 }
 
+/**
+ * Anchors arrive from the store with empty selectedGroupIds; without a group
+ * they render no calendar events and are invisible to conflict checks.
+ * Assign each group-less anchor its first valid group up front.
+ */
+function scheduleAnchors(
+  anchors: PlannedCourse[],
+  offerings: CourseOffering[],
+  prefs: UserPreferences
+): PlannedCourse[] {
+  const scheduled: PlannedCourse[] = [];
+  for (const anchor of anchors) {
+    if (anchor.selectedGroupIds.length > 0) {
+      scheduled.push({ ...anchor });
+      continue;
+    }
+    const offering = offerings.find(o => o.courseId === anchor.courseId);
+    const group = offering && findBestGroup(offering.groups, scheduled, offerings, prefs);
+    scheduled.push(group
+      ? { ...anchor, selectedGroupIds: [group.id] }
+      : { ...anchor });
+  }
+  return scheduled;
+}
+
 function generateBundle(
+  id: string,
   name: string,
   rationale: string,
   anchors: PlannedCourse[],
@@ -85,7 +113,7 @@ function generateBundle(
   historyIds: string[],
   sortFn: (a: Candidate, b: Candidate) => number
 ): SuggestedBundle {
-  let bundleCourses = [...anchors];
+  let bundleCourses = scheduleAnchors(anchors, offerings, prefs);
   const candidates = getCandidates(catalog, track, historyIds, bundleCourses);
   candidates.sort(sortFn);
 
@@ -120,7 +148,7 @@ function generateBundle(
   }
 
   return {
-    id: name.toLowerCase().replace(/\s+/g, '-'),
+    id,
     name,
     courses: bundleCourses,
     rationale,
@@ -136,9 +164,9 @@ function generateCompactBundle(
   prefs: UserPreferences,
   historyIds: string[]
 ): SuggestedBundle {
-  let bundleCourses = [...anchors];
+  let bundleCourses = scheduleAnchors(anchors, offerings, prefs);
   const candidates = getCandidates(catalog, track, historyIds, bundleCourses);
-  
+
   // Track current credits by type
   const currentCredits = { Mandatory: 0, Core: 0, Elective: 0 };
   bundleCourses.forEach(pc => {
@@ -194,9 +222,9 @@ function generateCompactBundle(
 
   return {
     id: 'compact-schedule',
-    name: 'Compact Schedule',
+    name: 'מערכת מרוכזת',
     courses: bundleCourses,
-    rationale: 'Tries to group courses on the fewest possible days to maximize free time.',
+    rationale: 'מרכז את הקורסים במספר הימים הקטן ביותר כדי לפנות לך זמן חופשי.',
     totalCredits: calculateTotalCredits(bundleCourses, catalog)
   };
 }

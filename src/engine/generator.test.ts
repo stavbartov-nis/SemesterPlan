@@ -17,9 +17,11 @@ describe('suggestBundles', () => {
   it('should return three named bundles', () => {
     const bundles = suggestBundles([], MOCK_COURSES, MOCK_OFFERINGS, track, prefs, []);
     expect(bundles).toHaveLength(3);
-    expect(bundles[0].name).toBe('Fastest Path');
-    expect(bundles[1].name).toBe('Compact Schedule');
-    expect(bundles[2].name).toBe('No Early Mornings');
+    expect(bundles[0].name).toBe('המסלול המהיר');
+    expect(bundles[1].name).toBe('מערכת מרוכזת');
+    expect(bundles[2].name).toBe('בלי בקרים מוקדמים');
+    // Bundle ids are slugs used as keys and must stay stable.
+    expect(bundles.map(b => b.id)).toEqual(['fastest-path', 'compact-schedule', 'no-early-mornings']);
   });
 
   it('should include some mandatory Economics courses in Fastest Path', () => {
@@ -41,7 +43,7 @@ describe('suggestBundles', () => {
 
   it('should respect No Early Mornings preference (no slots before 10:00)', () => {
     const bundles = suggestBundles([], MOCK_COURSES, MOCK_OFFERINGS, track, prefs, []);
-    const noEarly = bundles.find(b => b.name === 'No Early Mornings')!;
+    const noEarly = bundles.find(b => b.id === 'no-early-mornings')!;
 
     for (const pc of noEarly.courses) {
       const offering = MOCK_OFFERINGS.find(o => o.courseId === pc.courseId);
@@ -53,6 +55,29 @@ describe('suggestBundles', () => {
           expect(slot.start >= '10:00').toBe(true);
         }
       }
+    }
+  });
+});
+
+describe('anchor scheduling', () => {
+  const track = MOCK_TRACKS[0];
+  const offerings = getOfferingsForSemester('A');
+  const prefs: UserPreferences = {
+    allowedDays: [0, 1, 2, 3, 4],
+    timeWindow: { start: '08:00', end: '20:00' },
+    overlapPolicy: { allowOverlap: false, maxOverlapMinutes: 0 },
+    targetCreditsByType: { Mandatory: 12, Core: 8, Elective: 4 }
+  };
+
+  it('assigns a meeting group to anchors that arrive without one', () => {
+    // Store creates anchors with empty selectedGroupIds; without a group the
+    // course renders no calendar events and is invisible to conflict checks.
+    const anchors = [{ courseId: '57107', isAnchor: true, selectedGroupIds: [] }];
+    const bundles = suggestBundles(anchors, MOCK_COURSES, offerings, track, prefs, []);
+    for (const bundle of bundles) {
+      const anchor = bundle.courses.find(c => c.courseId === '57107')!;
+      expect(anchor.isAnchor).toBe(true);
+      expect(anchor.selectedGroupIds.length).toBeGreaterThan(0);
     }
   });
 });
