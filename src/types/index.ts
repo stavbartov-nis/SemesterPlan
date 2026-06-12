@@ -3,7 +3,8 @@
  */
 export interface Course {
   id: string;        // 5-digit Shnaton code
-  name: string;      // Supports Unicode (Hebrew names)
+  name: string;      // Official Hebrew name from the Shnaton API
+  nameEn?: string;   // English name from the Shnaton API
   credits: number;   // NKZ
   department: string;
   prerequisites: string[]; // List of Course IDs
@@ -24,6 +25,8 @@ export type Campus = 'Safra' | 'MtScopus' | 'EinKerem' | 'Rehovot';
 
 export interface MeetingGroup {
   id: string;
+  /** Shnaton group code like "1-01"; first number ties exercise sections to their lecture section. */
+  code?: string | null;
   type: MeetingType;
   slots: ScheduleSlot[];
 }

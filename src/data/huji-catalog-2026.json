@@ -1,7 +1,7 @@
 {
   "meta": {
     "year": 2026,
-    "generated": "2026-05-31T09:18:22.795Z",
+    "generated": "2026-06-11T15:33:33.101Z",
     "filter": {
       "degree": "Bachelor's only (sugToar=001)"
     },
@@ -10,7 +10,7 @@
       "Business Administration"
     ],
     "courseCount": 92,
-    "offeringCount": 86,
+    "offeringCount": 100,
     "noScheduleCount": 6,
     "droppedByDept": {
       "Economics": 19,
@@ -46,7 +46,8 @@
   "courses": [
     {
       "id": "57893",
-      "name": "The causes and consequences of  income inequality",
+      "name": "הגורמים וההשלכות של אי-שוויון בהכנסה",
+      "nameEn": "The causes and consequences of  income inequality",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
@@ -57,7 +58,8 @@
     },
     {
       "id": "57126",
-      "name": "International investments and exchange rates",
+      "name": "השקעות בינלאומיות ושערי חליפין",
+      "nameEn": "International investments and exchange rates",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
@@ -68,11 +70,11 @@
     },
     {
       "id": "57552",
-      "name": "Forecasting in Macroeconomics and Financial markets",
+      "name": "חיזוי במאקרו כלכלה ובשוק ההון",
+      "nameEn": "Forecasting in Macroeconomics and Financial markets",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
-        "57468",
         "57322",
         "57108"
       ],
@@ -80,7 +82,8 @@
     },
     {
       "id": "57121",
-      "name": "Math for Economists A1",
+      "name": "חשבון דיפרנציאלי ואינטגרלי לכלכלנים א'",
+      "nameEn": "Math for Economists A1",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [],
@@ -88,18 +91,19 @@
     },
     {
       "id": "57467",
-      "name": "Behavioral Economics and Empirical Applications",
+      "name": "כלכלה התנהגותית ויישומיים אימפירים",
+      "nameEn": "Behavioral Economics and Empirical Applications",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
-        "57322",
-        "57468"
+        "57322"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57807",
-      "name": "POLITICAL ECONOMY",
+      "name": "כלכלה פוליטית",
+      "nameEn": "POLITICAL ECONOMY",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -110,24 +114,24 @@
     },
     {
       "id": "57104",
-      "name": "The Economics of Disasters and Climate Change",
+      "name": "כלכלה של אסונות ושינויי אקלים",
+      "nameEn": "The Economics of Disasters and Climate Change",
       "credits": 1,
       "department": "Economics",
       "prerequisites": [
-        "57322",
-        "57468"
+        "57322"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57010",
-      "name": "The Israeli Economy",
+      "name": "כלכלת ישראל",
+      "nameEn": "The Israeli Economy",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57305",
         "57322",
-        "57468",
         "57307",
         "57308"
       ],
@@ -135,7 +139,8 @@
     },
     {
       "id": "57638",
-      "name": "Empirical Labor Economics",
+      "name": "כלכלת עבודה אמפירית",
+      "nameEn": "Empirical Labor Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -147,41 +152,40 @@
     },
     {
       "id": "57123",
-      "name": "Media Economics",
+      "name": "כלכלת תקשורת",
+      "nameEn": "Media Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57322",
-        "57468",
         "57307"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57305",
-      "name": "Intermediate Macroeconomics",
+      "name": "מאקרו כלכלה",
+      "nameEn": "Intermediate Macroeconomics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57107",
         "57108",
         "57121",
-        "54110",
         "57122",
         "57340",
-        "54111",
         "57341"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "57506",
-      "name": "Advanced macroeconomics",
+      "name": "מאקרו כלכלה מתקדמת",
+      "nameEn": "Advanced macroeconomics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57121",
-        "54110",
         "57122",
         "57305",
         "57307"
@@ -190,15 +194,14 @@
     },
     {
       "id": "57322",
-      "name": "Introduction to Econometrics",
+      "name": "מבוא לאקונומטריקה",
+      "nameEn": "Introduction to Econometrics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57121",
-        "54110",
         "57122",
         "57340",
-        "54111",
         "57341",
         "57107",
         "57108"
@@ -207,7 +210,8 @@
     },
     {
       "id": "57107",
-      "name": "Introduction to Economics 1 (Micro)",
+      "name": "מבוא לכלכלה א (מיקרו)",
+      "nameEn": "Introduction to Economics 1 (Micro)",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [],
@@ -215,7 +219,8 @@
     },
     {
       "id": "57654",
-      "name": "International trade",
+      "name": "מסחר בינלאומי",
+      "nameEn": "International trade",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -226,7 +231,8 @@
     },
     {
       "id": "57253",
-      "name": "Financial and Economic Crises and Macroeconomic Analysis",
+      "name": "משברים פיננסיים וכלכליים והחשיבה במאקרו-כלכלה",
+      "nameEn": "Financial and Economic Crises and Macroeconomic Analysis",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -236,26 +242,21 @@
     },
     {
       "id": "57556",
-      "name": "Advanced Mathematics for Economists",
+      "name": "מתמטיקה מתקדמת לכלכלנים",
+      "nameEn": "Advanced Mathematics for Economists",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
-        "52112",
         "57121",
-        "80131",
-        "80114",
         "57130",
-        "57110",
-        "80132",
-        "57122",
-        "52113",
-        "80157"
+        "57122"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57469",
-      "name": "Topics in Empirical Tax Research",
+      "name": "נושאים בחקר המיסוי אמפירי",
+      "nameEn": "Topics in Empirical Tax Research",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -265,7 +266,8 @@
     },
     {
       "id": "57496",
-      "name": "Topics on Economics of the Firm",
+      "name": "סוגיות בכלכלת הפירמה",
+      "nameEn": "Topics on Economics of the Firm",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -280,7 +282,8 @@
     },
     {
       "id": "57128",
-      "name": "Selected Topics in Behavioral Economics",
+      "name": "סוגיות נבחרות בכלכלה התנהגותית",
+      "nameEn": "Selected Topics in Behavioral Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -293,7 +296,8 @@
     },
     {
       "id": "57340",
-      "name": "Statistics  for Economists A",
+      "name": "סטטיסטיקה לכלכלנים א'",
+      "nameEn": "Statistics  for Economists A",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [],
@@ -301,35 +305,25 @@
     },
     {
       "id": "57307",
-      "name": "Price Theory 1",
+      "name": "תורת המחירים א",
+      "nameEn": "Price Theory 1",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57107",
         "57108",
         "57121",
-        "54110",
         "57130",
-        "80131",
-        "80114",
-        "52112",
         "57122",
-        "80133",
-        "52113",
-        "80132",
         "57340",
-        "80430",
-        "80312",
-        "52220",
-        "54111",
-        "57341",
-        "52221"
+        "57341"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "57554",
-      "name": "Game Theory for Economists",
+      "name": "תורת המשחקים לכלכלנים",
+      "nameEn": "Game Theory for Economists",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -340,18 +334,19 @@
     },
     {
       "id": "57493",
-      "name": "Big Data in Economics",
+      "name": "נושאים בביג דאטה בכלכלה",
+      "nameEn": "Big Data in Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
-        "57322",
-        "57468"
+        "57322"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57132",
-      "name": "Firm Financial decisions",
+      "name": "החלטות פיננסיות של הפירמה",
+      "nameEn": "Firm Financial decisions",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
@@ -361,18 +356,19 @@
     },
     {
       "id": "57533",
-      "name": "Economic Research on Discrimination and Bias",
+      "name": "מחקר כלכלי על אפליה והטיה",
+      "nameEn": "Economic Research on Discrimination and Bias",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
-        "57322",
-        "57468"
+        "57322"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57130",
-      "name": "Math for Machpil students",
+      "name": "מתמטיקה לתלמידי מכפיל",
+      "nameEn": "Math for Machpil students",
       "credits": 5,
       "department": "Economics",
       "prerequisites": [],
@@ -380,7 +376,8 @@
     },
     {
       "id": "57736",
-      "name": "Topics in Political Economy",
+      "name": "נושאים בכלכלה פוליטית",
+      "nameEn": "Topics in Political Economy",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -390,19 +387,20 @@
     },
     {
       "id": "57117",
-      "name": "Advanced topics in labor economics",
+      "name": "נושאים מתקדמים בכלכלת עבודה",
+      "nameEn": "Advanced topics in labor economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
-        "57322",
-        "57468"
+        "57322"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "57013",
-      "name": "Policy Analysis",
+      "name": "ניתוח מדיניות",
+      "nameEn": "Policy Analysis",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [],
@@ -410,25 +408,21 @@
     },
     {
       "id": "57509",
-      "name": "Linear Algebra for Economists",
+      "name": "אלגברה לינארית לכלכלנים",
+      "nameEn": "Linear Algebra for Economists",
       "credits": 3,
       "department": "Economics",
       "prerequisites": [
         "57122",
-        "52113",
-        "57110",
         "57130",
-        "80131",
-        "52112",
-        "57121",
-        "54110",
-        "80132"
+        "57121"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57011",
-      "name": "Applied Issues in Competition Law",
+      "name": "היבטים יישומיים של חוק התחרות הכלכלית",
+      "nameEn": "Applied Issues in Competition Law",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -439,7 +433,8 @@
     },
     {
       "id": "57127",
-      "name": "History of Economic Thought",
+      "name": "הסטוריה של המחשבה הכלכלית",
+      "nameEn": "History of Economic Thought",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -450,7 +445,8 @@
     },
     {
       "id": "57122",
-      "name": "Math for Economists A2",
+      "name": "חשבון דיפרנציאלי ואינטגרלי לכלכלנים ב'",
+      "nameEn": "Math for Economists A2",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -460,7 +456,8 @@
     },
     {
       "id": "57133",
-      "name": "Public Economics",
+      "name": "כלכלה ציבורית",
+      "nameEn": "Public Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -470,7 +467,8 @@
     },
     {
       "id": "57667",
-      "name": "INFORMATION ECONOMICS",
+      "name": "כלכלת אינפורמציה",
+      "nameEn": "INFORMATION ECONOMICS",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -481,7 +479,8 @@
     },
     {
       "id": "57012",
-      "name": "Health Economics",
+      "name": "כלכלת בריאות",
+      "nameEn": "Health Economics",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -492,7 +491,8 @@
     },
     {
       "id": "57020",
-      "name": "Middle East Economics",
+      "name": "כלכלת מזרח תיכון",
+      "nameEn": "Middle East Economics",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
@@ -506,23 +506,23 @@
     },
     {
       "id": "57495",
-      "name": "Labour Economics",
+      "name": "כלכלת עבודה",
+      "nameEn": "Labour Economics",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57307",
-        "57322",
-        "57468"
+        "57322"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57510",
-      "name": "Market Failures",
+      "name": "כשלי שוק",
+      "nameEn": "Market Failures",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
-        "57118",
         "57308",
         "57307"
       ],
@@ -530,7 +530,8 @@
     },
     {
       "id": "57108",
-      "name": "INTRODUCTION TO ECONOMICS II (MACRO)",
+      "name": "מבוא לכלכלה ב (מקרו)",
+      "nameEn": "INTRODUCTION TO ECONOMICS II (MACRO)",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -540,7 +541,8 @@
     },
     {
       "id": "57003",
-      "name": "Economic Data Analysis using Python – An Introduction",
+      "name": "מבוא לניתוח נתונים בכלכלה בעזרת Pyton",
+      "nameEn": "Economic Data Analysis using Python – An Introduction",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
@@ -551,7 +553,8 @@
     },
     {
       "id": "57124",
-      "name": "Monetary Policy: From Theory to Today’s Challenges",
+      "name": "מדיניות מוניטרית: מהתיאוריה לאתגרים של היום",
+      "nameEn": "Monetary Policy: From Theory to Today’s Challenges",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
@@ -563,7 +566,8 @@
     },
     {
       "id": "57002",
-      "name": "International Finance",
+      "name": "מימון בינלאומי",
+      "nameEn": "International Finance",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -574,35 +578,35 @@
     },
     {
       "id": "57102",
-      "name": "Finance for Economists",
+      "name": "מימון לכלכלנים",
+      "nameEn": "Finance for Economists",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
         "57307",
-        "57468",
         "57322"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57705",
-      "name": "Topics in Fiscal Policy",
+      "name": "נושאים במדיניות פיסקלית",
+      "nameEn": "Topics in Fiscal Policy",
       "credits": 2,
       "department": "Economics",
       "prerequisites": [
         "57322",
-        "57468",
         "57305"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57311",
-      "name": "Topics in Macroeconomics of Uncertainty and Financial Markets",
+      "name": "נושאים במקרו כלכלה של אי-ודאות ושווקים פיננסים",
+      "nameEn": "Topics in Macroeconomics of Uncertainty and Financial Markets",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
-        "57468",
         "57322",
         "57307",
         "57305"
@@ -611,7 +615,8 @@
     },
     {
       "id": "57341",
-      "name": "Statistics for Economics B",
+      "name": "סטטיסטיקה לכלכלנים ב'",
+      "nameEn": "Statistics for Economics B",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -621,30 +626,31 @@
     },
     {
       "id": "57466",
-      "name": "Markets and Competition in Israel",
+      "name": "שווקים ותחרות בישראל",
+      "nameEn": "Markets and Competition in Israel",
       "credits": 3,
       "department": "Economics",
       "prerequisites": [
         "57322",
-        "57468",
         "57307"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57497",
-      "name": "Machine Learning Methods for economists",
+      "name": "שיטות בלמידת מכונה לכלכלנים",
+      "nameEn": "Machine Learning Methods for economists",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
-        "57322",
-        "57468"
+        "57322"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "57308",
-      "name": "Price Theory 2",
+      "name": "תורת המחירים ב",
+      "nameEn": "Price Theory 2",
       "credits": 4,
       "department": "Economics",
       "prerequisites": [
@@ -656,7 +662,8 @@
     },
     {
       "id": "55007",
-      "name": "HUBS Aid - Design and Implementation of a Rehabilitation Program for Small and Medium Businesses in Israel",
+      "name": "HUBS Aid – בנייה ויישום של תכנית שיקום לעסקים קטנים ובינוניים בישראל",
+      "nameEn": "HUBS Aid - Design and Implementation of a Rehabilitation Program for Small and Medium Businesses in Israel",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [],
@@ -664,19 +671,19 @@
     },
     {
       "id": "55008",
-      "name": "Researching Human Behavior Causality Using Big Data",
+      "name": "חקר התנהגות אנושית בעזרת נתוני עתק",
+      "nameEn": "Researching Human Behavior Causality Using Big Data",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
-        "6177",
-        "55518",
-        "6180"
+        "55518"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "55009",
-      "name": "Foundations of Behavioural Sciences (English)",
+      "name": "יסודות מדעי ההתנהגות באנגלית",
+      "nameEn": "Foundations of Behavioural Sciences (English)",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -684,24 +691,22 @@
     },
     {
       "id": "55337",
-      "name": "Business plans for social entrepreneurship ventures",
+      "name": "כתיבת תוכנית עסקית למיזם חברתי",
+      "nameEn": "Business plans for social entrepreneurship ventures",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
         "55945",
         "55518",
         "55802",
-        "55107",
         "55804",
         "55687",
         "57341",
         "55125",
-        "52117",
         "55322",
         "55702",
         "55701",
         "55510",
-        "55108",
         "55803",
         "55312"
       ],
@@ -709,7 +714,8 @@
     },
     {
       "id": "55650",
-      "name": "Introduction to Financial Innovation and Fintech",
+      "name": "מבוא לחדשנות פיננסית ופינטק",
+      "nameEn": "Introduction to Financial Innovation and Fintech",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -717,7 +723,8 @@
     },
     {
       "id": "55701",
-      "name": "Basic Principles of Economics (Micro)",
+      "name": "מבוא לכלכלה א' (מיקרו)",
+      "nameEn": "Basic Principles of Economics (Micro)",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [],
@@ -725,7 +732,8 @@
     },
     {
       "id": "55120",
-      "name": "Introduction to Statistics I",
+      "name": "מבוא לסטטיסטיקה א׳",
+      "nameEn": "Introduction to Statistics I",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -733,7 +741,8 @@
     },
     {
       "id": "55321",
-      "name": "Mathematics A",
+      "name": "מתמטיקה א'",
+      "nameEn": "Mathematics A",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -741,53 +750,47 @@
     },
     {
       "id": "55826",
-      "name": "Advertising and Communication Management in the Digital era",
+      "name": "ניהול התקשורת והפרסום בעידן הדיגיטלי",
+      "nameEn": "Advertising and Communication Management in the Digital era",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
-        "55905",
         "55804"
       ],
       "statusCourseCode": 2
     },
     {
       "id": "55507",
-      "name": "Practical  Workshop in Management",
+      "name": "סדנה יישומית במינהל עסקים",
+      "nameEn": "Practical  Workshop in Management",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
-        "52117",
         "55125",
         "57341",
         "55802",
-        "55107",
-        "55108",
         "55803",
-        "55904",
         "55687",
-        "55905",
         "55804",
         "55312",
         "55322",
         "55518",
-        "55945",
-        "55815"
+        "55945"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55404",
-      "name": "Startup Science Innovation A",
+      "name": "סמינר  ביזמות טכנולוגית א",
+      "nameEn": "Startup Science Innovation A",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
         "55518",
         "55312",
         "55687",
-        "55107",
         "55802",
         "55803",
-        "55108",
         "55804",
         "55945"
       ],
@@ -795,20 +798,16 @@
     },
     {
       "id": "55529",
-      "name": "Brand and Marketing Strategy seminar",
+      "name": "סמינר - חדשנות בניהול מותגים ואסטרטגיה שיווקית",
+      "nameEn": "Brand and Marketing Strategy seminar",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
         "55803",
-        "55904",
-        "55108",
         "55687",
         "55802",
-        "55902",
-        "55107",
         "55518",
         "55804",
-        "55905",
         "55312",
         "55945"
       ],
@@ -816,7 +815,8 @@
     },
     {
       "id": "55432",
-      "name": "Decision Making: Intuition, Strategy, and In Between",
+      "name": "קבלת החלטות: אינטואיציה, אסטרטגיה, ומה שביניהן",
+      "nameEn": "Decision Making: Intuition, Strategy, and In Between",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [],
@@ -824,7 +824,8 @@
     },
     {
       "id": "55301",
-      "name": "Competition, valuation and financial reports A",
+      "name": "תחרות, תמחור ודוחות כספיים א'",
+      "nameEn": "Competition, valuation and financial reports A",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
@@ -832,7 +833,6 @@
         "55518",
         "55312",
         "55687",
-        "55108",
         "55803",
         "55804",
         "55945",
@@ -842,19 +842,20 @@
     },
     {
       "id": "55687",
-      "name": "Organizational Behaviour",
+      "name": "התנהגות ארגונית",
+      "nameEn": "Organizational Behaviour",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55102",
-        "55117",
-        "55119"
+        "55117"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55802",
-      "name": "Fundamentals of Accounting",
+      "name": "יסודות החשבונאות",
+      "nameEn": "Fundamentals of Accounting",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -862,57 +863,38 @@
     },
     {
       "id": "55803",
-      "name": "Fundamentals of Finance",
+      "name": "יסודות המימון",
+      "nameEn": "Fundamentals of Finance",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55701",
         "57107",
-        "55795",
         "55321",
-        "55796",
-        "55745",
-        "55746",
-        "52116",
-        "55797",
         "57340",
-        "55120",
-        "80430"
+        "55120"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55804",
-      "name": "Fundamentals of Marketing Managment",
+      "name": "יסודות השיווק",
+      "nameEn": "Fundamentals of Marketing Managment",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
-        "55904",
-        "55108",
         "55803",
-        "55002",
-        "55796",
         "55322",
-        "55745",
-        "80181",
-        "55341",
         "57122",
-        "80420",
-        "55797",
-        "52116",
         "57340",
-        "52221",
-        "52005",
-        "80421",
-        "55746",
-        "52117",
         "55125"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55102",
-      "name": "Foundations of  Behavioural Sciences",
+      "name": "יסודות מדעי ההתנהגות",
+      "nameEn": "Foundations of  Behavioural Sciences",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -920,7 +902,8 @@
     },
     {
       "id": "55124",
-      "name": "Business Modelling with Excel",
+      "name": "מודלים עסקיים באקסל",
+      "nameEn": "Business Modelling with Excel",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [],
@@ -928,111 +911,81 @@
     },
     {
       "id": "55510",
-      "name": "Strategic Management",
+      "name": "ניהול אסטרטגי",
+      "nameEn": "Strategic Management",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55803",
-        "55108",
         "55804",
         "55687",
         "55945",
         "55322",
-        "55796",
-        "52117",
         "55125",
         "57341",
-        "55797",
         "55312"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55506",
-      "name": "Operations Management",
+      "name": "ניהול התפעול",
+      "nameEn": "Operations Management",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55312",
         "55804",
         "55945",
-        "55815",
         "55322",
-        "55796",
-        "52117",
-        "55797",
         "55125",
         "57341",
         "55518",
         "55687",
         "55803",
-        "55108",
         "55702"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55312",
-      "name": "Business Data and Technology",
+      "name": "נתונים וטכנולוגיה בעסקים",
+      "nameEn": "Business Data and Technology",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55322",
-        "55745",
-        "55796",
-        "51002",
         "55125",
-        "52117",
-        "55797",
-        "55746",
-        "55120",
-        "51102",
-        "52116"
+        "55120"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55945",
-      "name": "Quantitative Methods in Management",
+      "name": "שיטות כמותיות בניהול",
+      "nameEn": "Quantitative Methods in Management",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55322",
         "57122",
-        "55796",
-        "55745",
-        "52113",
         "55321",
         "57121",
-        "52112",
-        "52116",
-        "52220",
-        "80430",
         "55120",
-        "51102",
-        "55797",
-        "55746",
-        "51002",
-        "52117",
-        "55125",
-        "52221"
+        "55125"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55518",
-      "name": "Research Methods in  Business Administration",
+      "name": "שיטות מחקר במינהל עסקים",
+      "nameEn": "Research Methods in  Business Administration",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
-        "52116",
-        "52220",
         "57340",
         "55120",
-        "52117",
-        "80430",
         "55125",
-        "52221",
         "57341",
         "57121",
         "55321",
@@ -1043,7 +996,8 @@
     },
     {
       "id": "55117",
-      "name": "Participation in Experiments",
+      "name": "השתתפות בניסויים",
+      "nameEn": "Participation in Experiments",
       "credits": 0,
       "department": "Business Administration",
       "prerequisites": [],
@@ -1051,7 +1005,8 @@
     },
     {
       "id": "55527",
-      "name": "Business Ethics",
+      "name": "אתיקה בעסקים",
+      "nameEn": "Business Ethics",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -1059,7 +1014,8 @@
     },
     {
       "id": "55324",
-      "name": "Built it Now:Vibe Coding-Tech Creation without the Code Barrier",
+      "name": "בנה את הרעיון שלך: מפנטזיה למציאות ב-Vibe Coding",
+      "nameEn": "Built it Now:Vibe Coding-Tech Creation without the Code Barrier",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -1067,7 +1023,8 @@
     },
     {
       "id": "55022",
-      "name": "When AI meets Humans and Society",
+      "name": "כשבינה מלאכותית פוגשת אנשים וחברה",
+      "nameEn": "When AI meets Humans and Society",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
@@ -1075,9 +1032,7 @@
         "55312",
         "55687",
         "55802",
-        "55107",
         "55803",
-        "55108",
         "55804",
         "55945"
       ],
@@ -1085,7 +1040,8 @@
     },
     {
       "id": "55308",
-      "name": "Introduction to Database and Business Intelligence",
+      "name": "מבוא לבסיסי נתונים ובינה עסקית",
+      "nameEn": "Introduction to Database and Business Intelligence",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
@@ -1095,30 +1051,31 @@
     },
     {
       "id": "55702",
-      "name": "Management  Economics (Macro)",
+      "name": "מבוא לכלכלה ב' (מאקרו)",
+      "nameEn": "Management  Economics (Macro)",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
-        "55795",
         "55701"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55125",
-      "name": "Introduction to Statistics II",
+      "name": "מבוא לסטטיסטיקה ב׳",
+      "nameEn": "Introduction to Statistics II",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
         "55120",
-        "52116",
         "57340"
       ],
       "statusCourseCode": 1
     },
     {
       "id": "55223",
-      "name": "Global Competence: Thriving in Multicultural Landscapes",
+      "name": "מסוגלות גלובלית בזירות רב תרבותיות",
+      "nameEn": "Global Competence: Thriving in Multicultural Landscapes",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [],
@@ -1126,7 +1083,8 @@
     },
     {
       "id": "55322",
-      "name": "Mathematics B",
+      "name": "מתמטיקה ב'",
+      "nameEn": "Mathematics B",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [
@@ -1136,7 +1094,8 @@
     },
     {
       "id": "55408",
-      "name": "tartup Science Innovation B",
+      "name": "סמינר ביזמות טכנולוגית ב",
+      "nameEn": "tartup Science Innovation B",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
@@ -1144,9 +1103,7 @@
         "55518",
         "55312",
         "55687",
-        "55107",
         "55802",
-        "55108",
         "55803",
         "55804",
         "55945"
@@ -1155,16 +1112,15 @@
     },
     {
       "id": "55415",
-      "name": "Seminar in Capital Market",
+      "name": "סמינר בשוק ההון",
+      "nameEn": "Seminar in Capital Market",
       "credits": 4,
       "department": "Business Administration",
       "prerequisites": [
         "55518",
-        "55107",
         "55802",
         "55945",
         "55803",
-        "55108",
         "55804",
         "55312",
         "55125",
@@ -1178,7 +1134,8 @@
     },
     {
       "id": "55717",
-      "name": "Competition - Innovation in brand management - Continue",
+      "name": "תחרות -חדשנות בניהול מותגים - המשך",
+      "nameEn": "Competition - Innovation in brand management - Continue",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
@@ -1188,7 +1145,8 @@
     },
     {
       "id": "55305",
-      "name": "Competition, valuation and financial reports B",
+      "name": "תחרות, תמחור ודוחות כספיים ב'",
+      "nameEn": "Competition, valuation and financial reports B",
       "credits": 2,
       "department": "Business Administration",
       "prerequisites": [
@@ -1198,9 +1156,7 @@
         "55312",
         "55687",
         "55802",
-        "55106",
         "55803",
-        "55108",
         "55804",
         "55301"
       ],
@@ -1208,7 +1164,8 @@
     },
     {
       "id": "55531",
-      "name": "Negotiations - Theory and Practice.",
+      "name": "תיאוריה ומעשה במשא ומתן",
+      "nameEn": "Negotiations - Theory and Practice.",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -1216,7 +1173,8 @@
     },
     {
       "id": "55005",
-      "name": "Preparatory Course in Mathematics",
+      "name": "מכינה במתמטיקה",
+      "nameEn": "Preparatory Course in Mathematics",
       "credits": 0,
       "department": "Business Administration",
       "prerequisites": [],
@@ -1224,7 +1182,8 @@
     },
     {
       "id": "55861",
-      "name": "A Multicultural course in Entrepreneurship (Israel-Canada)-summer course",
+      "name": "קורס רב תרבותי ביזמות - קורס קיץ",
+      "nameEn": "A Multicultural course in Entrepreneurship (Israel-Canada)-summer course",
       "credits": 3,
       "department": "Business Administration",
       "prerequisites": [],
@@ -1239,6 +1198,7 @@
       "groups": [
         {
           "id": "6307",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1257,6 +1217,7 @@
       "groups": [
         {
           "id": "4737",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1275,6 +1236,7 @@
       "groups": [
         {
           "id": "6904",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1293,6 +1255,7 @@
       "groups": [
         {
           "id": "225",
+          "code": "2-02",
           "type": "Exercise",
           "slots": [
             {
@@ -1304,6 +1267,7 @@
         },
         {
           "id": "2115",
+          "code": "2-04",
           "type": "Exercise",
           "slots": [
             {
@@ -1315,6 +1279,7 @@
         },
         {
           "id": "3625",
+          "code": "1-03",
           "type": "Lecture",
           "slots": [
             {
@@ -1331,6 +1296,7 @@
         },
         {
           "id": "5265",
+          "code": "1-02",
           "type": "Lecture",
           "slots": [
             {
@@ -1347,15 +1313,16 @@
         },
         {
           "id": "8568",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
-              "day": 2,
+              "day": 3,
               "start": "14:30",
               "end": "16:00"
             },
             {
-              "day": 3,
+              "day": 2,
               "start": "14:30",
               "end": "16:00"
             }
@@ -1363,6 +1330,7 @@
         },
         {
           "id": "10321",
+          "code": "2-01",
           "type": "Exercise",
           "slots": [
             {
@@ -1381,6 +1349,7 @@
       "groups": [
         {
           "id": "108",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1399,6 +1368,7 @@
       "groups": [
         {
           "id": "869",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1422,6 +1392,7 @@
       "groups": [
         {
           "id": "1646",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1440,17 +1411,18 @@
       "groups": [
         {
           "id": "8017",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 2,
-              "start": "10:30",
-              "end": "12:00"
-            },
             {
               "day": 0,
               "start": "12:30",
               "end": "14:00"
+            },
+            {
+              "day": 2,
+              "start": "10:30",
+              "end": "12:00"
             }
           ]
         }
@@ -1463,6 +1435,7 @@
       "groups": [
         {
           "id": "2640",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1481,38 +1454,41 @@
       "groups": [
         {
           "id": "61",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 4,
-              "start": "16:30",
-              "end": "18:00"
-            },
             {
               "day": 0,
               "start": "18:30",
               "end": "20:00"
+            },
+            {
+              "day": 4,
+              "start": "16:30",
+              "end": "18:00"
             }
           ]
         },
         {
           "id": "2056",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 3,
-              "start": "16:30",
-              "end": "18:00"
-            },
             {
               "day": 0,
               "start": "14:30",
               "end": "16:00"
+            },
+            {
+              "day": 3,
+              "start": "16:30",
+              "end": "18:00"
             }
           ]
         },
         {
           "id": "2517",
+          "code": "7-02",
           "type": "Lab",
           "slots": [
             {
@@ -1524,22 +1500,24 @@
         },
         {
           "id": "5778",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 3,
-              "start": "18:30",
-              "end": "20:00"
-            },
             {
               "day": 1,
               "start": "15:00",
               "end": "16:30"
+            },
+            {
+              "day": 3,
+              "start": "18:30",
+              "end": "20:00"
             }
           ]
         },
         {
           "id": "9173",
+          "code": "7-01",
           "type": "Lab",
           "slots": [
             {
@@ -1558,17 +1536,18 @@
       "groups": [
         {
           "id": "926",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 2,
-              "start": "16:30",
-              "end": "18:00"
-            },
             {
               "day": 4,
               "start": "10:30",
               "end": "12:00"
+            },
+            {
+              "day": 2,
+              "start": "16:30",
+              "end": "18:00"
             }
           ]
         }
@@ -1581,6 +1560,7 @@
       "groups": [
         {
           "id": "94",
+          "code": "2-04",
           "type": "Exercise",
           "slots": [
             {
@@ -1592,6 +1572,7 @@
         },
         {
           "id": "1592",
+          "code": "1-03",
           "type": "Lecture",
           "slots": [
             {
@@ -1608,6 +1589,7 @@
         },
         {
           "id": "3523",
+          "code": "1-02",
           "type": "Lecture",
           "slots": [
             {
@@ -1624,6 +1606,7 @@
         },
         {
           "id": "7411",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1640,6 +1623,7 @@
         },
         {
           "id": "8146",
+          "code": "2-01",
           "type": "Exercise",
           "slots": [
             {
@@ -1658,6 +1642,7 @@
       "groups": [
         {
           "id": "1421",
+          "code": "7-01",
           "type": "Lab",
           "slots": [
             {
@@ -1669,6 +1654,7 @@
         },
         {
           "id": "2061",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -1685,6 +1671,7 @@
         },
         {
           "id": "3463",
+          "code": "3-04",
           "type": "Lecture",
           "slots": [
             {
@@ -1701,6 +1688,7 @@
         },
         {
           "id": "4440",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -1717,6 +1705,7 @@
         },
         {
           "id": "4441",
+          "code": "7-02",
           "type": "Lab",
           "slots": [
             {
@@ -1728,6 +1717,7 @@
         },
         {
           "id": "10711",
+          "code": "7-03",
           "type": "Lab",
           "slots": [
             {
@@ -1739,17 +1729,18 @@
         },
         {
           "id": "10969",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 1,
-              "start": "08:30",
-              "end": "10:00"
-            },
             {
               "day": 3,
               "start": "16:30",
               "end": "18:00"
+            },
+            {
+              "day": 1,
+              "start": "08:30",
+              "end": "10:00"
             }
           ]
         }
@@ -1762,6 +1753,7 @@
       "groups": [
         {
           "id": "990",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1780,17 +1772,18 @@
       "groups": [
         {
           "id": "5461",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 1,
-              "start": "13:00",
-              "end": "14:30"
-            },
             {
               "day": 3,
               "start": "12:30",
               "end": "14:00"
+            },
+            {
+              "day": 1,
+              "start": "13:00",
+              "end": "14:30"
             }
           ]
         }
@@ -1803,6 +1796,7 @@
       "groups": [
         {
           "id": "5174",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1814,6 +1808,7 @@
         },
         {
           "id": "9289",
+          "code": "2-01",
           "type": "Exercise",
           "slots": [
             {
@@ -1832,6 +1827,7 @@
       "groups": [
         {
           "id": "30",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1850,6 +1846,7 @@
       "groups": [
         {
           "id": "5215",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1873,17 +1870,18 @@
       "groups": [
         {
           "id": "4570",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 3,
-              "start": "16:30",
-              "end": "18:00"
-            },
             {
               "day": 1,
               "start": "17:00",
               "end": "18:30"
+            },
+            {
+              "day": 3,
+              "start": "16:30",
+              "end": "18:00"
             }
           ]
         }
@@ -1896,6 +1894,7 @@
       "groups": [
         {
           "id": "46",
+          "code": "1-03",
           "type": "Lecture",
           "slots": [
             {
@@ -1912,6 +1911,7 @@
         },
         {
           "id": "1218",
+          "code": "2-01",
           "type": "Exercise",
           "slots": [
             {
@@ -1923,6 +1923,7 @@
         },
         {
           "id": "3219",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -1939,6 +1940,7 @@
         },
         {
           "id": "6057",
+          "code": "1-02",
           "type": "Lecture",
           "slots": [
             {
@@ -1955,6 +1957,7 @@
         },
         {
           "id": "10685",
+          "code": "2-02",
           "type": "Exercise",
           "slots": [
             {
@@ -1973,6 +1976,7 @@
       "groups": [
         {
           "id": "239",
+          "code": "7-01",
           "type": "Lab",
           "slots": [
             {
@@ -1984,6 +1988,7 @@
         },
         {
           "id": "401",
+          "code": "7-03",
           "type": "Lab",
           "slots": [
             {
@@ -1995,6 +2000,7 @@
         },
         {
           "id": "3193",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -2011,6 +2017,7 @@
         },
         {
           "id": "7443",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -2027,22 +2034,24 @@
         },
         {
           "id": "8837",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 4,
-              "start": "12:30",
-              "end": "14:00"
-            },
             {
               "day": 1,
               "start": "17:00",
               "end": "18:30"
+            },
+            {
+              "day": 4,
+              "start": "12:30",
+              "end": "14:00"
             }
           ]
         },
         {
           "id": "10710",
+          "code": "7-02",
           "type": "Lab",
           "slots": [
             {
@@ -2061,6 +2070,7 @@
       "groups": [
         {
           "id": "527",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2079,11 +2089,12 @@
     },
     {
       "courseId": "57493",
-      "semester": "Annual",
+      "semester": "B",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "3476",
+          "code": "1-02",
           "type": "Lecture",
           "slots": [
             {
@@ -2092,9 +2103,17 @@
               "end": "16:30"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "courseId": "57493",
+      "semester": "A",
+      "campus": "MtScopus",
+      "groups": [
         {
           "id": "8490",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2108,11 +2127,12 @@
     },
     {
       "courseId": "57533",
-      "semester": "A",
+      "semester": "Annual",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "10259",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2131,6 +2151,7 @@
       "groups": [
         {
           "id": "5505",
+          "code": "2-02",
           "type": "Exercise",
           "slots": [
             {
@@ -2139,9 +2160,17 @@
               "end": "12:00"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "courseId": "57130",
+      "semester": "Annual",
+      "campus": "MtScopus",
+      "groups": [
         {
           "id": "6575",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2155,9 +2184,17 @@
               "end": "14:00"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "courseId": "57130",
+      "semester": "B",
+      "campus": "MtScopus",
+      "groups": [
         {
           "id": "8233",
+          "code": "2-01",
           "type": "Exercise",
           "slots": [
             {
@@ -2171,11 +2208,12 @@
     },
     {
       "courseId": "57736",
-      "semester": "A",
+      "semester": "Annual",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "9632",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2194,11 +2232,12 @@
     },
     {
       "courseId": "57117",
-      "semester": "A",
+      "semester": "Annual",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "5166",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2212,11 +2251,12 @@
     },
     {
       "courseId": "57013",
-      "semester": "A",
+      "semester": "Annual",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "566",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2235,6 +2275,7 @@
       "groups": [
         {
           "id": "4978",
+          "code": "7-01",
           "type": "Lab",
           "slots": [
             {
@@ -2246,6 +2287,7 @@
         },
         {
           "id": "6431",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2264,6 +2306,7 @@
       "groups": [
         {
           "id": "9567",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2282,6 +2325,7 @@
       "groups": [
         {
           "id": "11115",
+          "code": "1-02",
           "type": "Lecture",
           "slots": [
             {
@@ -2300,6 +2344,7 @@
       "groups": [
         {
           "id": "2114",
+          "code": "2-03",
           "type": "Exercise",
           "slots": [
             {
@@ -2311,6 +2356,7 @@
         },
         {
           "id": "3293",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2327,6 +2373,7 @@
         },
         {
           "id": "4439",
+          "code": "1-03",
           "type": "Lecture",
           "slots": [
             {
@@ -2343,6 +2390,7 @@
         },
         {
           "id": "8988",
+          "code": "1-02",
           "type": "Lecture",
           "slots": [
             {
@@ -2359,6 +2407,7 @@
         },
         {
           "id": "9924",
+          "code": "2-01",
           "type": "Exercise",
           "slots": [
             {
@@ -2370,6 +2419,7 @@
         },
         {
           "id": "10320",
+          "code": "2-02",
           "type": "Exercise",
           "slots": [
             {
@@ -2388,17 +2438,18 @@
       "groups": [
         {
           "id": "7780",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 4,
-              "start": "16:30",
-              "end": "18:00"
-            },
             {
               "day": 0,
               "start": "14:30",
               "end": "16:00"
+            },
+            {
+              "day": 4,
+              "start": "16:30",
+              "end": "18:00"
             }
           ]
         }
@@ -2411,6 +2462,7 @@
       "groups": [
         {
           "id": "1518",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2429,6 +2481,7 @@
       "groups": [
         {
           "id": "10140",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2452,6 +2505,7 @@
       "groups": [
         {
           "id": "3250",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2470,6 +2524,7 @@
       "groups": [
         {
           "id": "494",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2488,6 +2543,7 @@
       "groups": [
         {
           "id": "1574",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2506,6 +2562,7 @@
       "groups": [
         {
           "id": "367",
+          "code": "7-01",
           "type": "Lab",
           "slots": [
             {
@@ -2517,6 +2574,7 @@
         },
         {
           "id": "2116",
+          "code": "7-02",
           "type": "Lab",
           "slots": [
             {
@@ -2528,6 +2586,7 @@
         },
         {
           "id": "6697",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2544,15 +2603,16 @@
         },
         {
           "id": "7444",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
-              "day": 0,
+              "day": 2,
               "start": "16:30",
               "end": "18:00"
             },
             {
-              "day": 2,
+              "day": 0,
               "start": "16:30",
               "end": "18:00"
             }
@@ -2560,6 +2620,7 @@
         },
         {
           "id": "9602",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -2583,6 +2644,7 @@
       "groups": [
         {
           "id": "6412",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2601,6 +2663,7 @@
       "groups": [
         {
           "id": "4481",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2619,6 +2682,7 @@
       "groups": [
         {
           "id": "9163",
+          "code": "1-02",
           "type": "Lecture",
           "slots": [
             {
@@ -2637,6 +2701,7 @@
       "groups": [
         {
           "id": "6981",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2655,17 +2720,18 @@
       "groups": [
         {
           "id": "11259",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
-            {
-              "day": 4,
-              "start": "12:30",
-              "end": "14:00"
-            },
             {
               "day": 2,
               "start": "16:30",
               "end": "18:00"
+            },
+            {
+              "day": 4,
+              "start": "12:30",
+              "end": "14:00"
             }
           ]
         }
@@ -2678,6 +2744,7 @@
       "groups": [
         {
           "id": "1578",
+          "code": "1-02",
           "type": "Lecture",
           "slots": [
             {
@@ -2694,6 +2761,7 @@
         },
         {
           "id": "2261",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2710,6 +2778,7 @@
         },
         {
           "id": "3177",
+          "code": "2-01",
           "type": "Exercise",
           "slots": [
             {
@@ -2721,6 +2790,7 @@
         },
         {
           "id": "7312",
+          "code": "1-03",
           "type": "Lecture",
           "slots": [
             {
@@ -2737,6 +2807,7 @@
         },
         {
           "id": "10220",
+          "code": "2-02",
           "type": "Exercise",
           "slots": [
             {
@@ -2755,6 +2826,7 @@
       "groups": [
         {
           "id": "62",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2773,6 +2845,7 @@
       "groups": [
         {
           "id": "3620",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2791,6 +2864,7 @@
       "groups": [
         {
           "id": "366",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2807,6 +2881,7 @@
         },
         {
           "id": "1304",
+          "code": "7-02",
           "type": "Lab",
           "slots": [
             {
@@ -2818,6 +2893,7 @@
         },
         {
           "id": "2113",
+          "code": "7-01",
           "type": "Lab",
           "slots": [
             {
@@ -2829,6 +2905,7 @@
         },
         {
           "id": "7440",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -2845,6 +2922,7 @@
         },
         {
           "id": "9922",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -2868,6 +2946,7 @@
       "groups": [
         {
           "id": "2669",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -2886,6 +2965,7 @@
       "groups": [
         {
           "id": "7648",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2904,6 +2984,7 @@
       "groups": [
         {
           "id": "6318",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2922,6 +3003,7 @@
       "groups": [
         {
           "id": "10842",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -2940,6 +3022,7 @@
       "groups": [
         {
           "id": "3144",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2958,6 +3041,7 @@
       "groups": [
         {
           "id": "3072",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -2969,6 +3053,7 @@
         },
         {
           "id": "3123",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -2980,6 +3065,7 @@
         },
         {
           "id": "8152",
+          "code": "3-04",
           "type": "Lecture",
           "slots": [
             {
@@ -2998,6 +3084,7 @@
       "groups": [
         {
           "id": "3602",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3009,6 +3096,7 @@
         },
         {
           "id": "6067",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3020,6 +3108,7 @@
         },
         {
           "id": "9083",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3038,6 +3127,7 @@
       "groups": [
         {
           "id": "518",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3049,6 +3139,7 @@
         },
         {
           "id": "690",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3060,6 +3151,7 @@
         },
         {
           "id": "2942",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3078,6 +3170,7 @@
       "groups": [
         {
           "id": "8715",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3096,6 +3189,7 @@
       "groups": [
         {
           "id": "9103",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -3114,6 +3208,7 @@
       "groups": [
         {
           "id": "7176",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -3132,6 +3227,7 @@
       "groups": [
         {
           "id": "7866",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -3150,6 +3246,7 @@
       "groups": [
         {
           "id": "2781",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3168,6 +3265,7 @@
       "groups": [
         {
           "id": "4928",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -3181,11 +3279,12 @@
     },
     {
       "courseId": "55687",
-      "semester": "Annual",
+      "semester": "B",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "3801",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3197,6 +3296,7 @@
         },
         {
           "id": "3886",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3207,18 +3307,8 @@
           ]
         },
         {
-          "id": "5077",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "10:30",
-              "end": "13:00"
-            }
-          ]
-        },
-        {
           "id": "5405",
+          "code": "3-04",
           "type": "Lecture",
           "slots": [
             {
@@ -3231,12 +3321,32 @@
       ]
     },
     {
+      "courseId": "55687",
+      "semester": "A",
+      "campus": "MtScopus",
+      "groups": [
+        {
+          "id": "5077",
+          "code": "3-01",
+          "type": "Lecture",
+          "slots": [
+            {
+              "day": 2,
+              "start": "10:30",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "courseId": "55802",
-      "semester": "Annual",
+      "semester": "A",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "4221",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3248,6 +3358,7 @@
         },
         {
           "id": "4698",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3258,7 +3369,8 @@
           ]
         },
         {
-          "id": "8389",
+          "id": "11020",
+          "code": "3-04",
           "type": "Lecture",
           "slots": [
             {
@@ -3267,9 +3379,17 @@
               "end": "11:00"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "courseId": "55802",
+      "semester": "B",
+      "campus": "MtScopus",
+      "groups": [
         {
-          "id": "11020",
+          "id": "8389",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3283,11 +3403,12 @@
     },
     {
       "courseId": "55803",
-      "semester": "Annual",
+      "semester": "A",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "1650",
+          "code": "1-04",
           "type": "Lecture",
           "slots": [
             {
@@ -3299,6 +3420,7 @@
         },
         {
           "id": "1651",
+          "code": "2-04",
           "type": "Exercise",
           "slots": [
             {
@@ -3310,28 +3432,7 @@
         },
         {
           "id": "1759",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "13:30",
-              "end": "16:00"
-            }
-          ]
-        },
-        {
-          "id": "4408",
-          "type": "Exercise",
-          "slots": [
-            {
-              "day": 1,
-              "start": "16:15",
-              "end": "17:00"
-            }
-          ]
-        },
-        {
-          "id": "4804",
+          "code": "1-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3343,6 +3444,7 @@
         },
         {
           "id": "5097",
+          "code": "2-02",
           "type": "Exercise",
           "slots": [
             {
@@ -3354,6 +3456,7 @@
         },
         {
           "id": "5197",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3365,6 +3468,7 @@
         },
         {
           "id": "8755",
+          "code": "2-01",
           "type": "Exercise",
           "slots": [
             {
@@ -3377,12 +3481,44 @@
       ]
     },
     {
+      "courseId": "55803",
+      "semester": "B",
+      "campus": "MtScopus",
+      "groups": [
+        {
+          "id": "4408",
+          "code": "2-03",
+          "type": "Exercise",
+          "slots": [
+            {
+              "day": 1,
+              "start": "16:15",
+              "end": "17:00"
+            }
+          ]
+        },
+        {
+          "id": "4804",
+          "code": "1-03",
+          "type": "Lecture",
+          "slots": [
+            {
+              "day": 1,
+              "start": "13:30",
+              "end": "16:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "courseId": "55804",
-      "semester": "Annual",
+      "semester": "B",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "828",
+          "code": "3-04",
           "type": "Lecture",
           "slots": [
             {
@@ -3393,29 +3529,8 @@
           ]
         },
         {
-          "id": "1297",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "13:30",
-              "end": "16:00"
-            }
-          ]
-        },
-        {
-          "id": "7233",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "12:30",
-              "end": "15:00"
-            }
-          ]
-        },
-        {
           "id": "7529",
+          "code": "3-05",
           "type": "Lecture",
           "slots": [
             {
@@ -3428,23 +3543,13 @@
       ]
     },
     {
-      "courseId": "55102",
-      "semester": "Annual",
+      "courseId": "55804",
+      "semester": "A",
       "campus": "MtScopus",
       "groups": [
         {
-          "id": "1326",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "09:30",
-              "end": "12:00"
-            }
-          ]
-        },
-        {
-          "id": "5914",
+          "id": "1297",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3455,7 +3560,39 @@
           ]
         },
         {
+          "id": "7233",
+          "code": "3-01",
+          "type": "Lecture",
+          "slots": [
+            {
+              "day": 0,
+              "start": "12:30",
+              "end": "15:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": "55102",
+      "semester": "B",
+      "campus": "MtScopus",
+      "groups": [
+        {
+          "id": "1326",
+          "code": "3-03",
+          "type": "Lecture",
+          "slots": [
+            {
+              "day": 1,
+              "start": "09:30",
+              "end": "12:00"
+            }
+          ]
+        },
+        {
           "id": "7240",
+          "code": "3-04",
           "type": "Lecture",
           "slots": [
             {
@@ -3464,9 +3601,29 @@
               "end": "13:00"
             }
           ]
+        }
+      ]
+    },
+    {
+      "courseId": "55102",
+      "semester": "A",
+      "campus": "MtScopus",
+      "groups": [
+        {
+          "id": "5914",
+          "code": "3-01",
+          "type": "Lecture",
+          "slots": [
+            {
+              "day": 2,
+              "start": "13:30",
+              "end": "16:00"
+            }
+          ]
         },
         {
           "id": "9822",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3480,11 +3637,12 @@
     },
     {
       "courseId": "55124",
-      "semester": "Annual",
+      "semester": "B",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "4569",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3495,18 +3653,8 @@
           ]
         },
         {
-          "id": "9646",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 0,
-              "start": "10:30",
-              "end": "12:00"
-            }
-          ]
-        },
-        {
           "id": "9863",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3519,12 +3667,32 @@
       ]
     },
     {
+      "courseId": "55124",
+      "semester": "A",
+      "campus": "MtScopus",
+      "groups": [
+        {
+          "id": "9646",
+          "code": "3-03",
+          "type": "Lecture",
+          "slots": [
+            {
+              "day": 0,
+              "start": "10:30",
+              "end": "12:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "courseId": "55510",
-      "semester": "Annual",
+      "semester": "A",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "160",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3536,6 +3704,7 @@
         },
         {
           "id": "349",
+          "code": "3-04",
           "type": "Lecture",
           "slots": [
             {
@@ -3547,6 +3716,7 @@
         },
         {
           "id": "2270",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3555,9 +3725,17 @@
               "end": "12:00"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "courseId": "55510",
+      "semester": "B",
+      "campus": "MtScopus",
+      "groups": [
         {
           "id": "9916",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3571,11 +3749,12 @@
     },
     {
       "courseId": "55506",
-      "semester": "Annual",
+      "semester": "A",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "874",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3587,6 +3766,7 @@
         },
         {
           "id": "7218",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3595,9 +3775,17 @@
               "end": "18:00"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "courseId": "55506",
+      "semester": "B",
+      "campus": "MtScopus",
+      "groups": [
         {
           "id": "10081",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3611,11 +3799,12 @@
     },
     {
       "courseId": "55312",
-      "semester": "Annual",
+      "semester": "B",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "2145",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3624,9 +3813,17 @@
               "end": "12:00"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "courseId": "55312",
+      "semester": "A",
+      "campus": "MtScopus",
+      "groups": [
         {
           "id": "10640",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3640,11 +3837,12 @@
     },
     {
       "courseId": "55945",
-      "semester": "Annual",
+      "semester": "A",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "3825",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3655,7 +3853,27 @@
           ]
         },
         {
+          "id": "5382",
+          "code": "3-02",
+          "type": "Lecture",
+          "slots": [
+            {
+              "day": 1,
+              "start": "13:30",
+              "end": "16:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": "55945",
+      "semester": "B",
+      "campus": "MtScopus",
+      "groups": [
+        {
           "id": "5064",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3666,18 +3884,8 @@
           ]
         },
         {
-          "id": "5382",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 1,
-              "start": "13:30",
-              "end": "16:00"
-            }
-          ]
-        },
-        {
           "id": "9636",
+          "code": "3-04",
           "type": "Lecture",
           "slots": [
             {
@@ -3691,11 +3899,12 @@
     },
     {
       "courseId": "55518",
-      "semester": "Annual",
+      "semester": "A",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "2214",
+          "code": "1-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3706,29 +3915,8 @@
           ]
         },
         {
-          "id": "4142",
-          "type": "Lecture",
-          "slots": [
-            {
-              "day": 2,
-              "start": "14:30",
-              "end": "17:00"
-            }
-          ]
-        },
-        {
-          "id": "7627",
-          "type": "Exercise",
-          "slots": [
-            {
-              "day": 2,
-              "start": "17:30",
-              "end": "19:00"
-            }
-          ]
-        },
-        {
           "id": "9328",
+          "code": "2-01",
           "type": "Exercise",
           "slots": [
             {
@@ -3741,12 +3929,44 @@
       ]
     },
     {
+      "courseId": "55518",
+      "semester": "B",
+      "campus": "MtScopus",
+      "groups": [
+        {
+          "id": "4142",
+          "code": "1-02",
+          "type": "Lecture",
+          "slots": [
+            {
+              "day": 2,
+              "start": "14:30",
+              "end": "17:00"
+            }
+          ]
+        },
+        {
+          "id": "7627",
+          "code": "2-02",
+          "type": "Exercise",
+          "slots": [
+            {
+              "day": 2,
+              "start": "17:30",
+              "end": "19:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "courseId": "55527",
       "semester": "B",
       "campus": "MtScopus",
       "groups": [
         {
           "id": "10457",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3765,6 +3985,7 @@
       "groups": [
         {
           "id": "2803",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3783,6 +4004,7 @@
       "groups": [
         {
           "id": "5376",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -3801,6 +4023,7 @@
       "groups": [
         {
           "id": "3776",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3819,6 +4042,7 @@
       "groups": [
         {
           "id": "4202",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3830,6 +4054,7 @@
         },
         {
           "id": "5454",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3841,6 +4066,7 @@
         },
         {
           "id": "6441",
+          "code": "3-04",
           "type": "Lecture",
           "slots": [
             {
@@ -3852,6 +4078,7 @@
         },
         {
           "id": "8279",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3870,6 +4097,7 @@
       "groups": [
         {
           "id": "1161",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3881,6 +4109,7 @@
         },
         {
           "id": "9177",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3892,6 +4121,7 @@
         },
         {
           "id": "10914",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3910,6 +4140,7 @@
       "groups": [
         {
           "id": "7522",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3928,6 +4159,7 @@
       "groups": [
         {
           "id": "7354",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
@@ -3939,6 +4171,7 @@
         },
         {
           "id": "10480",
+          "code": "3-03",
           "type": "Lecture",
           "slots": [
             {
@@ -3950,6 +4183,7 @@
         },
         {
           "id": "11196",
+          "code": "3-02",
           "type": "Lecture",
           "slots": [
             {
@@ -3968,6 +4202,7 @@
       "groups": [
         {
           "id": "4144",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -3986,6 +4221,7 @@
       "groups": [
         {
           "id": "3377",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -4004,6 +4240,7 @@
       "groups": [
         {
           "id": "9737",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -4022,6 +4259,7 @@
       "groups": [
         {
           "id": "1162",
+          "code": "4-01",
           "type": "Seminar",
           "slots": [
             {
@@ -4040,6 +4278,7 @@
       "groups": [
         {
           "id": "495",
+          "code": "3-01",
           "type": "Lecture",
           "slots": [
             {
