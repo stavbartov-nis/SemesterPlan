@@ -1,11 +1,16 @@
 import React from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
-import { MOCK_COURSES, MOCK_OFFERINGS } from '../../data/huji-mock-catalog';
+import { MOCK_COURSES, getOfferingsForSemester } from '../../data/huji-mock-catalog';
 import { calculateRequirementProgress } from '../../engine/accounting';
 import { validateScheduleConflicts } from '../../engine/validation';
 
+const DAY_NAMES = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי'];
+
+const courseName = (courseId: string): string =>
+  MOCK_COURSES.find(c => c.id === courseId)?.name ?? courseId;
+
 export const Analysis: React.FC = () => {
-  const { selectedTrack, plannedCourses, historyCourseIds } = usePlannerStore();
+  const { selectedTrack, plannedCourses, historyCourseIds, targetSemester } = usePlannerStore();
 
   if (!selectedTrack) return null;
 
@@ -16,7 +21,7 @@ export const Analysis: React.FC = () => {
     MOCK_COURSES
   );
 
-  const conflictReport = validateScheduleConflicts(plannedCourses, MOCK_OFFERINGS);
+  const conflictReport = validateScheduleConflicts(plannedCourses, getOfferingsForSemester(targetSemester));
 
   return (
     <div className="analysis-sidebar">
@@ -30,7 +35,7 @@ export const Analysis: React.FC = () => {
           <div className="conflict-list">
             {conflictReport.conflicts.map((c, i) => (
               <div key={i} className="conflict-alert">
-                חפיפה: {c.courseIdA} & {c.courseIdB}
+                חפיפה ביום {DAY_NAMES[c.day]}: {courseName(c.courseIdA)} ↔ {courseName(c.courseIdB)} ({c.start}–{c.end})
               </div>
             ))}
           </div>

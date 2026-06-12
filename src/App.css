@@ -365,6 +365,17 @@
   gap: 4px;
 }
 
+.course-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  color: #718096;
+  background: #edf2f7;
+  border-radius: 4px;
+  padding: 0 4px;
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
 .done-check {
   color: #48bb78;
   font-weight: 700;
@@ -1252,5 +1263,69 @@
 .sidebar-toggle:hover {
   background: #e2e8f0;
   color: #2d3748;
+}
+
+/* ── Provenance badge (header) ─────────────────────────────── */
+.provenance-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #a0aec0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  white-space: nowrap;
+  cursor: default;
+}
+
+/* ── Semester picker (segmented control) ───────────────────── */
+.semester-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.semester-picker-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4a5568;
+  flex-shrink: 0;
+}
+
+.avail-days.semester-picker {
+  display: inline-flex;
+  gap: 0;
+  flex-wrap: nowrap;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.semester-picker .day-chip {
+  border: none;
+  border-radius: 0;
+  padding: 0.4rem 1.1rem;
+  font-weight: 600;
+}
+
+.semester-picker .day-chip + .day-chip {
+  border-inline-start: 1px solid #cbd5e0;
+}
+
+.semester-picker .day-chip:first-child {
+  border-start-start-radius: 7px;
+  border-end-start-radius: 7px;
+}
+
+.semester-picker .day-chip:last-child {
+  border-start-end-radius: 7px;
+  border-end-end-radius: 7px;
+}
+
+.semester-picker .day-chip.on {
+  background: #3182ce;
+  color: #fff;
 }
 

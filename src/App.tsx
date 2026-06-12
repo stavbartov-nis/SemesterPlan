@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { usePlannerStore } from './store/usePlannerStore';
 import { MOCK_TRACKS, MOCK_COURSES } from './data/huji-mock-catalog';
 import { WizardStepper } from './components/wizard/WizardStepper';
+import catalogData from './data/huji-catalog-2026.json';
 import './App.css';
 
 function App() {
@@ -26,10 +27,20 @@ function App() {
         .reduce((sum, c) => sum + c.credits, 0)
     : 0;
 
+  // Provenance: official catalog metadata (year תשפ"ו = meta.year 2026)
+  const catalogUpdated = new Date(catalogData.meta.generated).toLocaleDateString('he-IL', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+
   return (
     <div className="app-shell">
       <header className="app-top-bar">
         <h1 className="app-title">מתכנן לימודים</h1>
+        <span className="provenance-badge" title={`עודכן ${catalogUpdated}`}>
+          נתוני השנתון הרשמי · תשפ"ו
+        </span>
 
         <div className="header-center">
           {totalCredits > 0 && (
@@ -51,7 +62,12 @@ function App() {
           <span className="track-name">{selectedTrack?.name}</span>
           <button
             className="reset-btn"
-            onClick={() => { localStorage.clear(); window.location.reload(); }}
+            onClick={() => {
+              if (confirm('לאפס את כל התוכנית והנתונים?')) {
+                localStorage.clear();
+                window.location.reload();
+              }
+            }}
           >
             איפוס
           </button>

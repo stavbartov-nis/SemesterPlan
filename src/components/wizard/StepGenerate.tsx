@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
 import { suggestBundles, SuggestedBundle } from '../../engine/generator';
-import { MOCK_COURSES, MOCK_OFFERINGS } from '../../data/huji-mock-catalog';
+import { MOCK_COURSES, getOfferingsForSemester } from '../../data/huji-mock-catalog';
 import { getCourseNameHe } from '../../data/course-names-he';
 import { Calendar } from '../builder/Calendar';
 import { Analysis } from '../shared/Analysis';
 import { validateScheduleConflicts } from '../../engine/validation';
+import { CourseOffering } from '../../types';
 
 const DAY_ABBR = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳'];
 const DAY_FULL = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי'];
@@ -16,10 +17,10 @@ const TYPE_HE: Record<string, string> = {
   Elective: 'בחירה',
 };
 
-function bundleActiveDays(bundle: SuggestedBundle): Set<number> {
+function bundleActiveDays(bundle: SuggestedBundle, offerings: CourseOffering[]): Set<number> {
   const days = new Set<number>();
   bundle.courses.forEach(pc => {
-    const offering = MOCK_OFFERINGS.find(o => o.courseId === pc.courseId);
+    const offering = offerings.find(o => o.courseId === pc.courseId);
     if (!offering) return;
     pc.selectedGroupIds.forEach(gid => {
       offering.groups.find(g => g.id === gid)?.slots.forEach(s => days.add(s.day));
@@ -29,8 +30,10 @@ function bundleActiveDays(bundle: SuggestedBundle): Set<number> {
 }
 
 export const StepGenerate: React.FC = () => {
-  const { plannedCourses, selectedTrack, preferences, historyCourseIds, setPlannedCourses } =
+  const { plannedCourses, selectedTrack, preferences, historyCourseIds, setPlannedCourses, targetSemester } =
     usePlannerStore();
+
+  const offerings = getOfferingsForSemester(targetSemester);
 
   const [bundles,     setBundles]     = useState<SuggestedBundle[]>([]);
   const [appliedId,   setAppliedId]   = useState<string | null>(null);
@@ -42,7 +45,7 @@ export const StepGenerate: React.FC = () => {
   const handleGenerate = () => {
     if (!selectedTrack) return;
     const result = suggestBundles(
-      anchors, MOCK_COURSES, MOCK_OFFERINGS, selectedTrack, preferences, historyCourseIds
+      anchors, MOCK_COURSES, offerings, selectedTrack, preferences, historyCourseIds
     );
     setBundles(result);
     setGenerated(true);
@@ -55,8 +58,13 @@ export const StepGenerate: React.FC = () => {
   };
 
   const conflictCount = appliedId
-    ? validateScheduleConflicts(plannedCourses, MOCK_OFFERINGS).conflicts.length
+    ? validateScheduleConflicts(plannedCourses, offerings).conflicts.length
     : 0;
+
+  const allBundlesEmpty =
+    bundles.length > 0 &&
+    (bundles.every(b => b.courses.filter(c => !c.isAnchor).length === 0) ||
+      bundles.every(b => b.totalCredits === 0));
 
   return (
     <div className="step-generate">
@@ -99,7 +107,9 @@ export const StepGenerate: React.FC = () => {
                 <span>
                   {anchors.length === 0
                     ? 'אין קורסים קבועים — המתכנן ימלא בחופשיות'
-                    : `${anchors.length} קורס${anchors.length !== 1 ? 'ים' : ''} נעול${anchors.length !== 1 ? 'ים' : ''}`}
+                    : anchors.length === 1
+                      ? 'קורס אחד נעול'
+                      : `${anchors.length} קורסים נעולים`}
                 </span>
               </div>
               <div className="ready-item">
@@ -107,7 +117,9 @@ export const StepGenerate: React.FC = () => {
                 <span>
                   {historyCourseIds.length === 0
                     ? 'לא סומנו קורסים שהושלמו'
-                    : `${historyCourseIds.length} קורס${historyCourseIds.length !== 1 ? 'ים' : ''} שהושלמו הוחרגו`}
+                    : historyCourseIds.length === 1
+                      ? 'קורס אחד שהושלם הוחרג'
+                      : `${historyCourseIds.length} קורסים שהושלמו הוחרגו`}
                 </span>
               </div>
               <div className="ready-item">
@@ -135,12 +147,35 @@ export const StepGenerate: React.FC = () => {
           </div>
         )}
 
+        {/* ── מצב ריק — לא נמצאו קורסים ── */}
+        {generated && !appliedId && allBundlesEmpty && (
+          <div className="gen-empty-state ready-summary">
+            <h3>לא נמצאו קורסים מתאימים לאילוצים שבחרת — נסי להוסיף ימים פנויים או להרחיב את חלון הזמן</h3>
+            <div className="ready-items">
+              <div className="ready-item">
+                <span className="ready-icon">📅</span>
+                <span>
+                  {preferences.allowedDays.length === 0
+                    ? 'לא נבחרו ימים'
+                    : preferences.allowedDays.length === 1
+                      ? 'נבחר יום אחד בלבד'
+                      : `נבחרו ${preferences.allowedDays.length} ימים`}
+                </span>
+              </div>
+              <div className="ready-item">
+                <span className="ready-icon">⏰</span>
+                <span>חלון הזמן: {preferences.timeWindow.start} – {preferences.timeWindow.end}</span>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ── כרטיסי תוכניות ── */}
-        {generated && !appliedId && bundles.length > 0 && (
+        {generated && !appliedId && bundles.length > 0 && !allBundlesEmpty && (
           <div className="bundles-section">
             <div className="bundles-grid-large">
               {bundles.map(bundle => {
-                const activeDays = bundleActiveDays(bundle);
+                const activeDays = bundleActiveDays(bundle, offerings);
                 return (
                   <div key={bundle.id} className="bundle-card-large">
                     <div className="bundle-card-top">
@@ -167,6 +202,7 @@ export const StepGenerate: React.FC = () => {
                           <li key={pc.courseId} className={pc.isAnchor ? 'is-anchor' : ''}>
                             {pc.isAnchor && <span className="pin">📌</span>}
                             <span className="bc-name">{c ? getCourseNameHe(c.id, c.name) : pc.courseId}</span>
+                            <span className="course-code">{pc.courseId}</span>
                             <span className="bc-credits">{c?.credits} נ"ז</span>
                           </li>
                         );
@@ -187,9 +223,9 @@ export const StepGenerate: React.FC = () => {
         {appliedId && (
           <div className="applied-plan">
             <div className="schedule-header">
-              <h3>לוח הזמנים שלך לסמסטר</h3>
+              <h3>לוח הזמנים שלך — סמסטר {targetSemester === 'A' ? 'א׳' : 'ב׳'}</h3>
               {conflictCount > 0
-                ? <span className="conflict-badge">{conflictCount} התנגשות{conflictCount !== 1 ? 'ות' : ''}</span>
+                ? <span className="conflict-badge">{conflictCount === 1 ? 'התנגשות אחת' : `${conflictCount} התנגשויות`}</span>
                 : <span className="no-conflict-badge">אין התנגשויות</span>
               }
             </div>

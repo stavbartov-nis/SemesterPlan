@@ -9,9 +9,10 @@
  *   - sugToar === '001' (Bachelor's only — drops Master's and PhD courses)
  *   - isLearning === 1 (active courses only)
  *
- * Output is English-first: course names, department names, and meeting
- * types come from the API's English fields, with Hebrew kept only as a
- * fallback when an English string is missing.
+ * Course names are Hebrew-first (matching the app's RTL UI) with English
+ * kept in `nameEn`. Department names and meeting types use the API's
+ * English fields. Offerings are split per semester: each group belongs to
+ * one period, so a course running in both semesters yields two offerings.
  *
  * Usage: node scripts/scrape-shnaton.js
  * Requires Node 18+ (native fetch).
@@ -92,6 +93,14 @@ function pickEnglish(localized) {
   return (localized.he || '').trim();
 }
 
+/** Prefer Hebrew; fall back to English if Hebrew is missing/empty. */
+function pickHebrew(localized) {
+  if (!localized) return '';
+  const he = (localized.he || '').trim();
+  if (he) return he;
+  return (localized.en || '').trim();
+}
+
 /** milliseconds-from-midnight → "HH:MM" */
 function msToTime(ms) {
   if (ms == null) return null;
@@ -101,13 +110,20 @@ function msToTime(ms) {
   return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
-/** API coursePeriod number → our Semester type */
-function toSemester(period) {
+/**
+ * GROUP-level period → our Semester type.
+ *
+ * NOTE: group.period uses a DIFFERENT numbering than course-level
+ * coursePeriod (where 1=A, 2=B, 3=A-or-B, 4=Summer, 5=Annual).
+ * Group periodName values observed in the live API:
+ *   1 = "סמסטר א'", 2 = "סמסטר ב'", 3 = "סמסטר קיץ", 4 = "שנתי"
+ */
+function groupPeriodToSemester(period) {
   if (period === 1) return 'A';
   if (period === 2) return 'B';
-  if (period === 3) return 'Annual';
-  if (period === 4) return 'Summer';
-  return 'A';
+  if (period === 3) return 'Summer';
+  if (period === 4) return 'Annual';
+  return null;
 }
 
 /** API campus name → our Campus type */
@@ -238,15 +254,29 @@ async function main() {
   let noScheduleCount = 0;
   const missingSchedule = [];
 
+  // Prereq codes that point outside the scraped catalog (e.g. math/stats
+  // service courses) or to courses with no schedule can never be satisfied
+  // in-app — the engine would mark the course permanently unsuggestable.
+  // Keep only prereqs the user can actually take or mark as completed.
+  const offeredCodes = new Set();
+  for (const raw of allRaw) {
+    const groups = sessionsByCourseId[raw.id] || [];
+    if (groups.some((g) => (g.studySessions || []).some((s) => s.startTime != null))) {
+      offeredCodes.add(raw.code);
+    }
+  }
+
   for (const raw of allRaw) {
     const code = raw.code;
 
     courses.push({
       id: code,
-      name: pickEnglish(raw.name),
+      // Hebrew-first to match the app's Hebrew/RTL UI; English kept alongside.
+      name: pickHebrew(raw.name),
+      nameEn: pickEnglish(raw.name),
       credits: raw.academicPoints ?? 0,
       department: pickEnglish(raw.departmentName),
-      prerequisites: prereqMap[code] ?? [],
+      prerequisites: (prereqMap[code] ?? []).filter((p) => offeredCodes.has(p)),
       // statusCourseCode = 1 looks like a core / required-track tag,
       // 2 looks like an elective. We surface it so downstream code
       // (tracks, UI) can use it to bucket courses.
@@ -267,8 +297,13 @@ async function main() {
       if (campusName) { campus = toCampus(campusName); break; }
     }
 
-    const meetingGroups = [];
+    // A course can run in more than one semester (coursePeriod 3 = "Sem A or
+    // B", 5 = Annual). Each group belongs to exactly one period, so we emit
+    // one offering per semester containing only that semester's groups.
+    const groupsBySemester = new Map();
     for (const g of groups) {
+      const semester = groupPeriodToSemester(g.period);
+      if (!semester) continue;
       const sessions = g.studySessions || [];
       const slots = sessions
         .filter((s) => s.startTime != null && s.endTime != null)
@@ -278,25 +313,32 @@ async function main() {
           end: msToTime(s.endTime),
         }));
       if (!slots.length) continue;
-      meetingGroups.push({
+      const meetingGroup = {
         id: String(g.id),
+        // Shnaton group code like "1-01" — first number ties exercise
+        // sections to their lecture section. Kept for future pairing logic.
+        code: g.code ?? null,
         type: toMeetingType(g.studySessionTypeName),
         slots,
-      });
+      };
+      if (!groupsBySemester.has(semester)) groupsBySemester.set(semester, []);
+      groupsBySemester.get(semester).push(meetingGroup);
     }
 
-    if (!meetingGroups.length) {
+    if (!groupsBySemester.size) {
       noScheduleCount++;
       missingSchedule.push({ code, name: pickEnglish(raw.name) });
       continue;
     }
 
-    offerings.push({
-      courseId: code,
-      semester: toSemester(raw.coursePeriod),
-      campus,
-      groups: meetingGroups,
-    });
+    for (const [semester, meetingGroups] of groupsBySemester) {
+      offerings.push({
+        courseId: code,
+        semester,
+        campus,
+        groups: meetingGroups,
+      });
+    }
   }
 
   // 5. Save

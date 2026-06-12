@@ -35,12 +35,12 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
     <div className="step-layout single-col">
       <div className="step-header">
         <h2>אילוצי זמן</h2>
-        <p className="step-desc">ספר למתכנן מתי אתה פנוי ומה המטרות שלך לסמסטר זה.</p>
+        <p className="step-desc">ספרי למתכנן מתי את פנויה ומה המטרות שלך לסמסטר זה.</p>
       </div>
 
       {/* ── כרטיס זמינות ── */}
       <section className="constraints-section">
-        <h3>מתי אני פנוי?</h3>
+        <h3>מתי אני פנויה?</h3>
 
         <div className="availability-card">
           <div className="avail-days">
@@ -134,12 +134,12 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
               })
             }
           />
-          אפשר חפיפות קטנות בלוח הזמנים
+          לאפשר חפיפות קטנות בלוח הזמנים
         </label>
       </section>
 
       <button className="next-btn" onClick={onNext}>
-        ← צור תוכניות
+        ← צרי תוכניות
       </button>
     </div>
   );
