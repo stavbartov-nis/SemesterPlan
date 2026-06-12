@@ -45,11 +45,35 @@ export function suggestBundles(
   ));
 
   // 2. Compact Schedule: Group courses on fewest possible days
-  bundles.push(generateCompactBundle(
-    anchors, catalog, offerings, track, prefs, historyIds
+  bundles.push(generateBundle(
+    "compact-schedule",
+    "מערכת מרוכזת",
+    "מרכז את הקורסים במספר הימים הקטן ביותר כדי לפנות לך זמן חופשי.",
+    anchors, catalog, offerings, track, prefs, historyIds,
+    (a, b) => {
+      const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
+      return typePriority[a.type] - typePriority[b.type];
+    },
+    // Prefer groups whose slots land on days the bundle already uses
+    (bundleCourses) => {
+      const occupiedDays = new Set<number>();
+      bundleCourses.forEach(bc => {
+        const off = offerings.find(o => o.courseId === bc.courseId);
+        bc.selectedGroupIds.forEach(gid => {
+          const g = off?.groups.find(group => group.id === gid);
+          g?.slots.forEach(s => occupiedDays.add(s.day));
+        });
+      });
+      return (a, b) => {
+        const daysA = a.slots.filter(s => !occupiedDays.has(s.day)).length;
+        const daysB = b.slots.filter(s => !occupiedDays.has(s.day)).length;
+        return daysA - daysB;
+      };
+    }
   ));
 
-  // 3. No Early Mornings: Avoids slots before 10:00
+  // 3. No Early Mornings: avoids slots before 10:00 and leans toward
+  // afternoon groups, so its schedule visibly differs from the others.
   const noEarlyPrefs = {
     ...prefs,
     timeWindow: {
@@ -60,11 +84,17 @@ export function suggestBundles(
   bundles.push(generateBundle(
     "no-early-mornings",
     "בלי בקרים מוקדמים",
-    "נמנע משיעורים שמתחילים לפני 10:00 כדי שתוכלי לפתוח את הבוקר ברוגע.",
+    "נמנע משיעורים שמתחילים לפני 10:00 ומעדיף קבוצות מאוחרות יותר ביום.",
     anchors, catalog, offerings, track, noEarlyPrefs, historyIds,
     (a, b) => {
       const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
       return typePriority[a.type] - typePriority[b.type];
+    },
+    // Prefer groups whose earliest slot starts latest in the day
+    () => (a, b) => {
+      const earliest = (g: MeetingGroup) =>
+        g.slots.reduce((min, s) => (s.start < min ? s.start : min), '23:59');
+      return earliest(b).localeCompare(earliest(a));
     }
   ));
 
@@ -73,13 +103,52 @@ export function suggestBundles(
 
 interface Candidate {
   course: Course;
+  componentId: string;
   type: 'Mandatory' | 'Core' | 'Elective';
 }
 
+/** Builds a group comparator from the current bundle state, re-evaluated per course. */
+type GroupRankFactory = (bundleCourses: PlannedCourse[]) => (a: MeetingGroup, b: MeetingGroup) => number;
+
 /**
- * Anchors arrive from the store with empty selectedGroupIds; without a group
+ * Registering for a course means taking one group of EACH meeting type it
+ * offers (lecture + exercise/lab where they exist) — a lecture without its
+ * tirgul is not a valid registration. Picks one mutually-compatible group
+ * per type, or null if the set cannot be completed.
+ *
+ * `rank` optionally orders the candidates within each type (used by the
+ * compact bundle to prefer already-occupied days).
+ */
+function findBestGroupSet(
+  groups: MeetingGroup[],
+  currentBundle: PlannedCourse[],
+  offerings: CourseOffering[],
+  prefs: UserPreferences,
+  rank?: (a: MeetingGroup, b: MeetingGroup) => number
+): MeetingGroup[] | null {
+  // Lecture chosen first — it usually has the most alternatives and anchors
+  // the rest of the set.
+  const types = [...new Set(groups.map(g => g.type))]
+    .sort((a, b) => (a === 'Lecture' ? -1 : b === 'Lecture' ? 1 : 0));
+
+  const chosen: MeetingGroup[] = [];
+  for (const type of types) {
+    const candidates = groups.filter(g => g.type === type);
+    if (rank) candidates.sort(rank);
+    const valid = candidates.find(g =>
+      isGroupValid(g, currentBundle, offerings, prefs) &&
+      !chosen.some(c => groupsOverlap(g, c))
+    );
+    if (!valid) return null;
+    chosen.push(valid);
+  }
+  return chosen.length ? chosen : null;
+}
+
+/**
+ * Anchors arrive from the store with empty selectedGroupIds; without groups
  * they render no calendar events and are invisible to conflict checks.
- * Assign each group-less anchor its first valid group up front.
+ * Assign each group-less anchor a full valid group set up front.
  */
 function scheduleAnchors(
   anchors: PlannedCourse[],
@@ -93,9 +162,9 @@ function scheduleAnchors(
       continue;
     }
     const offering = offerings.find(o => o.courseId === anchor.courseId);
-    const group = offering && findBestGroup(offering.groups, scheduled, offerings, prefs);
-    scheduled.push(group
-      ? { ...anchor, selectedGroupIds: [group.id] }
+    const set = offering && findBestGroupSet(offering.groups, scheduled, offerings, prefs);
+    scheduled.push(set
+      ? { ...anchor, selectedGroupIds: set.map(g => g.id) }
       : { ...anchor });
   }
   return scheduled;
@@ -111,36 +180,46 @@ function generateBundle(
   track: DegreeTrack,
   prefs: UserPreferences,
   historyIds: string[],
-  sortFn: (a: Candidate, b: Candidate) => number
+  sortFn: (a: Candidate, b: Candidate) => number,
+  groupRankFactory?: GroupRankFactory
 ): SuggestedBundle {
   let bundleCourses = scheduleAnchors(anchors, offerings, prefs);
   const candidates = getCandidates(catalog, track, historyIds, bundleCourses);
   candidates.sort(sortFn);
 
-  // Track current credits by type
-  const currentCredits = { Mandatory: 0, Core: 0, Elective: 0 };
+  // Credits tracked per (component, basket type) so each degree column has
+  // its own semester target (e.g. כלכלה חובה vs מנהל עסקים חובה).
+  const currentCredits: Record<string, number> = {};
+  const creditKey = (componentId: string, type: string) => `${componentId}:${type}`;
+  const targetFor = (componentId: string, type: Candidate['type']) =>
+    prefs.targetCreditsByComponent[componentId]?.[type] ?? 0;
+
   bundleCourses.forEach(pc => {
     const course = catalog.find(c => c.id === pc.courseId);
     if (!course) return;
-    const type = getCourseType(course.id, track);
-    if (type) currentCredits[type] += course.credits;
+    const basket = getCourseBasket(course.id, track);
+    if (basket) {
+      const key = creditKey(basket.componentId, basket.type);
+      currentCredits[key] = (currentCredits[key] ?? 0) + course.credits;
+    }
   });
 
   for (const candidate of candidates) {
-    // Check if we've already met the target for this type
-    if (currentCredits[candidate.type] >= prefs.targetCreditsByType[candidate.type]) continue;
+    const key = creditKey(candidate.componentId, candidate.type);
+    if ((currentCredits[key] ?? 0) >= targetFor(candidate.componentId, candidate.type)) continue;
 
     const offering = offerings.find(o => o.courseId === candidate.course.id);
     if (!offering) continue;
 
-    const validGroup = findBestGroup(offering.groups, bundleCourses, offerings, prefs);
-    if (validGroup) {
+    const rank = groupRankFactory?.(bundleCourses);
+    const groupSet = findBestGroupSet(offering.groups, bundleCourses, offerings, prefs, rank);
+    if (groupSet) {
       bundleCourses.push({
         courseId: candidate.course.id,
         isAnchor: false,
-        selectedGroupIds: [validGroup.id]
+        selectedGroupIds: groupSet.map(g => g.id)
       });
-      currentCredits[candidate.type] += candidate.course.credits;
+      currentCredits[key] = (currentCredits[key] ?? 0) + candidate.course.credits;
     }
 
     // Limit bundle size for readability (cap at 8 instead of 6 to allow more credits)
@@ -156,83 +235,15 @@ function generateBundle(
   };
 }
 
-function generateCompactBundle(
-  anchors: PlannedCourse[],
-  catalog: Course[],
-  offerings: CourseOffering[],
-  track: DegreeTrack,
-  prefs: UserPreferences,
-  historyIds: string[]
-): SuggestedBundle {
-  let bundleCourses = scheduleAnchors(anchors, offerings, prefs);
-  const candidates = getCandidates(catalog, track, historyIds, bundleCourses);
-
-  // Track current credits by type
-  const currentCredits = { Mandatory: 0, Core: 0, Elective: 0 };
-  bundleCourses.forEach(pc => {
-    const course = catalog.find(c => c.id === pc.courseId);
-    if (!course) return;
-    const type = getCourseType(course.id, track);
-    if (type) currentCredits[type] += course.credits;
-  });
-
-  // Sort by priority first
-  candidates.sort((a, b) => {
-    const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
-    return typePriority[a.type] - typePriority[b.type];
-  });
-
-  for (const candidate of candidates) {
-    // Check if we've already met the target for this type
-    if (currentCredits[candidate.type] >= prefs.targetCreditsByType[candidate.type]) continue;
-
-    const offering = offerings.find(o => o.courseId === candidate.course.id);
-    if (!offering) continue;
-
-    // For compact, we prefer groups that use already occupied days
-    const occupiedDays = new Set<number>();
-    bundleCourses.forEach(bc => {
-      const off = offerings.find(o => o.courseId === bc.courseId);
-      bc.selectedGroupIds.forEach(gid => {
-        const g = off?.groups.find(group => group.id === gid);
-        g?.slots.forEach(s => occupiedDays.add(s.day));
-      });
-    });
-
-    const groups = offering.groups.filter(g => isGroupValid(g, bundleCourses, offerings, prefs));
-    
-    // Sort groups by how many NEW days they add (prefer 0)
-    groups.sort((a, b) => {
-      const daysA = a.slots.filter(s => !occupiedDays.has(s.day)).length;
-      const daysB = b.slots.filter(s => !occupiedDays.has(s.day)).length;
-      return daysA - daysB;
-    });
-
-    if (groups.length > 0) {
-      bundleCourses.push({
-        courseId: candidate.course.id,
-        isAnchor: false,
-        selectedGroupIds: [groups[0].id]
-      });
-      currentCredits[candidate.type] += candidate.course.credits;
-    }
-
-    if (bundleCourses.length >= 8) break;
-  }
-
-  return {
-    id: 'compact-schedule',
-    name: 'מערכת מרוכזת',
-    courses: bundleCourses,
-    rationale: 'מרכז את הקורסים במספר הימים הקטן ביותר כדי לפנות לך זמן חופשי.',
-    totalCredits: calculateTotalCredits(bundleCourses, catalog)
-  };
-}
-
-function getCourseType(courseId: string, track: DegreeTrack): 'Mandatory' | 'Core' | 'Elective' | undefined {
+function getCourseBasket(
+  courseId: string,
+  track: DegreeTrack
+): { componentId: string; type: 'Mandatory' | 'Core' | 'Elective' } | undefined {
   for (const comp of track.components) {
     for (const basket of comp.baskets) {
-      if (basket.courseIds.includes(courseId)) return basket.type;
+      if (basket.courseIds.includes(courseId)) {
+        return { componentId: comp.id, type: basket.type };
+      }
     }
   }
   return undefined;
@@ -251,31 +262,22 @@ function getCandidates(
     comp.baskets.forEach(basket => {
       basket.courseIds.forEach(courseId => {
         if (historyIds.includes(courseId) || currentIds.includes(courseId)) return;
-        
+
         const course = catalog.find(c => c.id === courseId);
         if (!course) return;
 
         // Rule 1: Prerequisites
-        const prereqsMet = course.prerequisites.every(p => 
+        const prereqsMet = course.prerequisites.every(p =>
           historyIds.includes(p) || currentIds.includes(p)
         );
         if (!prereqsMet) return;
 
-        candidates.push({ course, type: basket.type });
+        candidates.push({ course, componentId: comp.id, type: basket.type });
       });
     });
   });
 
   return candidates;
-}
-
-function findBestGroup(
-  groups: MeetingGroup[],
-  currentBundle: PlannedCourse[],
-  offerings: CourseOffering[],
-  prefs: UserPreferences
-): MeetingGroup | undefined {
-  return groups.find(g => isGroupValid(g, currentBundle, offerings, prefs));
 }
 
 function isGroupValid(

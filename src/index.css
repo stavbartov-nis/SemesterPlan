@@ -1,7 +1,65 @@
+/* ══════════════════════════════════════════════════════════════
+   Design tokens
+   ══════════════════════════════════════════════════════════════ */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* surfaces */
+  --bg:            #f6f4ef;
+  --surface:       #ffffff;
+  --surface-2:     #faf9f5;
+  --border:        #e7e3d9;
+  --border-strong: #d8d3c5;
+
+  /* accent — deep indigo / violet */
+  --accent:             #4f46e5;
+  --accent-strong:      #4338ca;
+  --accent-soft:        #edecfc;
+  --accent-soft-border: #d5d2f7;
+  --grad-accent:        linear-gradient(135deg, #6366f1 0%, #7c5ce8 55%, #8b5cf6 100%);
+
+  /* text */
+  --text:       #1e1b2e;
+  --text-muted: #6b6880;
+  --text-faint: #9b98ad;
+
+  /* semantic */
+  --ok:          #0f9b6c;
+  --ok-strong:   #0b7a55;
+  --ok-soft:     #e2f6ed;
+  --warn:        #b45309;
+  --warn-soft:   #fdf3e2;
+  --warn-border: #f3ddb0;
+  --danger:      #dc2626;
+  --danger-soft: #fdeaea;
+
+  /* header */
+  --header-bg: linear-gradient(120deg, #16142b 0%, #221d49 55%, #2d2363 100%);
+
+  /* radius scale */
+  --r-sm:   8px;
+  --r-md:   10px;
+  --r-lg:   14px;
+  --r-pill: 999px;
+
+  /* layered shadows */
+  --shadow-sm: 0 1px 2px rgba(30, 27, 46, 0.05), 0 1px 1px rgba(30, 27, 46, 0.03);
+  --shadow-md: 0 1px 2px rgba(30, 27, 46, 0.05), 0 4px 12px rgba(30, 27, 46, 0.07);
+  --shadow-lg: 0 2px 4px rgba(30, 27, 46, 0.06), 0 14px 30px rgba(30, 27, 46, 0.12);
+  --shadow-accent: 0 4px 14px rgba(99, 102, 241, 0.35);
+  --shadow-accent-lg: 0 6px 22px rgba(99, 102, 241, 0.45);
+
+  /* motion */
+  --ease:   cubic-bezier(0.2, 0.7, 0.3, 1);
+  --t-fast: 150ms;
+
+  font-family: 'Heebo', 'Segoe UI', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -10,4 +68,25 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.015em;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
 }

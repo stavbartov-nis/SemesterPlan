@@ -57,7 +57,8 @@ export interface DegreeTrack {
 }
 
 export interface RequirementComponent {
-  name: string;     // e.g., "Economics Component"
+  id: string;       // stable key, e.g. 'econ' / 'biz'
+  name: string;     // display name, e.g. 'כלכלה'
   baskets: RequirementBasket[];
 }
 
@@ -77,11 +78,12 @@ export interface UserPreferences {
     end: string;   // "HH:MM"
   };
   overlapPolicy: OverlapPolicy;
-  targetCreditsByType: {
+  /** Semester credit targets per degree component (keyed by component id). */
+  targetCreditsByComponent: Record<string, {
     Mandatory: number;
     Core: number;
     Elective: number;
-  };
+  }>;
 }
 
 export type OverlapPolicy = {

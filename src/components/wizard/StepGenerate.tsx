@@ -137,10 +137,17 @@ export const StepGenerate: React.FC = () => {
               <div className="ready-item">
                 <span className="ready-icon">🎯</span>
                 <span>
-                  {Object.entries(preferences.targetCreditsByType)
-                    .filter(([, v]) => v > 0)
-                    .map(([k, v]) => `${v} ${TYPE_HE[k] ?? k}`)
-                    .join(' · ') || 'לא הוגדרו יעדי נקודות'}
+                  {Object.entries(preferences.targetCreditsByComponent)
+                    .map(([compId, types]) => {
+                      const parts = Object.entries(types)
+                        .filter(([, v]) => v > 0)
+                        .map(([k, v]) => `${v} ${TYPE_HE[k] ?? k}`)
+                        .join(' · ');
+                      const compName = compId === 'econ' ? 'כלכלה' : compId === 'biz' ? 'מנע"ס' : compId;
+                      return parts ? `${compName}: ${parts}` : null;
+                    })
+                    .filter(Boolean)
+                    .join(' | ') || 'לא הוגדרו יעדי נקודות'}
                 </span>
               </div>
             </div>

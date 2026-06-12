@@ -9,13 +9,21 @@
 .legend-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.6rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 9999px;
-  background: white;
+  gap: 0.4rem;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  background: var(--surface);
   font-size: 0.75rem;
-  color: #4a5568;
+  font-weight: 500;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.legend-chip:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
 }
 
 .legend-dot {
@@ -23,27 +31,29 @@
   height: 0.6rem;
   border-radius: 50%;
   flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px rgba(30, 27, 46, 0.08);
 }
 
 .weekly-calendar {
   display: flex;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
   overflow: hidden;
   margin-top: 1rem;
+  box-shadow: var(--shadow-md);
 }
 
 .time-column {
   width: 60px;
-  border-inline-end: 1px solid #e2e8f0;
-  background-color: #f7fafc;
+  border-inline-end: 1px solid var(--border);
+  background-color: var(--surface-2);
   flex-shrink: 0;
 }
 
 .day-column {
   flex: 1;
-  border-inline-end: 1px solid #e2e8f0;
+  border-inline-end: 1px solid #f0ede6;
   min-width: 100px;
 }
 
@@ -53,23 +63,29 @@
 
 .header-cell {
   text-align: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #e2e8f0;
-  font-weight: 600;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
   font-size: 0.85rem;
-  background-color: #edf2f7;
-  color: #4a5568;
+  letter-spacing: -0.01em;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+  color: var(--text);
+  box-shadow: 0 1px 0 rgba(30, 27, 46, 0.03);
 }
 
 .timezone {
   font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-faint);
 }
 
 .time-label {
   text-align: end;
   padding-inline-end: 0.5rem;
-  font-size: 0.75rem;
-  color: #a0aec0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
   transform: translateY(-0.5rem);
 }
 
@@ -78,46 +94,89 @@
   inset-inline-start: 0;
   inset-inline-end: 0;
   height: 1px;
-  background-color: #edf2f7;
+  background-color: rgba(30, 27, 46, 0.045);
+}
+
+/* Per-course border-color/background come from inline styles —
+   the CSS below must not set them for non-conflict events. */
+@keyframes event-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .calendar-event {
   position: absolute;
   inset-inline-start: 2px;
   inset-inline-end: 2px;
-  background-color: #ebf8ff;
-  border: 2px solid #3182ce;
+  border-width: 2px;
   border-inline-start-width: 4px;
-  border-radius: 4px;
-  padding: 0.25rem;
+  border-radius: 7px;
+  padding: 0.3rem 0.35rem;
   font-size: 0.75rem;
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 2px rgba(30, 27, 46, 0.06), 0 3px 8px rgba(30, 27, 46, 0.06);
   z-index: 10;
+  cursor: default;
+  backdrop-filter: blur(2px);
+  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease),
+              z-index var(--t-fast) step-end;
+  animation: event-drop 0.4s var(--ease) backwards;
 }
 
+.calendar-event:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-lg);
+  z-index: 20;
+}
+
+/* Staggered drop-in: one beat per day column (col 1 is the time axis) */
+.day-column:nth-child(2)  .calendar-event { animation-delay: 40ms; }
+.day-column:nth-child(3)  .calendar-event { animation-delay: 90ms; }
+.day-column:nth-child(4)  .calendar-event { animation-delay: 140ms; }
+.day-column:nth-child(5)  .calendar-event { animation-delay: 190ms; }
+.day-column:nth-child(6)  .calendar-event { animation-delay: 240ms; }
+.day-column:nth-child(7)  .calendar-event { animation-delay: 290ms; }
+.day-column:nth-child(8)  .calendar-event { animation-delay: 340ms; }
+.day-column:nth-child(9)  .calendar-event { animation-delay: 390ms; }
+.day-column:nth-child(10) .calendar-event { animation-delay: 440ms; }
+
 .calendar-event.conflict {
-  border-color: #e53e3e;
+  border-color: var(--danger);
   background: repeating-linear-gradient(
     -45deg,
     #fff5f5,
     #fff5f5 6px,
-    #fed7d7 6px,
-    #fed7d7 12px
+    #fdd9d9 6px,
+    #fdd9d9 12px
   );
 }
 
 .event-title {
-  font-weight: bold;
-  color: #2d3748;
+  font-weight: 700;
+  color: var(--text);
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
 .event-type, .event-time {
-  color: #4a5568;
+  color: var(--text-muted);
+  font-size: 0.7rem;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.event-time {
+  font-variant-numeric: tabular-nums;
+  /* time ranges are neutral-direction runs; force LTR so 08:30–10:00
+     doesn't display reversed, but keep right alignment in the RTL card */
+  unicode-bidi: plaintext;
+  text-align: right;
 }

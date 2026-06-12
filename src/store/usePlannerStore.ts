@@ -41,10 +41,10 @@ const DEFAULT_PREFERENCES: UserPreferences = {
     allowOverlap: false,
     maxOverlapMinutes: 0,
   },
-  targetCreditsByType: {
-    Mandatory: 12,
-    Core: 8,
-    Elective: 4,
+  // Per-component semester targets (~20 נ"ז total for a regular semester)
+  targetCreditsByComponent: {
+    econ: { Mandatory: 8, Core: 4, Elective: 2 },
+    biz:  { Mandatory: 6, Core: 0, Elective: 2 },
   },
 };
 
@@ -126,7 +126,7 @@ export const usePlannerStore = create<PlannerState>()(
     }),
     {
       name: 'huji-planner-storage',
-      version: 4,
+      version: 5,
       // selectedTrack is NOT persisted: track definitions (baskets, credit
       // minimums, exclusions) live in code and must always come from the
       // current build — a persisted copy kept serving stale requirements
@@ -141,15 +141,7 @@ export const usePlannerStore = create<PlannerState>()(
       // otherwise old states skip newer resets.
       migrate: (persistedState: any, version: number) => {
         let state = persistedState;
-        if (version <= 0) {
-          state = {
-            ...state,
-            preferences: {
-              ...state.preferences,
-              targetCreditsByType: DEFAULT_PREFERENCES.targetCreditsByType
-            }
-          };
-        }
+        // (v0's targetCreditsByType backfill is subsumed by the v4 step below.)
         if (version <= 1) {
           // Reset selectedTrack so the new combined track is picked up
           state = { ...state, selectedTrack: null };
@@ -170,6 +162,18 @@ export const usePlannerStore = create<PlannerState>()(
           // stale copy so the current build's track always loads.
           const { selectedTrack: _dropped, ...rest } = state;
           state = rest;
+        }
+        if (version <= 4) {
+          // Credit targets became per-component (econ/biz columns); the old
+          // global targetCreditsByType shape can't be mapped — reset.
+          const { targetCreditsByType: _old, ...prefs } = state.preferences ?? {};
+          state = {
+            ...state,
+            preferences: {
+              ...prefs,
+              targetCreditsByComponent: DEFAULT_PREFERENCES.targetCreditsByComponent
+            }
+          };
         }
         return state;
       }
