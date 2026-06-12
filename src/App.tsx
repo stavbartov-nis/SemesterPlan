@@ -12,20 +12,17 @@ function App() {
     if (!selectedTrack) setTrack(MOCK_TRACKS[0]);
   }, [selectedTrack, setTrack]);
 
-  // NKZ stat for header (#9)
-  const completedCredits = MOCK_COURSES
-    .filter(c => historyCourseIds.includes(c.id))
-    .reduce((sum, c) => sum + c.credits, 0);
-
-  const totalCredits = selectedTrack
-    ? MOCK_COURSES
-        .filter(c =>
-          selectedTrack.components.some(comp =>
-            comp.baskets.some(b => b.courseIds.includes(c.id))
-          )
-        )
-        .reduce((sum, c) => sum + c.credits, 0)
-    : 0;
+  // Header NKZ stat: degree total is the sum of basket minimums (120 נ"ז),
+  // not the sum of every course that could fill them. Completed credits are
+  // capped per basket so over-filling one basket doesn't inflate progress.
+  const baskets = selectedTrack?.components.flatMap(comp => comp.baskets) ?? [];
+  const totalCredits = baskets.reduce((sum, b) => sum + b.minCredits, 0);
+  const completedCredits = baskets.reduce((sum, b) => {
+    const done = MOCK_COURSES
+      .filter(c => b.courseIds.includes(c.id) && historyCourseIds.includes(c.id))
+      .reduce((s, c) => s + c.credits, 0);
+    return sum + Math.min(done, b.minCredits);
+  }, 0);
 
   // Provenance: official catalog metadata (year תשפ"ו = meta.year 2026)
   const catalogUpdated = new Date(catalogData.meta.generated).toLocaleDateString('he-IL', {

@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
-import { MOCK_COURSES } from '../../data/huji-mock-catalog';
+import { MOCK_COURSES, COURSE_YEAR } from '../../data/huji-mock-catalog';
 import { getCourseNameHe } from '../../data/course-names-he';
 
 interface Props { onNext: () => void; }
 
+type YearFilter = 0 | 1 | 2 | 3; // 0 = all
+
+const YEAR_LABELS: Record<Exclude<YearFilter, 0>, string> = {
+  1: "שנה א'",
+  2: "שנה ב'",
+  3: "שנה ג'",
+};
+
 export const StepCompleted: React.FC<Props> = ({ onNext }) => {
   const [search, setSearch] = useState('');
+  const [yearFilter, setYearFilter] = useState<YearFilter>(0);
   const { selectedTrack, historyCourseIds, addToHistory, removeFromHistory } = usePlannerStore();
 
   if (!selectedTrack) return null;
 
+  // Per-component progress against the real basket minimums (capped per
+  // basket), so the totals reflect the degree's 120 נ"ז — not the sum of
+  // every course that could fill a basket.
   const componentStats = selectedTrack.components.map(comp => {
-    const courseIds = comp.baskets.flatMap(b => b.courseIds);
-    const courses   = MOCK_COURSES.filter(c => courseIds.includes(c.id));
-    const total     = courses.reduce((s, c) => s + c.credits, 0);
-    const done      = courses
-      .filter(c => historyCourseIds.includes(c.id))
-      .reduce((s, c) => s + c.credits, 0);
+    let total = 0;
+    let done = 0;
+    for (const b of comp.baskets) {
+      const doneInBasket = MOCK_COURSES
+        .filter(c => b.courseIds.includes(c.id) && historyCourseIds.includes(c.id))
+        .reduce((s, c) => s + c.credits, 0);
+      total += b.minCredits;
+      done  += Math.min(doneInBasket, b.minCredits);
+    }
     return { name: comp.name, done, total };
   });
 
@@ -28,11 +43,20 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
     comp,
     rows: MOCK_COURSES.filter(c =>
       comp.baskets.some(b => b.courseIds.includes(c.id)) &&
+      (yearFilter === 0 || COURSE_YEAR[c.id] === yearFilter) &&
       (search === '' ||
         c.name.toLowerCase().includes(search.toLowerCase()) ||
         c.id.includes(search))
     ),
   }));
+
+  const visibleIds = componentRows.flatMap(({ rows }) => rows.map(c => c.id));
+  const allVisibleDone = visibleIds.length > 0 && visibleIds.every(id => historyCourseIds.includes(id));
+
+  const markVisibleYear = () => {
+    if (allVisibleDone) visibleIds.forEach(removeFromHistory);
+    else visibleIds.forEach(addToHistory);
+  };
 
   return (
     <div className="step-layout single-col">
@@ -73,6 +97,34 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
         ))}
       </div>
 
+      {/* ── סינון לפי שנה + סימון שנה שלמה ── */}
+      <div className="year-filter-row">
+        <div className="avail-days">
+          <button
+            className={`day-chip ${yearFilter === 0 ? 'on' : ''}`}
+            onClick={() => setYearFilter(0)}
+          >
+            הכל
+          </button>
+          {([1, 2, 3] as const).map(y => (
+            <button
+              key={y}
+              className={`day-chip ${yearFilter === y ? 'on' : ''}`}
+              onClick={() => setYearFilter(y)}
+            >
+              {YEAR_LABELS[y]}
+            </button>
+          ))}
+        </div>
+        {yearFilter !== 0 && visibleIds.length > 0 && (
+          <button className="mark-year-btn" onClick={markVisibleYear}>
+            {allVisibleDone
+              ? `בטלי סימון ${YEAR_LABELS[yearFilter]}`
+              : `סמני את כל ${YEAR_LABELS[yearFilter]} כהושלמה`}
+          </button>
+        )}
+      </div>
+
       <input
         className="search-input"
         type="text"
@@ -82,8 +134,10 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
       />
 
       <div className="course-scroll-list">
-        {componentRows.every(({ rows }) => rows.length === 0) && search !== '' && (
-          <div className="empty-state">לא נמצאו קורסים עבור "{search}"</div>
+        {componentRows.every(({ rows }) => rows.length === 0) && (search !== '' || yearFilter !== 0) && (
+          <div className="empty-state">
+            {search !== '' ? `לא נמצאו קורסים עבור "${search}"` : 'אין קורסים משויכים לשנה זו'}
+          </div>
         )}
         {componentRows.map(({ comp, rows }) => {
           if (rows.length === 0) return null;
@@ -118,7 +172,7 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
       </div>
 
       <button className="next-btn" onClick={onNext}>
-        ← הבא: אילוצי זמן
+        ← הבא: קורסים קבועים
       </button>
     </div>
   );

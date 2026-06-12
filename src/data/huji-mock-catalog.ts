@@ -62,6 +62,11 @@ export function getOfferingsForSemester(semester: 'A' | 'B'): CourseOffering[] {
 
 const offeredIds = new Set(MOCK_OFFERINGS.map((o) => o.courseId));
 
+/** Courses that belong to other programs (מכפיל etc.) — not in this track. */
+const ECON_EXCLUDED = [
+  '57130', // מתמטיקה לתלמידי מכפיל
+];
+
 /** Economics ליבה courses (remark tagged "קורס ליבה"). */
 const ECON_CORE = [
   '57002', '57010', '57020', '57104', '57133', '57253', '57311', '57466',
@@ -96,7 +101,24 @@ function deptIds(department: string, filter: (c: CatalogCourse) => boolean): str
 
 const econCore     = new Set(ECON_CORE);
 const econResearch = new Set(ECON_RESEARCH);
+const econExcluded = new Set(ECON_EXCLUDED);
 const bizExcluded  = new Set(BIZ_EXCLUDED);
+
+/**
+ * Recommended program year per חובה course (1=שנה א', 2=שנה ב', 3=שנה ג').
+ * Not exposed by the Shnaton API — entered from the standard dual-major
+ * program layout; verify against the official degree sheet.
+ * ליבה/בחירה/חקר courses are taken across years 2-3 and stay unmapped.
+ */
+export const COURSE_YEAR: Record<string, 1 | 2 | 3> = {
+  // כלכלה
+  '57107': 1, '57108': 1, '57121': 1, '57122': 1, '57340': 1, '57341': 1,
+  '57305': 2, '57307': 2, '57308': 2, '57322': 2,
+  // מינהל עסקים
+  '55102': 1, '55802': 1, '55312': 1,
+  '55803': 2, '55804': 2, '55687': 2, '55945': 2, '55506': 2,
+  '55510': 3, '55507': 3, '55529': 3,
+};
 
 const econBaskets: RequirementBasket[] = [
   {
@@ -105,7 +127,8 @@ const econBaskets: RequirementBasket[] = [
     type: 'Mandatory',
     minCredits: 40,
     courseIds: deptIds('Economics', (c) =>
-      c.statusCourseCode === 1 && !econCore.has(c.id) && !econResearch.has(c.id)),
+      c.statusCourseCode === 1 && !econCore.has(c.id) && !econResearch.has(c.id) &&
+      !econExcluded.has(c.id)),
   },
   {
     id: 'econ_core',
@@ -127,7 +150,8 @@ const econBaskets: RequirementBasket[] = [
     type: 'Elective',
     minCredits: 8,
     courseIds: deptIds('Economics', (c) =>
-      c.statusCourseCode !== 1 && !econCore.has(c.id) && !econResearch.has(c.id)),
+      c.statusCourseCode !== 1 && !econCore.has(c.id) && !econResearch.has(c.id) &&
+      !econExcluded.has(c.id)),
   },
 ];
 
