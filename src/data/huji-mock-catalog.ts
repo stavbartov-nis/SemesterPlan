@@ -31,7 +31,20 @@ interface CatalogJson {
 
 const catalog = catalogData as CatalogJson;
 
-export const MOCK_COURSES: Course[] = catalog.courses;
+/**
+ * Courses that belong to other programs (מכפיל etc.) — excluded from the
+ * track AND stripped from prerequisite lists: the Shnaton requirement tree
+ * is flattened OR→AND by the scraper, so an alternative-path course like
+ * 57130 would otherwise permanently block its OR-siblings (e.g. תורת
+ * המחירים lists "מתמטיקה רגילה או 57130" — flattened to both).
+ */
+const PROGRAM_EXCLUDED = ['57130']; // מתמטיקה לתלמידי מכפיל
+const programExcluded = new Set(PROGRAM_EXCLUDED);
+
+export const MOCK_COURSES: Course[] = catalog.courses.map((c) => ({
+  ...c,
+  prerequisites: c.prerequisites.filter((p) => !programExcluded.has(p)),
+}));
 export const MOCK_OFFERINGS: CourseOffering[] = catalog.offerings;
 
 /**
@@ -61,11 +74,6 @@ export function getOfferingsForSemester(semester: 'A' | 'B'): CourseOffering[] {
 // the department page; חובה vs בחירה falls back to statusCourseCode (1/2).
 
 const offeredIds = new Set(MOCK_OFFERINGS.map((o) => o.courseId));
-
-/** Courses that belong to other programs (מכפיל etc.) — not in this track. */
-const ECON_EXCLUDED = [
-  '57130', // מתמטיקה לתלמידי מכפיל
-];
 
 /** Economics ליבה courses (remark tagged "קורס ליבה"). */
 const ECON_CORE = [
@@ -101,7 +109,7 @@ function deptIds(department: string, filter: (c: CatalogCourse) => boolean): str
 
 const econCore     = new Set(ECON_CORE);
 const econResearch = new Set(ECON_RESEARCH);
-const econExcluded = new Set(ECON_EXCLUDED);
+const econExcluded = programExcluded;
 const bizExcluded  = new Set(BIZ_EXCLUDED);
 
 /**

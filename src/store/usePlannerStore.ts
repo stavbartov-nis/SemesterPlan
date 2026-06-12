@@ -126,7 +126,17 @@ export const usePlannerStore = create<PlannerState>()(
     }),
     {
       name: 'huji-planner-storage',
-      version: 3,
+      version: 4,
+      // selectedTrack is NOT persisted: track definitions (baskets, credit
+      // minimums, exclusions) live in code and must always come from the
+      // current build — a persisted copy kept serving stale requirements
+      // after deploys. App re-selects the track on load.
+      partialize: (state) => ({
+        plannedCourses: state.plannedCourses,
+        historyCourseIds: state.historyCourseIds,
+        preferences: state.preferences,
+        targetSemester: state.targetSemester,
+      }),
       // Migrations chain: a v0 state must pass through every later step,
       // otherwise old states skip newer resets.
       migrate: (persistedState: any, version: number) => {
@@ -154,6 +164,12 @@ export const usePlannerStore = create<PlannerState>()(
             plannedCourses: [],
             selectedTrack: null
           };
+        }
+        if (version <= 3) {
+          // selectedTrack is no longer persisted (see partialize); drop any
+          // stale copy so the current build's track always loads.
+          const { selectedTrack: _dropped, ...rest } = state;
+          state = rest;
         }
         return state;
       }
