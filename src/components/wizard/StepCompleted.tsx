@@ -97,7 +97,9 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
                     />
                     <div className="course-row-info">
                       <span className="course-row-name">{getCourseNameHe(course.id, course.name)}</span>
-                      <span className="course-row-meta">{course.credits} נ"ז</span>
+                      <span className="course-row-meta">
+                        <span className="course-code">{course.id}</span> &nbsp;·&nbsp; {course.credits} נ"ז
+                      </span>
                     </div>
                     {done && <span className="done-check">✓</span>}
                   </label>

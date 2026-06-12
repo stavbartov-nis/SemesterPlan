@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
-import { MOCK_COURSES } from '../../data/huji-mock-catalog';
+import { MOCK_COURSES, getOfferingsForSemester } from '../../data/huji-mock-catalog';
 import { getCourseNameHe } from '../../data/course-names-he';
 
 const TYPE_HE: Record<string, string> = {
@@ -15,9 +15,13 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
   const [search, setSearch] = useState('');
   const {
     selectedTrack, plannedCourses, removePlannedCourse, addAnchor, historyCourseIds,
+    targetSemester, setTargetSemester,
   } = usePlannerStore();
 
   if (!selectedTrack) return null;
+
+  // Only courses actually offered in the planned semester are anchorable.
+  const offeredIds = new Set(getOfferingsForSemester(targetSemester).map(o => o.courseId));
 
   const anchored = plannedCourses.filter(pc => pc.isAnchor);
 
@@ -50,6 +54,18 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
           <p className="step-desc">נעל קורסים שאתה בטוח שתלמד. המתכנן תמיד ישמור אותם.</p>
         </div>
 
+        <div className="avail-days semester-picker">
+          {([['A', "סמסטר א'"], ['B', "סמסטר ב'"]] as const).map(([value, label]) => (
+            <button
+              key={value}
+              className={`day-chip ${targetSemester === value ? 'on' : ''}`}
+              onClick={() => setTargetSemester(value)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
         <input
           className="search-input"
           type="text"
@@ -64,6 +80,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
               MOCK_COURSES
                 .filter(c =>
                   b.courseIds.includes(c.id) &&
+                  offeredIds.has(c.id) &&
                   !historyCourseIds.includes(c.id) &&
                   (search === '' ||
                     c.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -89,6 +106,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
                       <div className="course-row-info">
                         <span className="course-row-name">{getCourseNameHe(course.id, course.name)}</span>
                         <span className="course-row-meta">
+                          <span className="course-code">{course.id}</span> &nbsp;·&nbsp;
                           {course.credits} נ"ז &nbsp;·&nbsp;
                           <span className={`type-badge type-${type.toLowerCase()}`}>{TYPE_HE[type] ?? type}</span>
                         </span>
@@ -138,7 +156,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
                 <div key={pc.courseId} className={`anchor-card ${warning ? 'warn' : ''}`}>
                   <div className="anchor-card-info">
                     <strong>{course ? getCourseNameHe(course.id, course.name) : ''}</strong>
-                    <small>{course?.credits} נ"ז</small>
+                    <small><span className="course-code">{pc.courseId}</span> · {course?.credits} נ"ז</small>
                     {warning && (
                       <span className="prereq-warning small">⚠ דרישות קדם חסרות</span>
                     )}

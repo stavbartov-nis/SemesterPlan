@@ -14,9 +14,12 @@ interface PlannerState {
   historyCourseIds: string[];
   selectedTrack: DegreeTrack | null;
   preferences: UserPreferences;
+  /** Semester being planned. Annual courses are available in both. */
+  targetSemester: 'A' | 'B';
 
   // Actions
   setTrack: (track: DegreeTrack) => void;
+  setTargetSemester: (semester: 'A' | 'B') => void;
   setPlannedCourses: (courses: PlannedCourse[]) => void;
   addPlannedCourse: (courseId: string) => void;
   removePlannedCourse: (courseId: string) => void;
@@ -52,8 +55,18 @@ export const usePlannerStore = create<PlannerState>()(
       historyCourseIds: [],
       selectedTrack: null,
       preferences: DEFAULT_PREFERENCES,
+      targetSemester: 'A',
 
       setTrack: (track) => set({ selectedTrack: track }),
+
+      // Selected group IDs belong to the previous semester's offerings, so
+      // switching semesters clears the plan (keeping anchors isn't safe
+      // either — their group IDs differ per semester). History and
+      // preferences survive.
+      setTargetSemester: (targetSemester) => set((state) => ({
+        targetSemester,
+        plannedCourses: state.targetSemester === targetSemester ? state.plannedCourses : []
+      })),
 
       setPlannedCourses: (plannedCourses) => set({ plannedCourses }),
 
@@ -113,22 +126,36 @@ export const usePlannerStore = create<PlannerState>()(
     }),
     {
       name: 'huji-planner-storage',
-      version: 2,
+      version: 3,
+      // Migrations chain: a v0 state must pass through every later step,
+      // otherwise old states skip newer resets.
       migrate: (persistedState: any, version: number) => {
-        if (version === 0) {
-          return {
-            ...persistedState,
+        let state = persistedState;
+        if (version <= 0) {
+          state = {
+            ...state,
             preferences: {
-              ...persistedState.preferences,
+              ...state.preferences,
               targetCreditsByType: DEFAULT_PREFERENCES.targetCreditsByType
             }
           };
         }
-        if (version === 1) {
+        if (version <= 1) {
           // Reset selectedTrack so the new combined track is picked up
-          return { ...persistedState, selectedTrack: null };
+          state = { ...state, selectedTrack: null };
         }
-        return persistedState;
+        if (version <= 2) {
+          // Catalog regenerated with per-semester offerings: old selected
+          // group IDs and track baskets may no longer exist. Reset plan and
+          // track, keep history and preferences.
+          state = {
+            ...state,
+            targetSemester: 'A',
+            plannedCourses: [],
+            selectedTrack: null
+          };
+        }
+        return state;
       }
     }
   )

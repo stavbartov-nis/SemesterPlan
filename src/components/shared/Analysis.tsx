@@ -1,11 +1,11 @@
 import React from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
-import { MOCK_COURSES, MOCK_OFFERINGS } from '../../data/huji-mock-catalog';
+import { MOCK_COURSES, getOfferingsForSemester } from '../../data/huji-mock-catalog';
 import { calculateRequirementProgress } from '../../engine/accounting';
 import { validateScheduleConflicts } from '../../engine/validation';
 
 export const Analysis: React.FC = () => {
-  const { selectedTrack, plannedCourses, historyCourseIds } = usePlannerStore();
+  const { selectedTrack, plannedCourses, historyCourseIds, targetSemester } = usePlannerStore();
 
   if (!selectedTrack) return null;
 
@@ -16,7 +16,7 @@ export const Analysis: React.FC = () => {
     MOCK_COURSES
   );
 
-  const conflictReport = validateScheduleConflicts(plannedCourses, MOCK_OFFERINGS);
+  const conflictReport = validateScheduleConflicts(plannedCourses, getOfferingsForSemester(targetSemester));
 
   return (
     <div className="analysis-sidebar">

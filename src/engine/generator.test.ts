@@ -1,10 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { suggestBundles } from './generator';
-import { MOCK_COURSES, MOCK_OFFERINGS, MOCK_TRACKS } from '../data/huji-mock-catalog';
+import { MOCK_COURSES, MOCK_TRACKS, getOfferingsForSemester } from '../data/huji-mock-catalog';
 import { UserPreferences } from '../types';
 
 describe('suggestBundles', () => {
-  const track = MOCK_TRACKS.find(t => t.id === 'econ-2026')!;
+  const track = MOCK_TRACKS[0];
+  // The app always plans one semester at a time; mirror that here.
+  const MOCK_OFFERINGS = getOfferingsForSemester('A');
   const prefs: UserPreferences = {
     allowedDays: [0, 1, 2, 3, 4],
     timeWindow: { start: '08:00', end: '20:00' },

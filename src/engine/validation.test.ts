@@ -1,9 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import { validateScheduleConflicts } from './validation';
-import { MOCK_OFFERINGS } from '../data/huji-mock-catalog';
+import { getOfferingsForSemester } from '../data/huji-mock-catalog';
 import { PlannedCourse } from '../types';
 
 describe('validateScheduleConflicts', () => {
+  // The app always validates against one semester's offerings.
+  const MOCK_OFFERINGS = getOfferingsForSemester('A');
   it('should detect no conflicts for an empty plan', () => {
     const report = validateScheduleConflicts([], MOCK_OFFERINGS);
     expect(report.conflicts).toHaveLength(0);

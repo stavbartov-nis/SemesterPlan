@@ -365,6 +365,17 @@
   gap: 4px;
 }
 
+.course-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  color: #718096;
+  background: #edf2f7;
+  border-radius: 4px;
+  padding: 0 4px;
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
 .done-check {
   color: #48bb78;
   font-weight: 700;

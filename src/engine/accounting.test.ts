@@ -3,8 +3,10 @@ import { calculateRequirementProgress } from './accounting';
 import { MOCK_COURSES, MOCK_TRACKS } from '../data/huji-mock-catalog';
 
 describe('calculateRequirementProgress', () => {
-  const econTrack = MOCK_TRACKS.find((t) => t.id === 'econ-2026')!;
-  const coreBasketId = 'econ-2026_core';
+  // Single combined track ('huji-ba-2026'); 57107 (Intro Micro) sits in the
+  // Economics mandatory basket (see huji-mock-catalog).
+  const econTrack = MOCK_TRACKS[0];
+  const coreBasketId = 'econ_mandatory';
 
   it('should calculate zero progress for an empty plan', () => {
     const report = calculateRequirementProgress([], [], econTrack, MOCK_COURSES);

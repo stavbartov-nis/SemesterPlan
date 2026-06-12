@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
-import { MOCK_COURSES, MOCK_OFFERINGS } from '../../data/huji-mock-catalog';
+import { MOCK_COURSES, getOfferingsForSemester } from '../../data/huji-mock-catalog';
 import { getCourseNameHe } from '../../data/course-names-he';
 import { ScheduleSlot } from '../../types';
 import './Calendar.css';
@@ -31,7 +31,9 @@ const TYPE_HE: Record<string, string> = {
 };
 
 export const Calendar: React.FC = () => {
-  const { plannedCourses, preferences } = usePlannerStore();
+  const { plannedCourses, preferences, targetSemester } = usePlannerStore();
+
+  const offerings = getOfferingsForSemester(targetSemester);
 
   const visibleDays = DAYS
     .map((name, idx) => ({ name, idx }))
@@ -40,7 +42,7 @@ export const Calendar: React.FC = () => {
   const events: CalendarEvent[] = [];
 
   plannedCourses.forEach(pc => {
-    const offering = MOCK_OFFERINGS.find(o => o.courseId === pc.courseId);
+    const offering = offerings.find(o => o.courseId === pc.courseId);
     const course   = MOCK_COURSES.find(c => c.id === pc.courseId);
     if (!offering) return;
 
