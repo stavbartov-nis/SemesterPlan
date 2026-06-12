@@ -187,11 +187,12 @@ export const MOCK_TRACKS: DegreeTrack[] = [
     id: 'huji-ba-2026',
     name: 'כלכלה ומינהל עסקים (תואר ראשון 2026)',
     components: [
-      { name: 'כלכלה', baskets: econBaskets },
-      { name: 'מינהל עסקים', baskets: bizBaskets },
+      { id: 'econ', name: 'כלכלה', baskets: econBaskets },
+      { id: 'biz', name: 'מינהל עסקים', baskets: bizBaskets },
       {
         // אבני פינה are university-wide courses outside this catalog; the
         // empty list keeps the 4-credit requirement visible in progress UI.
+        id: 'cornerstones',
         name: 'אבני פינה',
         baskets: [{
           id: 'cornerstones',

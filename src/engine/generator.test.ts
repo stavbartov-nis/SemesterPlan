@@ -11,7 +11,10 @@ describe('suggestBundles', () => {
     allowedDays: [0, 1, 2, 3, 4],
     timeWindow: { start: '08:00', end: '20:00' },
     overlapPolicy: { allowOverlap: false, maxOverlapMinutes: 0 },
-    targetCreditsByType: { Mandatory: 12, Core: 8, Elective: 4 }
+    targetCreditsByComponent: {
+      econ: { Mandatory: 12, Core: 8, Elective: 4 },
+      biz:  { Mandatory: 8,  Core: 0, Elective: 4 },
+    }
   };
 
   it('should return three named bundles', () => {
@@ -66,7 +69,10 @@ describe('anchor scheduling', () => {
     allowedDays: [0, 1, 2, 3, 4],
     timeWindow: { start: '08:00', end: '20:00' },
     overlapPolicy: { allowOverlap: false, maxOverlapMinutes: 0 },
-    targetCreditsByType: { Mandatory: 12, Core: 8, Elective: 4 }
+    targetCreditsByComponent: {
+      econ: { Mandatory: 12, Core: 8, Elective: 4 },
+      biz:  { Mandatory: 8,  Core: 0, Elective: 4 },
+    }
   };
 
   it('assigns a meeting group to anchors that arrive without one', () => {
@@ -89,7 +95,10 @@ describe('full group sets (lecture + tirgul)', () => {
     allowedDays: [0, 1, 2, 3, 4],
     timeWindow: { start: '08:00', end: '20:30' },
     overlapPolicy: { allowOverlap: false, maxOverlapMinutes: 0 },
-    targetCreditsByType: { Mandatory: 12, Core: 8, Elective: 4 }
+    targetCreditsByComponent: {
+      econ: { Mandatory: 12, Core: 8, Elective: 4 },
+      biz:  { Mandatory: 8,  Core: 0, Elective: 4 },
+    }
   };
 
   it('selects one group of every meeting type the course offers', () => {

@@ -22,11 +22,23 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
     setPreferences({ ...preferences, allowedDays: days });
   };
 
-  const setTarget = (type: 'Mandatory' | 'Core' | 'Elective', val: string) =>
+  const setTarget = (componentId: string, type: 'Mandatory' | 'Core' | 'Elective', val: string) =>
     setPreferences({
       ...preferences,
-      targetCreditsByType: { ...preferences.targetCreditsByType, [type]: parseInt(val) || 0 },
+      targetCreditsByComponent: {
+        ...preferences.targetCreditsByComponent,
+        [componentId]: {
+          ...preferences.targetCreditsByComponent[componentId],
+          [type]: parseInt(val) || 0,
+        },
+      },
     });
+
+  // One column per degree component; only basket types that component has.
+  const TARGET_COLUMNS: { id: string; name: string; types: ('Mandatory' | 'Core' | 'Elective')[] }[] = [
+    { id: 'econ', name: 'כלכלה', types: ['Mandatory', 'Core', 'Elective'] },
+    { id: 'biz',  name: 'מינהל עסקים', types: ['Mandatory', 'Elective'] },
+  ];
 
   const startH = parseInt(preferences.timeWindow.start.split(':')[0]);
   const endH   = parseInt(preferences.timeWindow.end.split(':')[0]);
@@ -102,19 +114,24 @@ export const StepConstraints: React.FC<Props> = ({ onNext }) => {
       {/* ── יעדי נקודות ── */}
       <section className="constraints-section">
         <h3>יעדי נקודות לסמסטר</h3>
-        <p className="step-hint">כמה נ"ז לכוון לפי סוג דרישה.</p>
-        <div className="credit-targets">
-          {(['Mandatory', 'Core', 'Elective'] as const).map(type => (
-            <div key={type} className="credit-target-row">
-              <span className={`type-badge type-${type.toLowerCase()}`}>{TYPE_HE[type]}</span>
-              <input
-                type="number"
-                value={preferences.targetCreditsByType[type]}
-                onChange={e => setTarget(type, e.target.value)}
-                min="0"
-                max="30"
-              />
-              <span className="nkz-label">נ"ז</span>
+        <p className="step-hint">כמה נ"ז לכוון בכל חוג, לפי סוג דרישה.</p>
+        <div className="credit-target-columns">
+          {TARGET_COLUMNS.map(col => (
+            <div key={col.id} className="credit-target-col">
+              <h4>{col.name}</h4>
+              {col.types.map(type => (
+                <div key={type} className="credit-target-row">
+                  <span className={`type-badge type-${type.toLowerCase()}`}>{TYPE_HE[type]}</span>
+                  <input
+                    type="number"
+                    value={preferences.targetCreditsByComponent[col.id]?.[type] ?? 0}
+                    onChange={e => setTarget(col.id, type, e.target.value)}
+                    min="0"
+                    max="30"
+                  />
+                  <span className="nkz-label">נ"ז</span>
+                </div>
+              ))}
             </div>
           ))}
         </div>
