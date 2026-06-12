@@ -4,6 +4,11 @@ import { MOCK_COURSES, getOfferingsForSemester } from '../../data/huji-mock-cata
 import { calculateRequirementProgress } from '../../engine/accounting';
 import { validateScheduleConflicts } from '../../engine/validation';
 
+const DAY_NAMES = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי'];
+
+const courseName = (courseId: string): string =>
+  MOCK_COURSES.find(c => c.id === courseId)?.name ?? courseId;
+
 export const Analysis: React.FC = () => {
   const { selectedTrack, plannedCourses, historyCourseIds, targetSemester } = usePlannerStore();
 
@@ -30,7 +35,7 @@ export const Analysis: React.FC = () => {
           <div className="conflict-list">
             {conflictReport.conflicts.map((c, i) => (
               <div key={i} className="conflict-alert">
-                חפיפה: {c.courseIdA} & {c.courseIdB}
+                חפיפה ביום {DAY_NAMES[c.day]}: {courseName(c.courseIdA)} ↔ {courseName(c.courseIdB)} ({c.start}–{c.end})
               </div>
             ))}
           </div>

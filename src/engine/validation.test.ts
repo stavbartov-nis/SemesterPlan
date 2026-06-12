@@ -23,6 +23,9 @@ describe('validateScheduleConflicts', () => {
     expect(report.conflicts.length).toBeGreaterThan(0);
     const conflict = report.conflicts.find(c => c.day === 0);
     expect(conflict).toBeDefined();
+    // Both slots are exactly Sun 14:30-16:00, so the intersection is the full slot.
+    expect(conflict?.start).toBe('14:30');
+    expect(conflict?.end).toBe('16:00');
   });
 
   it('should detect no conflict between non-overlapping groups', () => {

@@ -1,3 +1,30 @@
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.legend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  background: white;
+  font-size: 0.75rem;
+  color: #4a5568;
+}
+
+.legend-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
 .weekly-calendar {
   display: flex;
   border: 1px solid #e2e8f0;
@@ -9,19 +36,19 @@
 
 .time-column {
   width: 60px;
-  border-right: 1px solid #e2e8f0;
+  border-inline-end: 1px solid #e2e8f0;
   background-color: #f7fafc;
   flex-shrink: 0;
 }
 
 .day-column {
   flex: 1;
-  border-right: 1px solid #e2e8f0;
+  border-inline-end: 1px solid #e2e8f0;
   min-width: 100px;
 }
 
 .day-column:last-child {
-  border-right: none;
+  border-inline-end: none;
 }
 
 .header-cell {
@@ -39,8 +66,8 @@
 }
 
 .time-label {
-  text-align: right;
-  padding-right: 0.5rem;
+  text-align: end;
+  padding-inline-end: 0.5rem;
   font-size: 0.75rem;
   color: #a0aec0;
   transform: translateY(-0.5rem);
@@ -48,18 +75,19 @@
 
 .grid-line {
   position: absolute;
-  left: 0;
-  right: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
   height: 1px;
   background-color: #edf2f7;
 }
 
 .calendar-event {
   position: absolute;
-  left: 2px;
-  right: 2px;
+  inset-inline-start: 2px;
+  inset-inline-end: 2px;
   background-color: #ebf8ff;
-  border-left: 4px solid #3182ce;
+  border: 2px solid #3182ce;
+  border-inline-start-width: 4px;
   border-radius: 4px;
   padding: 0.25rem;
   font-size: 0.75rem;
@@ -68,9 +96,20 @@
   z-index: 10;
 }
 
+.calendar-event.conflict {
+  border-color: #e53e3e;
+  background: repeating-linear-gradient(
+    -45deg,
+    #fff5f5,
+    #fff5f5 6px,
+    #fed7d7 6px,
+    #fed7d7 12px
+  );
+}
+
 .event-title {
   font-weight: bold;
-  color: #2b6cb0;
+  color: #2d3748;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

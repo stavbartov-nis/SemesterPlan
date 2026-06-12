@@ -5,6 +5,10 @@ export interface Conflict {
   courseIdB: string;
   day: number;
   timeRange: string;
+  /** Start of the overlapping window: max(startA, startB). */
+  start: string;
+  /** End of the overlapping window: min(endA, endB). */
+  end: string;
 }
 
 export interface ConflictReport {
@@ -51,6 +55,8 @@ export function validateScheduleConflicts(
           courseIdB: b.courseId,
           day: a.slot.day,
           timeRange: `${a.slot.start}-${a.slot.end} vs ${b.slot.start}-${b.slot.end}`,
+          start: parseTime(a.slot.start) >= parseTime(b.slot.start) ? a.slot.start : b.slot.start,
+          end: parseTime(a.slot.end) <= parseTime(b.slot.end) ? a.slot.end : b.slot.end,
         });
       }
     }

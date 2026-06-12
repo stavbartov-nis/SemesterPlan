@@ -61,6 +61,11 @@ export const StepGenerate: React.FC = () => {
     ? validateScheduleConflicts(plannedCourses, offerings).conflicts.length
     : 0;
 
+  const allBundlesEmpty =
+    bundles.length > 0 &&
+    (bundles.every(b => b.courses.filter(c => !c.isAnchor).length === 0) ||
+      bundles.every(b => b.totalCredits === 0));
+
   return (
     <div className="step-generate">
       <div className="generate-main">
@@ -102,7 +107,9 @@ export const StepGenerate: React.FC = () => {
                 <span>
                   {anchors.length === 0
                     ? 'אין קורסים קבועים — המתכנן ימלא בחופשיות'
-                    : `${anchors.length} קורס${anchors.length !== 1 ? 'ים' : ''} נעול${anchors.length !== 1 ? 'ים' : ''}`}
+                    : anchors.length === 1
+                      ? 'קורס אחד נעול'
+                      : `${anchors.length} קורסים נעולים`}
                 </span>
               </div>
               <div className="ready-item">
@@ -110,7 +117,9 @@ export const StepGenerate: React.FC = () => {
                 <span>
                   {historyCourseIds.length === 0
                     ? 'לא סומנו קורסים שהושלמו'
-                    : `${historyCourseIds.length} קורס${historyCourseIds.length !== 1 ? 'ים' : ''} שהושלמו הוחרגו`}
+                    : historyCourseIds.length === 1
+                      ? 'קורס אחד שהושלם הוחרג'
+                      : `${historyCourseIds.length} קורסים שהושלמו הוחרגו`}
                 </span>
               </div>
               <div className="ready-item">
@@ -138,8 +147,31 @@ export const StepGenerate: React.FC = () => {
           </div>
         )}
 
+        {/* ── מצב ריק — לא נמצאו קורסים ── */}
+        {generated && !appliedId && allBundlesEmpty && (
+          <div className="gen-empty-state ready-summary">
+            <h3>לא נמצאו קורסים מתאימים לאילוצים שבחרת — נסי להוסיף ימים פנויים או להרחיב את חלון הזמן</h3>
+            <div className="ready-items">
+              <div className="ready-item">
+                <span className="ready-icon">📅</span>
+                <span>
+                  {preferences.allowedDays.length === 0
+                    ? 'לא נבחרו ימים'
+                    : preferences.allowedDays.length === 1
+                      ? 'נבחר יום אחד בלבד'
+                      : `נבחרו ${preferences.allowedDays.length} ימים`}
+                </span>
+              </div>
+              <div className="ready-item">
+                <span className="ready-icon">⏰</span>
+                <span>חלון הזמן: {preferences.timeWindow.start} – {preferences.timeWindow.end}</span>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ── כרטיסי תוכניות ── */}
-        {generated && !appliedId && bundles.length > 0 && (
+        {generated && !appliedId && bundles.length > 0 && !allBundlesEmpty && (
           <div className="bundles-section">
             <div className="bundles-grid-large">
               {bundles.map(bundle => {
@@ -191,9 +223,9 @@ export const StepGenerate: React.FC = () => {
         {appliedId && (
           <div className="applied-plan">
             <div className="schedule-header">
-              <h3>לוח הזמנים שלך לסמסטר</h3>
+              <h3>לוח הזמנים שלך — סמסטר {targetSemester === 'A' ? 'א׳' : 'ב׳'}</h3>
               {conflictCount > 0
-                ? <span className="conflict-badge">{conflictCount} התנגשות{conflictCount !== 1 ? 'ות' : ''}</span>
+                ? <span className="conflict-badge">{conflictCount === 1 ? 'התנגשות אחת' : `${conflictCount} התנגשויות`}</span>
                 : <span className="no-conflict-badge">אין התנגשויות</span>
               }
             </div>

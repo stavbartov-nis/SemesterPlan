@@ -24,12 +24,22 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
   const totalDone  = componentStats.reduce((s, c) => s + c.done,  0);
   const totalAll   = componentStats.reduce((s, c) => s + c.total, 0);
 
+  const componentRows = selectedTrack.components.map(comp => ({
+    comp,
+    rows: MOCK_COURSES.filter(c =>
+      comp.baskets.some(b => b.courseIds.includes(c.id)) &&
+      (search === '' ||
+        c.name.toLowerCase().includes(search.toLowerCase()) ||
+        c.id.includes(search))
+    ),
+  }));
+
   return (
     <div className="step-layout single-col">
       <div className="step-header">
         <h2>קורסים שהושלמו</h2>
         <p className="step-desc">
-          סמן קורסים שכבר עברת. הם לא יופיעו בתוכניות שייווצרו ויחשבו להתקדמות התואר.
+          סמני קורסים שכבר עברת. הם לא יופיעו בתוכניות שייווצרו ויחשבו להתקדמות התואר.
         </p>
       </div>
 
@@ -66,19 +76,16 @@ export const StepCompleted: React.FC<Props> = ({ onNext }) => {
       <input
         className="search-input"
         type="text"
-        placeholder="חפש לפי שם או קוד…"
+        placeholder="חפשי לפי שם או קוד…"
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
 
       <div className="course-scroll-list">
-        {selectedTrack.components.map(comp => {
-          const rows = MOCK_COURSES.filter(c =>
-            comp.baskets.some(b => b.courseIds.includes(c.id)) &&
-            (search === '' ||
-              c.name.toLowerCase().includes(search.toLowerCase()) ||
-              c.id.includes(search))
-          );
+        {componentRows.every(({ rows }) => rows.length === 0) && search !== '' && (
+          <div className="empty-state">לא נמצאו קורסים עבור "{search}"</div>
+        )}
+        {componentRows.map(({ comp, rows }) => {
           if (rows.length === 0) return null;
 
           return (

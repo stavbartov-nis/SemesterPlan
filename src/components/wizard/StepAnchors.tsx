@@ -45,49 +45,59 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
       });
   };
 
+  const componentRows = selectedTrack.components.map(comp => ({
+    comp,
+    rows: comp.baskets.flatMap(b =>
+      MOCK_COURSES
+        .filter(c =>
+          b.courseIds.includes(c.id) &&
+          offeredIds.has(c.id) &&
+          !historyCourseIds.includes(c.id) &&
+          (search === '' ||
+            c.name.toLowerCase().includes(search.toLowerCase()) ||
+            c.id.includes(search))
+        )
+        .map(c => ({ course: c, type: b.type }))
+    ),
+  }));
+
   return (
     <div className="step-layout two-col">
       {/* ── שמאל: קטלוג ── */}
       <div className="step-left">
         <div className="step-header">
           <h2>קורסים קבועים</h2>
-          <p className="step-desc">נעל קורסים שאתה בטוח שתלמד. המתכנן תמיד ישמור אותם.</p>
+          <p className="step-desc">נעלי קורסים שאת בטוחה שתלמדי. המתכנן תמיד ישמור אותם.</p>
         </div>
 
-        <div className="avail-days semester-picker">
-          {([['A', "סמסטר א'"], ['B', "סמסטר ב'"]] as const).map(([value, label]) => (
-            <button
-              key={value}
-              className={`day-chip ${targetSemester === value ? 'on' : ''}`}
-              onClick={() => setTargetSemester(value)}
-            >
-              {label}
-            </button>
-          ))}
+        <div className="semester-picker-row">
+          <span className="semester-picker-label">מתכננת עבור:</span>
+          <div className="avail-days semester-picker">
+            {([['A', "סמסטר א'"], ['B', "סמסטר ב'"]] as const).map(([value, label]) => (
+              <button
+                key={value}
+                className={`day-chip ${targetSemester === value ? 'on' : ''}`}
+                onClick={() => setTargetSemester(value)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <input
           className="search-input"
           type="text"
-          placeholder="חפש לפי שם או קוד…"
+          placeholder="חפשי לפי שם או קוד…"
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
 
         <div className="course-scroll-list">
-          {selectedTrack.components.map(comp => {
-            const rows = comp.baskets.flatMap(b =>
-              MOCK_COURSES
-                .filter(c =>
-                  b.courseIds.includes(c.id) &&
-                  offeredIds.has(c.id) &&
-                  !historyCourseIds.includes(c.id) &&
-                  (search === '' ||
-                    c.name.toLowerCase().includes(search.toLowerCase()) ||
-                    c.id.includes(search))
-                )
-                .map(c => ({ course: c, type: b.type }))
-            );
+          {componentRows.every(({ rows }) => rows.length === 0) && search !== '' && (
+            <div className="empty-state">לא נמצאו קורסים עבור "{search}"</div>
+          )}
+          {componentRows.map(({ comp, rows }) => {
             if (rows.length === 0) return null;
 
             return (
@@ -122,7 +132,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
                           isAnchored ? removePlannedCourse(course.id) : addAnchor(course.id)
                         }
                       >
-                        {isAnchored ? '📌 נעול' : '+ נעל'}
+                        {isAnchored ? '📌 נעול' : '+ נעלי'}
                       </button>
                     </div>
                   );
@@ -145,7 +155,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
 
         {anchored.length === 0 ? (
           <div className="empty-state">
-            אין קורסים קבועים עדיין — לחץ על&nbsp;<strong>+ נעל</strong>&nbsp;על כל קורס.
+            אין קורסים קבועים עדיין — לחצי על&nbsp;<strong>+ נעלי</strong>&nbsp;על כל קורס.
           </div>
         ) : (
           <div className="anchor-list">
