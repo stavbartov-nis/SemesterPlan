@@ -1329,3 +1329,36 @@
   color: #fff;
 }
 
+
+/* ── Year filter + bulk mark (StepCompleted) ───────────────── */
+.year-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.mark-year-btn {
+  background: #ebf8ff;
+  color: #2b6cb0;
+  border: 1px solid #bee3f8;
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.mark-year-btn:hover { background: #bee3f8; }
+
+/* ── Eligibility filter (StepAnchors) ──────────────────────── */
+.eligible-filter {
+  font-size: 0.8rem;
+  color: #718096;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}

@@ -5,10 +5,10 @@ import { StepConstraints } from './StepConstraints';
 import { StepGenerate } from './StepGenerate';
 
 const STEPS = [
-  { label: 'קורסים קבועים', desc: 'נעל קורסים שאתה בטוח לגביהם' },
-  { label: 'קורסים שהושלמו', desc: 'סמן מה כבר למדת' },
+  { label: 'קורסים שהושלמו', desc: 'סמני מה כבר למדת' },
+  { label: 'קורסים קבועים', desc: 'נעלי קורסים שאת בטוחה לגביהם' },
   { label: 'אילוצים',        desc: 'ימים, שעות ויעדי נקודות' },
-  { label: 'צור תוכנית',    desc: 'בנה ובחר את התוכנית שלך' },
+  { label: 'צרי תוכנית',    desc: 'בני ובחרי את התוכנית שלך' },
 ];
 
 export const WizardStepper: React.FC = () => {
@@ -48,8 +48,8 @@ export const WizardStepper: React.FC = () => {
 
       {/* ── Content ── */}
       <div className="wizard-body">
-        {active === 0 && <StepAnchors     onNext={() => setActive(1)} />}
-        {active === 1 && <StepCompleted   onNext={() => setActive(2)} />}
+        {active === 0 && <StepCompleted   onNext={() => setActive(1)} />}
+        {active === 1 && <StepAnchors     onNext={() => setActive(2)} />}
         {active === 2 && <StepConstraints onNext={() => setActive(3)} />}
         {active === 3 && <StepGenerate />}
       </div>

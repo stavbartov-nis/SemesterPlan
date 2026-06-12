@@ -13,6 +13,7 @@ interface Props { onNext: () => void; }
 
 export const StepAnchors: React.FC<Props> = ({ onNext }) => {
   const [search, setSearch] = useState('');
+  const [onlyEligible, setOnlyEligible] = useState(true);
   const {
     selectedTrack, plannedCourses, removePlannedCourse, addAnchor, historyCourseIds,
     targetSemester, setTargetSemester,
@@ -53,6 +54,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
           b.courseIds.includes(c.id) &&
           offeredIds.has(c.id) &&
           !historyCourseIds.includes(c.id) &&
+          (!onlyEligible || prereqsMet(c.id)) &&
           (search === '' ||
             c.name.toLowerCase().includes(search.toLowerCase()) ||
             c.id.includes(search))
@@ -92,6 +94,15 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
+
+        <label className="toggle-label eligible-filter">
+          <input
+            type="checkbox"
+            checked={onlyEligible}
+            onChange={e => setOnlyEligible(e.target.checked)}
+          />
+          הציגי רק קורסים שניתן לקחת (דרישות הקדם הושלמו)
+        </label>
 
         <div className="course-scroll-list">
           {componentRows.every(({ rows }) => rows.length === 0) && search !== '' && (
@@ -179,7 +190,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
         )}
 
         <button className="next-btn" onClick={onNext}>
-          ← הבא: קורסים שהושלמו
+          ← הבא: אילוצי זמן
         </button>
       </div>
     </div>
