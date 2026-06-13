@@ -45,6 +45,33 @@ export const MOCK_COURSES: Course[] = catalog.courses.map((c) => ({
   ...c,
   prerequisites: c.prerequisites.filter((p) => !programExcluded.has(p)),
 }));
+
+/**
+ * Prerequisite equivalence groups for the dual-major (Econ + BizAdmin) track.
+ * The Shnaton scraper flattens OR-groups into AND, so courses like 55803
+ * (Fundamentals of Finance) list BOTH the BizAdmin version AND the Econ
+ * version of the same subject as prerequisites. For this joint degree a
+ * student who completed the Econ variant satisfies the BizAdmin prereq and
+ * vice versa.
+ */
+const PREREQ_EQUIV_GROUPS: string[][] = [
+  ['55701', '57107'],          // מיקרו: BizAdmin ↔ Econ
+  ['55120', '57340'],          // סטטיסטיקה א׳: BizAdmin ↔ Econ
+  ['55321', '57121', '57122'], // מתמטיקה א׳: BizAdmin ↔ Econ A1/A2
+];
+
+const _prereqEquivMap = new Map<string, string[]>();
+PREREQ_EQUIV_GROUPS.forEach(group => {
+  group.forEach(id => {
+    _prereqEquivMap.set(id, group.filter(other => other !== id));
+  });
+});
+
+/** Returns true if prereqId is in completedIds OR any of its tracked equivalents is. */
+export function satisfiesPrereq(prereqId: string, completedIds: readonly string[]): boolean {
+  if (completedIds.includes(prereqId)) return true;
+  return (_prereqEquivMap.get(prereqId) ?? []).some(e => completedIds.includes(e));
+}
 export const MOCK_OFFERINGS: CourseOffering[] = catalog.offerings;
 
 /**

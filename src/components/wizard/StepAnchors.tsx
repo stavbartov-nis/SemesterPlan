@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
-import { MOCK_COURSES, getOfferingsForSemester } from '../../data/huji-mock-catalog';
+import { MOCK_COURSES, getOfferingsForSemester, satisfiesPrereq } from '../../data/huji-mock-catalog';
 import { getCourseNameHe } from '../../data/course-names-he';
 
 const TYPE_HE: Record<string, string> = {
@@ -32,17 +32,19 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
   const anchoredIds = new Set(anchored.map(pc => pc.courseId));
   const satisfiedIds = new Set([...historyCourseIds, ...anchoredIds]);
 
+  const satisfiedList = [...satisfiedIds];
+
   const prereqsMet = (courseId: string) => {
     const course = MOCK_COURSES.find(c => c.id === courseId);
     if (!course || course.prerequisites.length === 0) return true;
-    return course.prerequisites.every(p => satisfiedIds.has(p));
+    return course.prerequisites.every(p => satisfiesPrereq(p, satisfiedList));
   };
 
   const missingPrereqs = (courseId: string): string[] => {
     const course = MOCK_COURSES.find(c => c.id === courseId);
     if (!course) return [];
     return course.prerequisites
-      .filter(p => !satisfiedIds.has(p))
+      .filter(p => !satisfiesPrereq(p, satisfiedList))
       .map(p => {
         const c = MOCK_COURSES.find(x => x.id === p);
         return c ? getCourseNameHe(c.id, c.name) : p;

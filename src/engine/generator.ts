@@ -1,12 +1,13 @@
-import { 
-  PlannedCourse, 
-  Course, 
-  CourseOffering, 
-  RequirementBasket, 
+import {
+  PlannedCourse,
+  Course,
+  CourseOffering,
+  RequirementBasket,
   UserPreferences,
   DegreeTrack,
   MeetingGroup
 } from '../types';
+import { satisfiesPrereq } from '../data/huji-mock-catalog';
 
 export interface SuggestedBundle {
   id: string;
@@ -301,9 +302,8 @@ function getCandidates(
         const course = catalog.find(c => c.id === courseId);
         if (!course) return;
 
-        const prereqsMet = course.prerequisites.every(p =>
-          historyIds.includes(p) || currentIds.includes(p)
-        );
+        const allCompleted = [...historyIds, ...currentIds];
+        const prereqsMet = course.prerequisites.every(p => satisfiesPrereq(p, allCompleted));
         if (!prereqsMet) return;
 
         candidates.push({ course, componentId: comp.id, type: basket.type });
@@ -319,9 +319,10 @@ function getCandidates(
     if (trackCourseIds.has(courseId)) return; // already represented above
     const course = catalog.find(c => c.id === courseId);
     if (!course) return;
+    const allCompleted = [...historyIds, ...currentIds];
     const prereqsMet =
       course.prerequisites.length === 0 ||
-      course.prerequisites.some(p => historyIds.includes(p) || currentIds.includes(p));
+      course.prerequisites.some(p => satisfiesPrereq(p, allCompleted));
     if (!prereqsMet) return;
     track.components.forEach(comp => {
       candidates.push({ course, componentId: comp.id, type: 'Elective' });
