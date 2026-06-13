@@ -31,32 +31,52 @@ export function suggestBundles(
 ): SuggestedBundle[] {
   const bundles: SuggestedBundle[] = [];
 
-  // 1. Fastest Path: Prioritize Mandatory/Core and high credits
+  // Helpers for offering-aware sort keys (close over offerings).
+  // uniqueDays: how many distinct calendar days the course occupies across all its groups.
+  // Compact theme prefers courses with smaller footprints (they're easier to cluster).
+  const uniqueDays = (courseId: string) => {
+    const off = offerings.find(o => o.courseId === courseId);
+    if (!off) return 7;
+    return new Set(off.groups.flatMap(g => g.slots.map(s => s.day))).size;
+  };
+  // latestEarliestStart: the LATEST "earliest slot" across all groups.
+  // A high value means there EXISTS a group that starts late — good for No-Early theme.
+  const latestEarliestStart = (courseId: string) => {
+    const off = offerings.find(o => o.courseId === courseId);
+    if (!off) return '00:00';
+    const groupEarliests = off.groups.map(g =>
+      g.slots.reduce((min, s) => (s.start < min ? s.start : min), '23:59')
+    );
+    return groupEarliests.reduce((max, t) => (t > max ? t : max), '00:00');
+  };
+  const tp = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 } as const;
+
+  // 1. Fastest Path: maximize mandatory/core first, then pack in the most credits.
   bundles.push(generateBundle(
     "fastest-path",
     "המסלול המהיר",
     "נותן עדיפות לנקודות זכות ולקורסי חובה וליבה כדי להאיץ את סיום התואר.",
     anchors, catalog, offerings, track, prefs, historyIds, excludedIds, freePickIds,
     (a, b) => {
-      const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
-      if (typePriority[a.type] !== typePriority[b.type]) {
-        return typePriority[a.type] - typePriority[b.type];
-      }
-      return b.course.credits - a.course.credits;
+      if (tp[a.type] !== tp[b.type]) return tp[a.type] - tp[b.type];
+      return b.course.credits - a.course.credits; // highest credits first
     }
   ));
 
-  // 2. Compact Schedule: Group courses on fewest possible days
+  // 2. Compact Schedule: within each type, pick courses whose total day-footprint
+  // is smallest so they naturally cluster on fewer days of the week.
   bundles.push(generateBundle(
     "compact-schedule",
     "מערכת מרוכזת",
     "מרכז את הקורסים במספר הימים הקטן ביותר כדי לפנות לך זמן חופשי.",
     anchors, catalog, offerings, track, prefs, historyIds, excludedIds, freePickIds,
     (a, b) => {
-      const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
-      return typePriority[a.type] - typePriority[b.type];
+      if (tp[a.type] !== tp[b.type]) return tp[a.type] - tp[b.type];
+      const dayDiff = uniqueDays(a.course.id) - uniqueDays(b.course.id); // fewer days first
+      if (dayDiff !== 0) return dayDiff;
+      return b.course.credits - a.course.credits;
     },
-    // Prefer groups whose slots land on days the bundle already uses
+    // Also prefer groups that land on already-occupied days
     (bundleCourses) => {
       const occupiedDays = new Set<number>();
       bundleCourses.forEach(bc => {
@@ -74,8 +94,9 @@ export function suggestBundles(
     }
   ));
 
-  // 3. No Early Mornings: avoids slots before 10:00 and leans toward
-  // afternoon groups, so its schedule visibly differs from the others.
+  // 3. No Early Mornings: within each type, prefer courses that have a late-starting
+  // group available. Combined with the 10:00 time floor, courses with ONLY morning
+  // slots are eliminated and courses with afternoon options are prioritised.
   const noEarlyPrefs = {
     ...prefs,
     timeWindow: {
@@ -89,10 +110,11 @@ export function suggestBundles(
     "נמנע משיעורים שמתחילים לפני 10:00 ומעדיף קבוצות מאוחרות יותר ביום.",
     anchors, catalog, offerings, track, noEarlyPrefs, historyIds, excludedIds, freePickIds,
     (a, b) => {
-      const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
-      return typePriority[a.type] - typePriority[b.type];
+      if (tp[a.type] !== tp[b.type]) return tp[a.type] - tp[b.type];
+      // Prefer courses whose latest available group starts the latest
+      return latestEarliestStart(b.course.id).localeCompare(latestEarliestStart(a.course.id));
     },
-    // Prefer groups whose earliest slot starts latest in the day
+    // Within the chosen course, also pick the group that starts latest
     () => (a, b) => {
       const earliest = (g: MeetingGroup) =>
         g.slots.reduce((min, s) => (s.start < min ? s.start : min), '23:59');
