@@ -13,10 +13,13 @@ interface Props { onNext: () => void; }
 
 export const StepAnchors: React.FC<Props> = ({ onNext }) => {
   const [search, setSearch] = useState('');
+  const [freeSearch, setFreeSearch] = useState('');
   const [onlyEligible, setOnlyEligible] = useState(true);
   const {
     selectedTrack, plannedCourses, removePlannedCourse, addAnchor, historyCourseIds,
     targetSemester, setTargetSemester,
+    excludedCourseIds, addExclusion, removeExclusion,
+    freePickIds, addFreePick, removeFreePick,
   } = usePlannerStore();
 
   if (!selectedTrack) return null;
@@ -46,6 +49,24 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
       });
   };
 
+  // All course IDs in the track (for free pick search exclusion)
+  const trackCourseIds = new Set(
+    selectedTrack.components.flatMap(c => c.baskets.flatMap(b => b.courseIds))
+  );
+
+  // Free pick search across full catalog
+  const freeSearchResults = freeSearch.trim().length >= 2
+    ? MOCK_COURSES.filter(c =>
+        !trackCourseIds.has(c.id) &&
+        !historyCourseIds.includes(c.id) &&
+        !excludedCourseIds.includes(c.id) &&
+        !freePickIds.includes(c.id) &&
+        (c.name.toLowerCase().includes(freeSearch.toLowerCase()) ||
+          (c.nameEn ?? '').toLowerCase().includes(freeSearch.toLowerCase()) ||
+          c.id.includes(freeSearch))
+      ).slice(0, 8)
+    : [];
+
   const componentRows = selectedTrack.components.map(comp => ({
     comp,
     rows: comp.baskets.flatMap(b =>
@@ -54,6 +75,7 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
           b.courseIds.includes(c.id) &&
           offeredIds.has(c.id) &&
           !historyCourseIds.includes(c.id) &&
+          !excludedCourseIds.includes(c.id) &&
           (!onlyEligible || prereqsMet(c.id)) &&
           (search === '' ||
             c.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -137,20 +159,49 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
                           </span>
                         )}
                       </div>
-                      <button
-                        className={`anchor-btn ${isAnchored ? 'anchored' : ''}`}
-                        onClick={() =>
-                          isAnchored ? removePlannedCourse(course.id) : addAnchor(course.id)
-                        }
-                      >
-                        {isAnchored ? '📌 נעול' : '+ נעלי'}
-                      </button>
+                      <div className="course-row-actions">
+                        <button
+                          className={`anchor-btn ${isAnchored ? 'anchored' : ''}`}
+                          onClick={() =>
+                            isAnchored ? removePlannedCourse(course.id) : addAnchor(course.id)
+                          }
+                        >
+                          {isAnchored ? '📌 נעול' : '+ נעלי'}
+                        </button>
+                        <button
+                          className="exclude-btn"
+                          title="הוציאי קורס זה מכל התוכניות"
+                          onClick={() => addExclusion(course.id)}
+                        >
+                          🚫
+                        </button>
+                      </div>
                     </div>
                   );
                 })}
               </div>
             );
           })}
+
+          {/* ── קורסים שהוצאו ── */}
+          {excludedCourseIds.length > 0 && (
+            <div className="excluded-section">
+              <div className="group-label excluded-label">קורסים שהוצאו ({excludedCourseIds.length})</div>
+              {excludedCourseIds.map(id => {
+                const course = MOCK_COURSES.find(c => c.id === id);
+                if (!course) return null;
+                return (
+                  <div key={id} className="course-row is-excluded">
+                    <div className="course-row-info">
+                      <span className="course-row-name excluded-name">{getCourseNameHe(course.id, course.name)}</span>
+                      <span className="course-row-meta">{course.id} · {course.credits} נ"ז</span>
+                    </div>
+                    <button className="unexclude-btn" onClick={() => removeExclusion(id)}>↩ החזרי</button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 
@@ -188,6 +239,62 @@ export const StepAnchors: React.FC<Props> = ({ onNext }) => {
             })}
           </div>
         )}
+
+        {/* ── הוספת קורס חופשי ── */}
+        <div className="free-picks-section">
+          <h3 className="free-picks-title">
+            הוספת קורס מחוץ למסלול
+            {freePickIds.length > 0 && <span className="count-badge">{freePickIds.length}</span>}
+          </h3>
+          <p className="step-desc">קורסים שייחשבו כבחירה בתוכניות שתיווצרנה.</p>
+          <div className="free-pick-search-wrap">
+            <input
+              className="search-input"
+              type="text"
+              placeholder="חפשי כל קורס לפי שם או קוד…"
+              value={freeSearch}
+              onChange={e => setFreeSearch(e.target.value)}
+            />
+            {freeSearchResults.length > 0 && (
+              <div className="free-pick-dropdown">
+                {freeSearchResults.map(course => (
+                  <div key={course.id} className="free-pick-result"
+                    onClick={() => { addFreePick(course.id); setFreeSearch(''); }}>
+                    <span className="fpr-name">{getCourseNameHe(course.id, course.name)}</span>
+                    <span className="fpr-meta">{course.id} · {course.credits} נ"ז · {course.department}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          {freePickIds.length > 0 && (
+            <div className="free-pick-list">
+              {freePickIds.map(id => {
+                const course = MOCK_COURSES.find(c => c.id === id);
+                if (!course) return null;
+                const isAnchored = anchored.some(pc => pc.courseId === id);
+                return (
+                  <div key={id} className="anchor-card free-pick-card">
+                    <div className="anchor-card-info">
+                      <strong>{getCourseNameHe(course.id, course.name)}</strong>
+                      <small>{course.id} · {course.credits} נ"ז</small>
+                    </div>
+                    <div className="course-row-actions">
+                      <button
+                        className={`anchor-btn ${isAnchored ? 'anchored' : ''}`}
+                        title="נעלי קורס זה"
+                        onClick={() => isAnchored ? removePlannedCourse(id) : addAnchor(id)}
+                      >
+                        {isAnchored ? '📌' : '📌?'}
+                      </button>
+                      <button className="remove-btn" onClick={() => removeFreePick(id)}>✕</button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
 
         <button className="next-btn" onClick={onNext}>
           ← הבא: אילוצי זמן

@@ -30,7 +30,7 @@ function bundleActiveDays(bundle: SuggestedBundle, offerings: CourseOffering[]):
 }
 
 export const StepGenerate: React.FC = () => {
-  const { plannedCourses, selectedTrack, preferences, historyCourseIds, setPlannedCourses, targetSemester } =
+  const { plannedCourses, selectedTrack, preferences, historyCourseIds, excludedCourseIds, freePickIds, setPlannedCourses, targetSemester } =
     usePlannerStore();
 
   const offerings = getOfferingsForSemester(targetSemester);
@@ -45,7 +45,7 @@ export const StepGenerate: React.FC = () => {
   const handleGenerate = () => {
     if (!selectedTrack) return;
     const result = suggestBundles(
-      anchors, MOCK_COURSES, offerings, selectedTrack, preferences, historyCourseIds
+      anchors, MOCK_COURSES, offerings, selectedTrack, preferences, historyCourseIds, excludedCourseIds, freePickIds
     );
     setBundles(result);
     setGenerated(true);

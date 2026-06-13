@@ -451,6 +451,72 @@
   color: #fff;
 }
 
+/* ── Course row action group ───────────────────────────────── */
+.course-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+/* ── Exclude button ────────────────────────────────────────── */
+.exclude-btn {
+  padding: 0.28rem 0.38rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-faint);
+  font-size: 0.82rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.exclude-btn:hover { background: #fff5f5; border-color: #feb2b2; }
+
+.course-row.is-excluded { opacity: 0.55; background: #fff5f5; border-color: #fed7d7; }
+.excluded-name { text-decoration: line-through; color: var(--text-faint); }
+.excluded-section { margin-top: 1rem; border-top: 1px dashed #fed7d7; padding-top: 0.5rem; }
+.excluded-label { color: #c53030 !important; }
+.unexclude-btn {
+  padding: 0.28rem 0.6rem;
+  border-radius: 20px;
+  border: 1px solid #fc8181;
+  background: #fff5f5;
+  color: #c53030;
+  font-size: 0.73rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background var(--t-fast) var(--ease);
+}
+.unexclude-btn:hover { background: #fed7d7; }
+
+/* ── Free picks ────────────────────────────────────────────── */
+.free-picks-section { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.free-picks-title {
+  font-size: 0.9rem; font-weight: 700; color: var(--text);
+  margin: 0 0 0.2rem; display: flex; align-items: center; gap: 0.4rem;
+}
+.free-pick-search-wrap { position: relative; margin-top: 0.5rem; }
+.free-pick-dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-md); box-shadow: var(--shadow-md);
+  z-index: 20; max-height: 220px; overflow-y: auto;
+}
+.free-pick-result {
+  padding: 0.45rem 0.75rem; cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--t-fast) var(--ease);
+}
+.free-pick-result:last-child { border-bottom: none; }
+.free-pick-result:hover { background: var(--accent-soft); }
+.fpr-name { display: block; font-size: 0.83rem; font-weight: 500; color: var(--text); }
+.fpr-meta { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.1rem; }
+.free-pick-list { margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.free-pick-card { border-color: #d6bcfa !important; background: #faf5ff !important; }
+
 /* ── Count badge ───────────────────────────────────────────── */
 .count-badge {
   display: inline-flex;

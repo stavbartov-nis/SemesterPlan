@@ -25,7 +25,9 @@ export function suggestBundles(
   offerings: CourseOffering[],
   track: DegreeTrack,
   prefs: UserPreferences,
-  historyIds: string[]
+  historyIds: string[],
+  excludedIds: string[] = [],
+  freePickIds: string[] = []
 ): SuggestedBundle[] {
   const bundles: SuggestedBundle[] = [];
 
@@ -34,7 +36,7 @@ export function suggestBundles(
     "fastest-path",
     "המסלול המהיר",
     "נותן עדיפות לנקודות זכות ולקורסי חובה וליבה כדי להאיץ את סיום התואר.",
-    anchors, catalog, offerings, track, prefs, historyIds,
+    anchors, catalog, offerings, track, prefs, historyIds, excludedIds, freePickIds,
     (a, b) => {
       const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
       if (typePriority[a.type] !== typePriority[b.type]) {
@@ -49,7 +51,7 @@ export function suggestBundles(
     "compact-schedule",
     "מערכת מרוכזת",
     "מרכז את הקורסים במספר הימים הקטן ביותר כדי לפנות לך זמן חופשי.",
-    anchors, catalog, offerings, track, prefs, historyIds,
+    anchors, catalog, offerings, track, prefs, historyIds, excludedIds, freePickIds,
     (a, b) => {
       const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
       return typePriority[a.type] - typePriority[b.type];
@@ -85,7 +87,7 @@ export function suggestBundles(
     "no-early-mornings",
     "בלי בקרים מוקדמים",
     "נמנע משיעורים שמתחילים לפני 10:00 ומעדיף קבוצות מאוחרות יותר ביום.",
-    anchors, catalog, offerings, track, noEarlyPrefs, historyIds,
+    anchors, catalog, offerings, track, noEarlyPrefs, historyIds, excludedIds, freePickIds,
     (a, b) => {
       const typePriority = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 };
       return typePriority[a.type] - typePriority[b.type];
@@ -180,11 +182,13 @@ function generateBundle(
   track: DegreeTrack,
   prefs: UserPreferences,
   historyIds: string[],
+  excludedIds: string[],
+  freePickIds: string[],
   sortFn: (a: Candidate, b: Candidate) => number,
   groupRankFactory?: GroupRankFactory
 ): SuggestedBundle {
   let bundleCourses = scheduleAnchors(anchors, offerings, prefs);
-  const candidates = getCandidates(catalog, track, historyIds, bundleCourses);
+  const candidates = getCandidates(catalog, track, historyIds, bundleCourses, excludedIds, freePickIds);
   candidates.sort(sortFn);
 
   // Credits tracked per (component, basket type) so each degree column has
@@ -205,6 +209,9 @@ function generateBundle(
   });
 
   for (const candidate of candidates) {
+    // Guard against duplicates (e.g. a free pick appearing under multiple components)
+    if (bundleCourses.some(bc => bc.courseId === candidate.course.id)) continue;
+
     const key = creditKey(candidate.componentId, candidate.type);
     if ((currentCredits[key] ?? 0) >= targetFor(candidate.componentId, candidate.type)) continue;
 
@@ -253,20 +260,25 @@ function getCandidates(
   catalog: Course[],
   track: DegreeTrack,
   historyIds: string[],
-  currentBundle: PlannedCourse[]
+  currentBundle: PlannedCourse[],
+  excludedIds: string[] = [],
+  freePickIds: string[] = []
 ): Candidate[] {
   const candidates: Candidate[] = [];
   const currentIds = currentBundle.map(c => c.courseId);
+  const trackCourseIds = new Set(
+    track.components.flatMap(c => c.baskets.flatMap(b => b.courseIds))
+  );
 
   track.components.forEach(comp => {
     comp.baskets.forEach(basket => {
       basket.courseIds.forEach(courseId => {
         if (historyIds.includes(courseId) || currentIds.includes(courseId)) return;
+        if (excludedIds.includes(courseId)) return;
 
         const course = catalog.find(c => c.id === courseId);
         if (!course) return;
 
-        // Rule 1: Prerequisites
         const prereqsMet = course.prerequisites.every(p =>
           historyIds.includes(p) || currentIds.includes(p)
         );
@@ -274,6 +286,23 @@ function getCandidates(
 
         candidates.push({ course, componentId: comp.id, type: basket.type });
       });
+    });
+  });
+
+  // Free picks: courses outside the track, added as Elective under each component.
+  // OR-semantics for prereqs (user explicitly requested them).
+  freePickIds.forEach(courseId => {
+    if (historyIds.includes(courseId) || currentIds.includes(courseId)) return;
+    if (excludedIds.includes(courseId)) return;
+    if (trackCourseIds.has(courseId)) return; // already represented above
+    const course = catalog.find(c => c.id === courseId);
+    if (!course) return;
+    const prereqsMet =
+      course.prerequisites.length === 0 ||
+      course.prerequisites.some(p => historyIds.includes(p) || currentIds.includes(p));
+    if (!prereqsMet) return;
+    track.components.forEach(comp => {
+      candidates.push({ course, componentId: comp.id, type: 'Elective' });
     });
   });
 

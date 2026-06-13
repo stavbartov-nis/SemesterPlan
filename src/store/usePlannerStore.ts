@@ -12,6 +12,8 @@ interface PlannerState {
   // Data
   plannedCourses: PlannedCourse[];
   historyCourseIds: string[];
+  excludedCourseIds: string[];
+  freePickIds: string[];
   selectedTrack: DegreeTrack | null;
   preferences: UserPreferences;
   /** Semester being planned. Annual courses are available in both. */
@@ -29,6 +31,10 @@ interface PlannerState {
   setPreferences: (prefs: UserPreferences) => void;
   addToHistory: (courseId: string) => void;
   removeFromHistory: (courseId: string) => void;
+  addExclusion: (courseId: string) => void;
+  removeExclusion: (courseId: string) => void;
+  addFreePick: (courseId: string) => void;
+  removeFreePick: (courseId: string) => void;
 }
 
 const DEFAULT_PREFERENCES: UserPreferences = {
@@ -53,6 +59,8 @@ export const usePlannerStore = create<PlannerState>()(
     (set) => ({
       plannedCourses: [],
       historyCourseIds: [],
+      excludedCourseIds: [],
+      freePickIds: [],
       selectedTrack: null,
       preferences: DEFAULT_PREFERENCES,
       targetSemester: 'A',
@@ -123,10 +131,32 @@ export const usePlannerStore = create<PlannerState>()(
       removeFromHistory: (courseId) => set((state) => ({
         historyCourseIds: state.historyCourseIds.filter(id => id !== courseId)
       })),
+
+      addExclusion: (courseId) => set((state) => {
+        if (state.excludedCourseIds.includes(courseId)) return state;
+        return {
+          excludedCourseIds: [...state.excludedCourseIds, courseId],
+          plannedCourses: state.plannedCourses.filter(c => c.courseId !== courseId),
+        };
+      }),
+
+      removeExclusion: (courseId) => set((state) => ({
+        excludedCourseIds: state.excludedCourseIds.filter(id => id !== courseId),
+      })),
+
+      addFreePick: (courseId) => set((state) => {
+        if (state.freePickIds.includes(courseId)) return state;
+        return { freePickIds: [...state.freePickIds, courseId] };
+      }),
+
+      removeFreePick: (courseId) => set((state) => ({
+        freePickIds: state.freePickIds.filter(id => id !== courseId),
+        plannedCourses: state.plannedCourses.filter(c => c.courseId !== courseId),
+      })),
     }),
     {
       name: 'huji-planner-storage',
-      version: 5,
+      version: 6,
       // selectedTrack is NOT persisted: track definitions (baskets, credit
       // minimums, exclusions) live in code and must always come from the
       // current build — a persisted copy kept serving stale requirements
@@ -134,6 +164,8 @@ export const usePlannerStore = create<PlannerState>()(
       partialize: (state) => ({
         plannedCourses: state.plannedCourses,
         historyCourseIds: state.historyCourseIds,
+        excludedCourseIds: state.excludedCourseIds,
+        freePickIds: state.freePickIds,
         preferences: state.preferences,
         targetSemester: state.targetSemester,
       }),
@@ -173,6 +205,13 @@ export const usePlannerStore = create<PlannerState>()(
               ...prefs,
               targetCreditsByComponent: DEFAULT_PREFERENCES.targetCreditsByComponent
             }
+          };
+        }
+        if (version <= 5) {
+          state = {
+            ...state,
+            excludedCourseIds: state.excludedCourseIds ?? [],
+            freePickIds: state.freePickIds ?? [],
           };
         }
         return state;
