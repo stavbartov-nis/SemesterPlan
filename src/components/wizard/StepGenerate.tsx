@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { usePlannerStore } from '../../store/usePlannerStore';
-import { suggestBundles, SuggestedBundle } from '../../engine/generator';
+import { suggestBundles, SuggestedBundle, Relaxation } from '../../engine/generator';
 import { MOCK_COURSES, getOfferingsForSemester } from '../../data/huji-mock-catalog';
 import { getCourseNameHe } from '../../data/course-names-he';
 import { Calendar } from '../builder/Calendar';
 import { Analysis } from '../shared/Analysis';
 import { validateScheduleConflicts } from '../../engine/validation';
-import { CourseOffering } from '../../types';
+import { CourseOffering, UserPreferences } from '../../types';
 
 const DAY_ABBR = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳'];
 const DAY_FULL = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי'];
@@ -30,7 +30,7 @@ function bundleActiveDays(bundle: SuggestedBundle, offerings: CourseOffering[]):
 }
 
 export const StepGenerate: React.FC = () => {
-  const { plannedCourses, selectedTrack, preferences, historyCourseIds, excludedCourseIds, freePickIds, setPlannedCourses, targetSemester } =
+  const { plannedCourses, selectedTrack, preferences, historyCourseIds, excludedCourseIds, freePickIds, setPlannedCourses, setPreferences, targetSemester } =
     usePlannerStore();
 
   const offerings = getOfferingsForSemester(targetSemester);
@@ -55,6 +55,27 @@ export const StepGenerate: React.FC = () => {
   const handleApply = (bundle: SuggestedBundle) => {
     setPlannedCourses(bundle.courses);
     setAppliedId(bundle.id);
+  };
+
+  /** Applies a relaxation patch to preferences and re-runs the generator. */
+  const applyRelaxation = (r: Relaxation) => {
+    const merged: UserPreferences = {
+      ...preferences,
+      ...r.prefsPatch,
+      timeWindow: { ...preferences.timeWindow, ...(r.prefsPatch.timeWindow ?? {}) },
+      overlapPolicy: { ...preferences.overlapPolicy, ...(r.prefsPatch.overlapPolicy ?? {}) },
+      targetCreditsByComponent: {
+        ...preferences.targetCreditsByComponent,
+        ...(r.prefsPatch.targetCreditsByComponent ?? {}),
+      },
+    };
+    setPreferences(merged);
+    if (!selectedTrack) return;
+    const result = suggestBundles(
+      anchors, MOCK_COURSES, offerings, selectedTrack, merged, historyCourseIds, excludedCourseIds, freePickIds
+    );
+    setBundles(result);
+    setAppliedId(null);
   };
 
   const conflictCount = appliedId
@@ -201,6 +222,48 @@ export const StepGenerate: React.FC = () => {
                     </div>
 
                     <p className="bundle-rationale">{bundle.rationale}</p>
+
+                    {bundle.differentiator && (
+                      <div className="bundle-differentiator">↻ {bundle.differentiator}</div>
+                    )}
+
+                    {bundle.report.length > 0 && (
+                      <div className="report-chips">
+                        {bundle.report.map(item => (
+                          <span
+                            key={item.id}
+                            className={`report-chip ${item.status}`}
+                            title={item.detail}
+                          >
+                            {item.status === 'ok' ? '✓' : item.status === 'warn' ? '⚠' : '✗'} {item.label}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {bundle.conflicts > 0 && (
+                      <div className="conflict-badge-inline">
+                        {bundle.conflicts === 1
+                          ? 'התנגשות אחת בלוח'
+                          : `${bundle.conflicts} התנגשויות בלוח`}
+                      </div>
+                    )}
+
+                    {bundle.relaxations.length > 0 && (
+                      <div className="relaxations">
+                        <span className="relax-label">לשיפור:</span>
+                        {bundle.relaxations.map(r => (
+                          <button
+                            key={r.id}
+                            className="relax-chip"
+                            onClick={() => applyRelaxation(r)}
+                            title={r.patchSummary}
+                          >
+                            {r.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
 
                     <ul className="bundle-course-list">
                       {bundle.courses.map(pc => {

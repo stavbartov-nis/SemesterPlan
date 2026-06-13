@@ -8,17 +8,45 @@ import {
   MeetingGroup
 } from '../types';
 import { satisfiesPrereq } from '../data/huji-mock-catalog';
+import { auditBundle, BundleReportItem } from './audit';
+import { suggestRelaxations, Relaxation } from './relaxation';
+
+export type ThemeKey = 'fastest-path' | 'compact-schedule' | 'no-early-mornings';
+export type { BundleReportItem, Relaxation };
 
 export interface SuggestedBundle {
   id: string;
   name: string;
+  themeKey: ThemeKey;
   courses: PlannedCourse[];
   rationale: string;
   totalCredits: number;
+  /** When two bundles cover the same courses, this explains the difference. */
+  differentiator?: string;
+  /** Per-rule audit chips (✓/⚠/✗). */
+  report: BundleReportItem[];
+  /** Number of schedule conflicts in the bundle. */
+  conflicts: number;
+  /** Up to 3 suggested preference relaxations that would improve this bundle. */
+  relaxations: Relaxation[];
+}
+
+/** Inputs the relaxation suggester re-uses to spin up alternate bundles. */
+export interface BundleInputs {
+  anchors: PlannedCourse[];
+  catalog: Course[];
+  offerings: CourseOffering[];
+  track: DegreeTrack;
+  prefs: UserPreferences;
+  historyIds: string[];
+  excludedIds: string[];
+  freePickIds: string[];
 }
 
 /**
- * Generates alternative course bundles based on user anchors and requirements.
+ * Generates alternative course bundles based on user anchors and requirements,
+ * then runs a per-bundle audit and relaxation suggester so the UI can show
+ * exactly which rules were defied and what would unblock the plan.
  */
 export function suggestBundles(
   anchors: PlannedCourse[],
@@ -29,6 +57,58 @@ export function suggestBundles(
   historyIds: string[],
   excludedIds: string[] = [],
   freePickIds: string[] = []
+): SuggestedBundle[] {
+  const raw = generateThemeBundles(
+    anchors, catalog, offerings, track, prefs, historyIds, excludedIds, freePickIds
+  );
+
+  // Augment each bundle with audit + relaxations.
+  const augmented = raw.map((b) => {
+    const audit = auditBundle(
+      b.courses, anchors, catalog, offerings, track, prefs, historyIds, excludedIds
+    );
+    const regenerate = (patchedPrefs: UserPreferences): PlannedCourse[] => {
+      // Re-run the SAME theme with patched prefs to estimate relaxation impact.
+      const reBundle = generateThemeBundles(
+        anchors, catalog, offerings, track, patchedPrefs, historyIds, excludedIds, freePickIds
+      ).find((x) => x.themeKey === b.themeKey);
+      return reBundle?.courses ?? b.courses;
+    };
+    const relaxations = suggestRelaxations({
+      baseCourses: b.courses,
+      audit,
+      catalog,
+      prefs,
+      regenerate,
+    });
+    return {
+      ...b,
+      report: audit.items,
+      conflicts: audit.conflicts,
+      relaxations,
+    };
+  });
+
+  // Differentiator: when two bundles share the same course set, explain why
+  // they still differ (group choices) so the user understands the alternatives.
+  return setDifferentiators(augmented, offerings);
+}
+
+/**
+ * Inner pipeline: just runs the three themes and returns "raw" bundles
+ * (report/relax/conflicts/differentiator placeholders). Exposed to
+ * `suggestRelaxations` via the closure above for delta probing — calling this
+ * directly avoids the audit/relax recursion that `suggestBundles` triggers.
+ */
+function generateThemeBundles(
+  anchors: PlannedCourse[],
+  catalog: Course[],
+  offerings: CourseOffering[],
+  track: DegreeTrack,
+  prefs: UserPreferences,
+  historyIds: string[],
+  excludedIds: string[],
+  freePickIds: string[]
 ): SuggestedBundle[] {
   const bundles: SuggestedBundle[] = [];
 
@@ -61,6 +141,7 @@ export function suggestBundles(
   // 1. Fastest Path: maximize mandatory/core first, then pack in the most credits.
   bundles.push(generateBundle(
     "fastest-path",
+    "fastest-path",
     "המסלול המהיר",
     "נותן עדיפות לנקודות זכות ולקורסי חובה וליבה כדי להאיץ את סיום התואר.",
     anchors, catalog, offerings, track, prefs, historyIds, excludedIds, freePickIds,
@@ -74,6 +155,7 @@ export function suggestBundles(
   // resulting bundle touches as few days as possible. Group-rank further compacts
   // by preferring slots on days the bundle already occupies.
   bundles.push(generateBundle(
+    "compact-schedule",
     "compact-schedule",
     "מערכת מרוכזת",
     "מרכז את הקורסים במספר הימים הקטן ביותר כדי לפנות לך זמן חופשי.",
@@ -115,6 +197,7 @@ export function suggestBundles(
     }
   };
   bundles.push(generateBundle(
+    "no-early-mornings",
     "no-early-mornings",
     "בלי בקרים מוקדמים",
     "נמנע משיעורים שמתחילים לפני 10:00 ומעדיף קבוצות מאוחרות יותר ביום.",
@@ -222,6 +305,7 @@ function scheduleAnchors(
 
 function generateBundle(
   id: string,
+  themeKey: ThemeKey,
   name: string,
   rationale: string,
   anchors: PlannedCourse[],
@@ -286,9 +370,13 @@ function generateBundle(
   return {
     id,
     name,
+    themeKey,
     courses: bundleCourses,
     rationale,
-    totalCredits: calculateTotalCredits(bundleCourses, catalog)
+    totalCredits: calculateTotalCredits(bundleCourses, catalog),
+    report: [],
+    conflicts: 0,
+    relaxations: [],
   };
 }
 
@@ -407,4 +495,50 @@ function calculateTotalCredits(planned: PlannedCourse[], catalog: Course[]): num
     const course = catalog.find(c => c.id === pc.courseId);
     return sum + (course?.credits || 0);
   }, 0);
+}
+
+/**
+ * When two themes happen to pick the same courses (common when anchors fill
+ * the bulk of the target), explain WHY the bundles still differ so the user
+ * isn't staring at three identical cards. The differentiator is set only on
+ * bundles whose course set matches an earlier bundle's.
+ */
+function setDifferentiators(
+  bundles: SuggestedBundle[],
+  offerings: CourseOffering[]
+): SuggestedBundle[] {
+  const sigOf = (b: SuggestedBundle) =>
+    b.courses
+      .map((c) => c.courseId)
+      .sort()
+      .join(',');
+  const groupSigOf = (b: SuggestedBundle) =>
+    b.courses
+      .flatMap((c) => c.selectedGroupIds)
+      .sort()
+      .join(',');
+
+  const explain = (b: SuggestedBundle): string => {
+    if (b.themeKey === 'compact-schedule') return 'אותם קורסים, פחות ימי לימוד';
+    if (b.themeKey === 'no-early-mornings') return 'אותם קורסים, שעות מאוחרות יותר';
+    return 'גרסה חלופית';
+  };
+
+  const seenCourseSets = new Map<string, SuggestedBundle>();
+  return bundles.map((b) => {
+    const sig = sigOf(b);
+    const prior = seenCourseSets.get(sig);
+    if (prior) {
+      // Same course set as an earlier bundle. If groups also identical, mark
+      // as duplicate (no real difference); otherwise flag the hour/day twist.
+      const groupSig = groupSigOf(b);
+      const priorGroupSig = groupSigOf(prior);
+      if (groupSig === priorGroupSig) {
+        return { ...b, differentiator: 'זהה לתוכנית הקודמת' };
+      }
+      return { ...b, differentiator: explain(b) };
+    }
+    seenCourseSets.set(sig, b);
+    return b;
+  });
 }
