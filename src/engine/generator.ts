@@ -32,24 +32,30 @@ export function suggestBundles(
 ): SuggestedBundle[] {
   const bundles: SuggestedBundle[] = [];
 
-  // Helpers for offering-aware sort keys (close over offerings).
-  // uniqueDays: how many distinct calendar days the course occupies across all its groups.
-  // Compact theme prefers courses with smaller footprints (they're easier to cluster).
+  // Helpers for offering-aware sort/filter keys (close over offerings).
   const uniqueDays = (courseId: string) => {
     const off = offerings.find(o => o.courseId === courseId);
     if (!off) return 7;
     return new Set(off.groups.flatMap(g => g.slots.map(s => s.day))).size;
   };
-  // latestEarliestStart: the LATEST "earliest slot" across all groups.
-  // A high value means there EXISTS a group that starts late — good for No-Early theme.
-  const latestEarliestStart = (courseId: string) => {
-    const off = offerings.find(o => o.courseId === courseId);
-    if (!off) return '00:00';
-    const groupEarliests = off.groups.map(g =>
-      g.slots.reduce((min, s) => (s.start < min ? s.start : min), '23:59')
-    );
-    return groupEarliests.reduce((max, t) => (t > max ? t : max), '00:00');
+
+  // creditsPerDay: credits / unique days — higher = more efficient use of day slots.
+  const creditsPerDay = (course: Course) => {
+    const d = uniqueDays(course.id);
+    return d === 0 ? 0 : course.credits / d;
   };
+
+  // hasAfternoonGroup: true iff the offering has at least one group where EVERY
+  // slot starts at ≥ 10:00. Used as a hard pre-filter for No-Early theme so courses
+  // with no viable afternoon option are excluded at the candidate level (not just at
+  // the group-pick level). This ensures the No-Early course LIST differs from Fastest.
+  const MORNING_CUTOFF = '10:00';
+  const hasAfternoonGroup = (courseId: string): boolean => {
+    const off = offerings.find(o => o.courseId === courseId);
+    if (!off) return false;
+    return off.groups.some(g => g.slots.every(s => s.start >= MORNING_CUTOFF));
+  };
+
   const tp = { 'Mandatory': 0, 'Core': 1, 'Elective': 2 } as const;
 
   // 1. Fastest Path: maximize mandatory/core first, then pack in the most credits.
@@ -64,8 +70,9 @@ export function suggestBundles(
     }
   ));
 
-  // 2. Compact Schedule: within each type, pick courses whose total day-footprint
-  // is smallest so they naturally cluster on fewer days of the week.
+  // 2. Compact Schedule: within each type, maximise credits-per-day-used so the
+  // resulting bundle touches as few days as possible. Group-rank further compacts
+  // by preferring slots on days the bundle already occupies.
   bundles.push(generateBundle(
     "compact-schedule",
     "מערכת מרוכזת",
@@ -73,9 +80,10 @@ export function suggestBundles(
     anchors, catalog, offerings, track, prefs, historyIds, excludedIds, freePickIds,
     (a, b) => {
       if (tp[a.type] !== tp[b.type]) return tp[a.type] - tp[b.type];
-      const dayDiff = uniqueDays(a.course.id) - uniqueDays(b.course.id); // fewer days first
-      if (dayDiff !== 0) return dayDiff;
-      return b.course.credits - a.course.credits;
+      // Higher credits-per-day → more efficient; pick those first
+      const diff = creditsPerDay(b.course) - creditsPerDay(a.course);
+      if (Math.abs(diff) > 0.01) return diff;
+      return uniqueDays(a.course.id) - uniqueDays(b.course.id);
     },
     // Also prefer groups that land on already-occupied days
     (bundleCourses) => {
@@ -95,14 +103,15 @@ export function suggestBundles(
     }
   ));
 
-  // 3. No Early Mornings: within each type, prefer courses that have a late-starting
-  // group available. Combined with the 10:00 time floor, courses with ONLY morning
-  // slots are eliminated and courses with afternoon options are prioritised.
+  // 3. No Early Mornings: hard-filter at the candidate level to courses that have
+  // at least one group where ALL slots start ≥ 10:00. This makes the COURSE LIST
+  // genuinely differ from Fastest (which has no time restriction at candidate level).
+  // The 10:00 time-window floor further ensures only afternoon groups are assigned.
   const noEarlyPrefs = {
     ...prefs,
     timeWindow: {
       ...prefs.timeWindow,
-      start: prefs.timeWindow.start < "10:00" ? "10:00" : prefs.timeWindow.start
+      start: prefs.timeWindow.start < MORNING_CUTOFF ? MORNING_CUTOFF : prefs.timeWindow.start
     }
   };
   bundles.push(generateBundle(
@@ -112,15 +121,16 @@ export function suggestBundles(
     anchors, catalog, offerings, track, noEarlyPrefs, historyIds, excludedIds, freePickIds,
     (a, b) => {
       if (tp[a.type] !== tp[b.type]) return tp[a.type] - tp[b.type];
-      // Prefer courses whose latest available group starts the latest
-      return latestEarliestStart(b.course.id).localeCompare(latestEarliestStart(a.course.id));
+      return b.course.credits - a.course.credits;
     },
-    // Within the chosen course, also pick the group that starts latest
+    // Within each course, pick the group that starts latest
     () => (a, b) => {
       const earliest = (g: MeetingGroup) =>
         g.slots.reduce((min, s) => (s.start < min ? s.start : min), '23:59');
       return earliest(b).localeCompare(earliest(a));
-    }
+    },
+    // Hard pre-filter: only consider courses with a viable afternoon group
+    (courseId) => hasAfternoonGroup(courseId)
   ));
 
   return bundles;
@@ -174,6 +184,10 @@ function findBestGroupSet(
  * Anchors arrive from the store with empty selectedGroupIds; without groups
  * they render no calendar events and are invisible to conflict checks.
  * Assign each group-less anchor a full valid group set up front.
+ *
+ * Always re-validates existing group assignments against current prefs —
+ * stale group IDs from a previous bundle application can violate the
+ * user's current day/time constraints.
  */
 function scheduleAnchors(
   anchors: PlannedCourse[],
@@ -182,15 +196,26 @@ function scheduleAnchors(
 ): PlannedCourse[] {
   const scheduled: PlannedCourse[] = [];
   for (const anchor of anchors) {
-    if (anchor.selectedGroupIds.length > 0) {
+    const offering = offerings.find(o => o.courseId === anchor.courseId);
+
+    // Check whether existing group IDs are still valid under current prefs.
+    const existingValid =
+      anchor.selectedGroupIds.length > 0 &&
+      !!offering &&
+      anchor.selectedGroupIds.every(gid => {
+        const g = offering.groups.find(gr => gr.id === gid);
+        return g && isGroupValid(g, scheduled, offerings, prefs);
+      });
+
+    if (existingValid) {
       scheduled.push({ ...anchor });
       continue;
     }
-    const offering = offerings.find(o => o.courseId === anchor.courseId);
+
     const set = offering && findBestGroupSet(offering.groups, scheduled, offerings, prefs);
     scheduled.push(set
       ? { ...anchor, selectedGroupIds: set.map(g => g.id) }
-      : { ...anchor });
+      : { ...anchor, selectedGroupIds: [] });
   }
   return scheduled;
 }
@@ -208,10 +233,12 @@ function generateBundle(
   excludedIds: string[],
   freePickIds: string[],
   sortFn: (a: Candidate, b: Candidate) => number,
-  groupRankFactory?: GroupRankFactory
+  groupRankFactory?: GroupRankFactory,
+  candidateFilter?: (courseId: string) => boolean
 ): SuggestedBundle {
   let bundleCourses = scheduleAnchors(anchors, offerings, prefs);
-  const candidates = getCandidates(catalog, track, historyIds, bundleCourses, excludedIds, freePickIds);
+  let candidates = getCandidates(catalog, track, historyIds, bundleCourses, excludedIds, freePickIds);
+  if (candidateFilter) candidates = candidates.filter(c => candidateFilter(c.course.id));
   candidates.sort(sortFn);
 
   // Credits tracked per (component, basket type) so each degree column has
